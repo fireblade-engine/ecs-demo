@@ -31,6 +31,8 @@ These instructions will get you a copy of the project up and running on your loc
 Clone the repository and open `FirebladeECSDemo.xcodeproj`.   
 Run one of the given Schemes. 
 
+To regenerate the Xcode project you may use `./generateXcodeProj.sh`.
+
 ## Authors
 
 * [Christian Treffs](https://github.com/ctreffs) - *Initial work*
