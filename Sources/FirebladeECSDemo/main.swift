@@ -3,7 +3,7 @@ import FirebladeECS
 
 var tFrame = Timer()
 var tSetup = Timer()
-
+var velocity: Double = 4.0
 var currentCount: Int = 0
 
 tSetup.start()
@@ -16,10 +16,10 @@ var fps: Double = 0
 let nexus = Nexus()
 
 var windowTitle: String {
-	return "Fireblade ECS demo: [entities: \(nexus.numEntities), components: \(nexus.numComponents)] @ [FPS: \(fps), frames: \(frameCount)]"
+    return "Fireblade ECS demo: [entities:\(nexus.numEntities) components:\(nexus.numComponents) families:\(nexus.numFamilies) velocity:\(velocity)] @ [FPS: \(fps), frames: \(frameCount)]"
 }
-let width: Int32 = 640
-let height: Int32 = 480
+let width: Int32 = 800
+let height: Int32 = 600
 let hWin = SDL_CreateWindow(windowTitle, 100, 100, width, height, SDL_WINDOW_SHOWN.rawValue)
 
 if hWin == nil {
@@ -64,12 +64,9 @@ func batchCreateEntities(count: Int) {
 func batchDestroyEntities(count: Int) {
 	let family = nexus.family(requiresAll: [Position.self], excludesAll: [])
 	currentCount = count
-	family.iterate { (entityId: EntityIdentifier) in
-		guard let entity = nexus.get(entity: entityId) else {
-			return
-		}
+	family.iterate { (entity: Entity!) in
 		if currentCount > 0 {
-			nexus.destroy(entity: entity)
+            entity.destroy()
 			currentCount -= 1
 		} else {
 			// FIXME: this is highly inefficient since we can not break out of the iteration
@@ -87,12 +84,15 @@ func createDefaultEntity(name: String?) {
 
 class PositionSystem {
 	let family = nexus.family(requiresAll: [Position.self], excludesAll: [])
-	var velocity: Double = 4.0
-	func update() {
-		family.iterate { [unowned self](_, pos: Position!) in
 
-			let deltaX: Double = self.velocity*((randNorm() * 2) - 1)
-			let deltaY: Double = self.velocity*((randNorm() * 2) - 1)
+	
+
+	func update() {
+
+		family.iterate { (pos: Position!) in
+
+			let deltaX: Double = velocity*((randNorm() * 2) - 1)
+			let deltaY: Double = velocity*((randNorm() * 2) - 1)
 			var x = pos.x + Int32(deltaX)
 			var y = pos.y + Int32(deltaY)
 
@@ -114,7 +114,7 @@ class PositionResetSystem {
 	let family = nexus.family(requiresAll: [Position.self], excludesAll: [])
 
 	func update() {
-		family.iterate { (_, pos: Position!) in
+		family.iterate { (pos: Position!) in
 			pos.x = width/2
 			pos.y = height/2
 		}
@@ -125,7 +125,8 @@ class ColorSystem {
 	let family = nexus.family(requiresAll: [Color.self], excludesAll: [])
 
 	func update() {
-		family.iterate { (_, color: Color!) in
+
+		family.iterate { (color: Color!) in
 
 			color.r = randColor()
 			color.g = randColor()
@@ -156,7 +157,11 @@ class RenderSystem {
 		SDL_SetRenderDrawColor( hRenderer, 0, 0, 0, 255 ) // black
 		SDL_RenderClear(hRenderer) // clear screen
 
-		family.iterate { [unowned self] (_, pos: Position!, color: Color!) in
+		family.iterate { [weak self] (pos: Position!, color: Color!) in
+            guard let `self` = self else {
+                return
+            }
+
 			var rect = SDL_Rect(x: pos.x, y: pos.y, w: 2, h: 2)
 
 			SDL_SetRenderDrawColor(self.hRenderer, color.r, color.g, color.b, 255)
@@ -220,13 +225,13 @@ while quit == false {
 			case SDLK_r:
 				positionResetSystem.update()
 			case SDLK_s:
-				positionSystem.velocity = 0.0
+				velocity = 0.0
 			case SDLK_PLUS:
-				positionSystem.velocity += 0.1
+				velocity += 0.1
 			case SDLK_MINUS:
-				positionSystem.velocity -= 0.1
+				velocity -= 0.1
 			case SDLK_SPACE:
-				positionSystem.velocity = 4.0
+				velocity = 4.0
 			case SDLK_e:
 				batchCreateEntities(count: 1)
 			case SDLK_d:
