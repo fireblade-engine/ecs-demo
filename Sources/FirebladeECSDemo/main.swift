@@ -85,8 +85,6 @@ func createDefaultEntity(name: String?) {
 class PositionSystem {
 	let family = nexus.family(requiresAll: [Position.self], excludesAll: [])
 
-	
-
 	func update() {
 
 		family.iterate { (pos: Position!) in

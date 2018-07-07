@@ -155,7 +155,7 @@
             "OBJ_31"
          );
          name = "FirebladeECS";
-         path = ".build/checkouts/ecs.git--3442644895847384864/Sources/FirebladeECS";
+         path = ".build/checkouts/ecs.git-4448084218043416506/Sources/FirebladeECS";
          sourceTree = "SOURCE_ROOT";
       };
       "OBJ_17" = {
@@ -284,7 +284,7 @@
          isa = "PBXFileReference";
          explicitFileType = "sourcecode.swift";
          name = "Package.swift";
-         path = "/Users/treffs/Development/personal/game-dev/fireblade/FirebladeECSDemo/.build/checkouts/ecs.git--3442644895847384864/Package.swift";
+         path = "/Users/treffs/Development/personal/game-dev/fireblade/FirebladeECSDemo/.build/checkouts/ecs.git-4448084218043416506/Package.swift";
          sourceTree = "<group>";
       };
       "OBJ_33" = {
@@ -531,7 +531,7 @@
             );
             HEADER_SEARCH_PATHS = (
                "$(inherited)",
-               "$(SRCROOT)/.build/checkouts/CSDL2.git--2752639886649490062"
+               "$(SRCROOT)/.build/checkouts/CSDL2.git-5828835611742162730"
             );
             INFOPLIST_FILE = "FirebladeECSDemo.xcodeproj/FirebladeECSDemo_Info.plist";
             LD_RUNPATH_SEARCH_PATHS = (
@@ -574,7 +574,7 @@
             );
             HEADER_SEARCH_PATHS = (
                "$(inherited)",
-               "$(SRCROOT)/.build/checkouts/CSDL2.git--2752639886649490062"
+               "$(SRCROOT)/.build/checkouts/CSDL2.git-5828835611742162730"
             );
             INFOPLIST_FILE = "FirebladeECSDemo.xcodeproj/FirebladeECSDemo_Info.plist";
             LD_RUNPATH_SEARCH_PATHS = (
@@ -651,7 +651,7 @@
                "-target",
                "x86_64-apple-macosx10.10",
                "-sdk",
-               "/Applications/Xcode-10b.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk"
+               "/Applications/Xcode-10b3.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk"
             );
             SWIFT_VERSION = "4_2.0";
          };
@@ -678,7 +678,7 @@
                "-target",
                "x86_64-apple-macosx10.10",
                "-sdk",
-               "/Applications/Xcode-10b.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk"
+               "/Applications/Xcode-10b3.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk"
             );
             SWIFT_VERSION = "4_2.0";
          };
@@ -715,7 +715,7 @@
                "-target",
                "x86_64-apple-macosx10.10",
                "-sdk",
-               "/Applications/Xcode-10b.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk"
+               "/Applications/Xcode-10b3.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk"
             );
             SWIFT_VERSION = "4_2.0";
          };
@@ -733,7 +733,7 @@
                "-target",
                "x86_64-apple-macosx10.10",
                "-sdk",
-               "/Applications/Xcode-10b.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk"
+               "/Applications/Xcode-10b3.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk"
             );
             SWIFT_VERSION = "4_2.0";
          };
