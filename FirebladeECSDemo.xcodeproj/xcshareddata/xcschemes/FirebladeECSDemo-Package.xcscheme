@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "9999"
+   LastUpgradeVersion = "1010"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -17,20 +17,6 @@
                BlueprintIdentifier = "FirebladeECSDemo::FirebladeECSDemo"
                BuildableName = "FirebladeECSDemo"
                BlueprintName = "FirebladeECSDemo"
-               ReferencedContainer = "container:FirebladeECSDemo.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FirebladeECS::FirebladeECS"
-               BuildableName = "FirebladeECS.framework"
-               BlueprintName = "FirebladeECS"
                ReferencedContainer = "container:FirebladeECSDemo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -56,7 +42,8 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FirebladeECSDemo::FirebladeECSDemo"
@@ -64,7 +51,7 @@
             BlueprintName = "FirebladeECSDemo"
             ReferencedContainer = "container:FirebladeECSDemo.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
