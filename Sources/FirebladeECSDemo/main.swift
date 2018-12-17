@@ -3,7 +3,7 @@ import FirebladeECS
 
 var tFrame = Timer()
 var tSetup = Timer()
-var velocity: Double = 4.0
+var simSpeed: Double = 4.0
 var currentCount: Int = 0
 
 tSetup.start()
@@ -16,7 +16,7 @@ var fps: Double = 0
 let nexus = Nexus()
 
 var windowTitle: String {
-    return "Fireblade ECS demo: [entities:\(nexus.numEntities) components:\(nexus.numComponents) families:\(nexus.numFamilies) velocity:\(velocity)] @ [FPS: \(fps), frames: \(frameCount)]"
+    return "Fireblade ECS demo: [entities:\(nexus.numEntities) components:\(nexus.numComponents) families:\(nexus.numFamilies) simSpeed:\(simSpeed)] @ [FPS: \(fps), frames: \(frameCount)]"
 }
 let width: Int32 = 800
 let height: Int32 = 600
@@ -26,7 +26,7 @@ let hWin = SDL_CreateWindow(windowTitle, 100, 100, width, height, winFlags)
 
 if hWin == nil {
     SDL_Quit()
-    fatalError("could not crate window")
+    fatalError("could not create window")
 }
 
 func randNorm() -> Double {
