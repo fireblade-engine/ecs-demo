@@ -1,5 +1,8 @@
 import CSDL2
 import FirebladeECS
+import os
+
+let log = OSLog(subsystem: "com.fireblade.ecs-demp", category: .pointsOfInterest)
 
 var tFrame = Timer()
 var tSetup = Timer()
@@ -23,7 +26,6 @@ let height: Int32 = 600
 let winFlags: UInt32 = SDL_WINDOW_SHOWN.rawValue | SDL_WINDOW_RESIZABLE.rawValue
 let hWin = SDL_CreateWindow(windowTitle, 100, 100, width, height, winFlags)
 
-
 if hWin == nil {
     SDL_Quit()
     fatalError("could not create window")
@@ -38,9 +40,12 @@ func randColor() -> UInt8 {
     return UInt8(randNorm() * 253) + 1
 }
 
-class Position: Component, Locatable {
-    typealias type = Position
-    func distance(_ other: type) -> Double {
+class Position: Component, Locatable, Equatable {
+    static func == (lhs: Position, rhs: Position) -> Bool {
+        return lhs.x == rhs.x && lhs.y == rhs.y
+    }
+
+    func distance(_ other: Position) -> Double {
         let deltaX = Double(self.x - other.x)
         let deltaY = Double(self.y - other.y)
 
@@ -78,32 +83,35 @@ class Color: Component {
     var b: UInt8 = 0
 }
 
-class ColoredPosition : Position {
+class ColoredPosition: Position {
     var r: Int32 = 255
     var g: Int32 = 255
     var b: Int32 = 255
+
 }
 
-
-class Grid : SpatialIndex {
+final class Grid: SpatialIndex {
     typealias type = Position
 
     private let gridSize: Int32
     private let tileSize: Int32
-    private var tiles: [[Position]]
+    private var tiles: ContiguousArray<ContiguousArray<Position>>
 
     init(_ gridSize: Int32, _ width: Double, _ height: Double) {
         self.gridSize = gridSize
         tileSize = Int32(ceil(Double(max(width, height)) / Double(gridSize)))
-        tiles = [[Position]].init(repeating: [], count: Int(gridSize * gridSize))
+        tiles = ContiguousArray<ContiguousArray<Position>>(repeating: [], count: Int(gridSize * gridSize))
     }
 
-    private func toGridIndex(_ locatable: type) -> Int {
+    @inlinable
+    func toGridIndex(_ locatable: type) -> Int {
         let xIndex = locatable.x / tileSize
         let yIndex = gridSize * (locatable.y / tileSize)
         return Int(xIndex + yIndex)
     }
-    @discardableResult func add(_ locatable: type) -> Bool {
+
+    @discardableResult
+    func add(_ locatable: type) -> Bool {
         tiles[toGridIndex(locatable)].append(locatable)
         return true
     }
@@ -112,7 +120,7 @@ class Grid : SpatialIndex {
         return []
     }
 
-    func allWithinDistance(_ other: type, _ distance: Double) -> [type] {
+    final func allWithinDistance(_ other: type, _ distance: Double) -> [type] {
 
         // heuristic 1: we don't give much of a crap and always limit us to the `other`'s
         // native grid index when searching and also do not filter results by distance
@@ -121,14 +129,12 @@ class Grid : SpatialIndex {
         // tile whose distance is higher requested
         // it is also NOT admissible since it will miss `other`s within distance but in
         // another grid tile
-//        return tiles[toGridIndex(other)]
+        //        return tiles[toGridIndex(other)]
 
         // heuristic 2: as `1` but now filtering results by distance
         // note:
         // NOT admissible, optimal
-        return tiles[toGridIndex(other)].filter( {(pos: Position) in
-            return pos.distance(other) <= distance
-        })
+        return tiles[toGridIndex(other)].filter { $0.distance(other) <= distance }
 
         // heuristic 3: as `2`, but including grid `n` steps out, where `n` is ceil(distance / tileSize)
         // admissible, optimal
@@ -141,8 +147,10 @@ class SpatialIndexSystem {
     var index = Grid(gridSize, Double(width), Double(height))
 
     func update() {
+        os_signpost(.begin, log: log, name: "SpatialIndexSystem")
+        defer { os_signpost(.end, log: log, name: "SpatialIndexSystem") }
         index = Grid(gridSize, Double(width), Double(height))
-        family.forEach{ (pos: Position, col: Color) in
+        family.forEach { (pos: Position, col: Color) in
             let cpos = ColoredPosition()
             cpos.x = pos.x
             cpos.y = pos.y
@@ -151,14 +159,15 @@ class SpatialIndexSystem {
             cpos.b = Int32(col.b)
             index.add(cpos)
         }
+
     }
 }
 
 func createScene() {
 
-//    let numEntities: Int = 10_000
+    //    let numEntities: Int = 10_000
     let numEntities: Int = 2_500
-//    let numEntities: Int = 1_000
+    //    let numEntities: Int = 1_000
 
     for i in 0..<numEntities {
         createDefaultEntity(name: "\(i)")
@@ -203,6 +212,8 @@ class PositionSystem {
     let family = nexus.family(requiresAll: Position.self, Velocity.self)
 
     func update() {
+        os_signpost(.begin, log: log, name: "PositionSystem")
+        defer { os_signpost(.end, log: log, name: "PositionSystem") }
         family
             .forEach { (pos: Position, vel: Velocity) in
 
@@ -232,14 +243,14 @@ class PositionSystem {
                 }
 
                 // wrappy borders
-//                pos.x = x % width
-//                if (pos.x < 0) {
-//                    pos.x += width
-//                }
-//                pos.y = y % height
-//                if (pos.y < 0) {
-//                    pos.y += height
-//                }
+                //                pos.x = x % width
+                //                if (pos.x < 0) {
+                //                    pos.x += width
+                //                }
+                //                pos.y = y % height
+                //                if (pos.y < 0) {
+                //                    pos.y += height
+                //                }
         }
     }
 }
@@ -274,6 +285,8 @@ class ColorGridSystem {
     let family = nexus.family(requiresAll: Position.self, Color.self)
 
     func update() {
+        os_signpost(.begin, log: log, name: "ColorGridSystem")
+        defer { os_signpost(.end, log: log, name: "ColorGridSystem") }
         family.forEach {(pos: Position, col: Color) in
             let xIndex = pos.x / tileSize
             let yIndex = gridSize * (pos.y / tileSize)
@@ -286,25 +299,33 @@ class ColorGridSystem {
 }
 class ColorNeighbourSystem {
     let tileSize: Int32 = Int32(ceil(Double(max(width, height)) / Double(gridSize)))
-    let family = nexus.family(requiresAll: Position.self, Color.self, Velocity.self)
+    let family = nexus.family(requiresAll: Position.self, Color.self)
 
     func update2(_ sis: SpatialIndexSystem) {
-        family.forEach { (pos: Position, col: Color, vel: Velocity) in
+        os_signpost(.begin, log: log, name: "ColorNeighbourSystem")
+        defer { os_signpost(.end, log: log, name: "ColorNeighbourSystem") }
+
+        family.forEach { (pos: Position, col: Color) in
             let neighbours = sis.index.allWithinDistance(pos, Double(tileSize) / 5)
             let acc = ColoredPosition()
             acc.r = Int32(col.r)
             acc.g = Int32(col.g)
             acc.b = Int32(col.b)
-            let centerOfGravity = neighbours.reduce(acc, { (acc: Position, next: Position) in
-                (acc as! ColoredPosition).r += (next as! ColoredPosition).r
-                (acc as! ColoredPosition).g += (next as! ColoredPosition).g
-                (acc as! ColoredPosition).b += (next as! ColoredPosition).b
-                return acc
-            })
 
-                col.r = UInt8((centerOfGravity as! ColoredPosition).r / Int32(neighbours.count + 1))
-                col.g = UInt8((centerOfGravity as! ColoredPosition).g / Int32(neighbours.count + 1))
-                col.b = UInt8((centerOfGravity as! ColoredPosition).b / Int32(neighbours.count + 1))
+            let centerOfGravity = neighbours
+                .compactMap { $0 as? ColoredPosition }
+                .reduce(acc) { (acc: ColoredPosition, next: ColoredPosition) in
+                    acc.r += next.r
+                    acc.g += next.g
+                    acc.b += next.b
+                    return acc
+            }
+
+            let nCount = Int32(neighbours.count + 1)
+
+            col.r = UInt8((centerOfGravity).r / nCount)
+            col.g = UInt8((centerOfGravity).g / nCount)
+            col.b = UInt8((centerOfGravity).b / nCount)
 
             if (Int(col.r) + Int(col.g) + Int(col.b) < 150
                 || abs((Int(col.r) + Int(col.g) + Int(col.b)) / 3 - Int(col.r)) < 25) {
@@ -318,13 +339,15 @@ class ColorNeighbourSystem {
 
 class AlignmentSystem {
     let tileSize: Int32 = Int32(ceil(Double(max(width, height)) / Double(gridSize)))
-    var alignments = [Int:(Int, (Double, Double))]()
+    var alignments = [Int: (Int, (Double, Double))]()
 
     let family = nexus.family(requiresAll: Position.self, Velocity.self, Alignment.self)
 
     func update() {
+        os_signpost(.begin, log: log, name: "AlignmentSystem")
+        defer { os_signpost(.end, log: log, name: "AlignmentSystem") }
         initialise()
-        family.forEach { (pos: Position, vel: Velocity, alg: Alignment) in
+        family.forEach { (pos: Position, vel: Velocity, _: Alignment) in
             let xIndex = pos.x / tileSize
             let yIndex = gridSize * (pos.y / tileSize)
             let index = Int(xIndex + yIndex)
@@ -340,12 +363,11 @@ class AlignmentSystem {
             let alignment = alignments[index]!
             let mag = sqrt(alignment.1.0*alignment.1.0 + alignment.1.1*alignment.1.1)
 
-//            vel.x *= Double.random(in: 0.8...1.2)
-//            vel.y *= Double.random(in: 0.8...1.2)
+            //            vel.x *= Double.random(in: 0.8...1.2)
+            //            vel.y *= Double.random(in: 0.8...1.2)
             if (mag != 0) {
                 alg.x = (alignment.1.0 / mag)
                 alg.y = (alignment.1.1 / mag)
-
 
                 vel.x = (vel.x * 0.85 + alg.x * 0.15)
                 vel.y = (vel.y * 0.85 + alg.y * 0.15)
@@ -361,16 +383,19 @@ class AlignmentSystem {
 
 class CohesionSystem {
     let tileSize: Int32 = Int32(ceil(Double(max(width, height)) / Double(gridSize)))
-    var cohesionCenters = [Int:(Int, (Double, Double))]()
+    var cohesionCenters = [Int: (Int, (Double, Double))]()
 
     let family = nexus.family(requiresAll: Position.self, Cohesion.self, Velocity.self)
 
     func update2(_ sis: SpatialIndexSystem) {
+        os_signpost(.begin, log: log, name: "CohesionSystem")
+        defer { os_signpost(.end, log: log, name: "CohesionSystem") }
         family.forEach { (pos: Position, coh: Cohesion, vel: Velocity) in
             let neighbours = sis.index.allWithinDistance(pos, Double(tileSize) / 5)
             let acc = Position()
             acc.x = pos.x
             acc.y = pos.y
+
             let centerOfGravity = neighbours.reduce(acc, { (acc: Position, next: Position) in
                 acc.x += next.x
                 acc.y += next.y
@@ -389,12 +414,12 @@ class CohesionSystem {
                 coh.x = (Double(centerOfGravity.x) / mag)
                 coh.y = (Double(centerOfGravity.y) / mag)
 
-//                if (vel.x < 0) {
-//                    coh.x *= -1
-//                }
-//                if (vel.y < 0) {
-//                    coh.y *= -1
-//                }
+                //                if (vel.x < 0) {
+                //                    coh.x *= -1
+                //                }
+                //                if (vel.y < 0) {
+                //                    coh.y *= -1
+                //                }
                 vel.x = (vel.x * 0.975 + coh.x * 0.025)
                 vel.y = (vel.y * 0.975 + coh.y * 0.025)
             }
@@ -402,8 +427,11 @@ class CohesionSystem {
     }
 
     func update() {
+        os_signpost(.begin, log: log, name: "CohesionSystem")
+        defer { os_signpost(.end, log: log, name: "CohesionSystem") }
         initialise()
-        family.forEach { (pos: Position, coh: Cohesion, _) in
+
+        family.forEach { (pos: Position, _: Cohesion, _) in
             let xIndex = pos.x / tileSize
             let yIndex = gridSize * (pos.y / tileSize)
             let index = Int(xIndex + yIndex)
@@ -412,6 +440,7 @@ class CohesionSystem {
             cohesion.0 += 1
             cohesionCenters[index] = (cohesion.0, (cohesion.1.0 + Double(pos.x)/Double(cohesion.0), cohesion.1.1 + Double(pos.y)/Double(cohesion.0)))
         }
+
         family.forEach { (pos: Position, coh: Cohesion, vel: Velocity) in
             let xIndex = pos.x / tileSize
             let yIndex = gridSize * (pos.y / tileSize)
@@ -424,9 +453,8 @@ class CohesionSystem {
             if (mag != 0) {
                 coh.x = coh.x / mag
                 coh.y = coh.y / mag
-//            assert(coh.x > 0)
-//            assert(coh.y > 0)
-
+                //            assert(coh.x > 0)
+                //            assert(coh.y > 0)
 
                 vel.x = (vel.x * 0.9 + coh.x * 0.1)
                 vel.y = (vel.y * 0.9 + coh.y * 0.1)
@@ -443,11 +471,13 @@ class CohesionSystem {
 
 class DispersionSystem {
     let tileSize: Int32 = Int32(ceil(Double(max(width, height)) / Double(gridSize)))
-    var cohesionCenters = [Int:(Int, (Double, Double))]()
+    var cohesionCenters = [Int: (Int, (Double, Double))]()
 
     let family = nexus.family(requiresAll: Position.self, Dispersion.self, Velocity.self)
 
     func update2(_ sis: SpatialIndexSystem) {
+        os_signpost(.begin, log: log, name: "DispersionSystem")
+        defer { os_signpost(.end, log: log, name: "DispersionSystem") }
         family.forEach { (pos: Position, coh: Dispersion, vel: Velocity) in
             let neighbours = sis.index.allWithinDistance(pos, Double(tileSize) / 10)
             let centerOfGravity = neighbours.reduce(Position(), { (acc: Position, next: Position) in
@@ -465,6 +495,7 @@ class DispersionSystem {
             } else {
                 return
             }
+
             if (neighbours.count != 0) {
                 centerOfGravity.x /= Int32(neighbours.count)
                 centerOfGravity.y /= Int32(neighbours.count)
@@ -475,15 +506,17 @@ class DispersionSystem {
                 coh.x = (Double(centerOfGravity.x) / mag)
                 coh.y = (Double(centerOfGravity.y) / mag)
 
-//                vel.x = (vel.x * 0.05 + coh.x * 0.95)
-//                vel.y = (vel.y * 0.05 + coh.y * 0.95)
+                //                vel.x = (vel.x * 0.05 + coh.x * 0.95)
+                //                vel.y = (vel.y * 0.05 + coh.y * 0.95)
             }
         }
     }
 
     func update() {
+        os_signpost(.begin, log: log, name: "DispersionSystem")
+        defer { os_signpost(.end, log: log, name: "DispersionSystem") }
         initialise()
-        family.forEach { (pos: Position, coh: Dispersion, _) in
+        family.forEach { (pos: Position, _: Dispersion, _) in
             let xIndex = pos.x / tileSize
             let yIndex = gridSize * (pos.y / tileSize)
             let index = Int(xIndex + yIndex)
@@ -499,20 +532,20 @@ class DispersionSystem {
             let cohesion = cohesionCenters[index]!
             coh.x = (cohesion.1.0 - Double(pos.x))
             coh.y = (cohesion.1.1 - Double(pos.y))
-//            coh.x = (-cohesion.1.0 + Double(pos.x))
-//            coh.y = (-cohesion.1.1 + Double(pos.y))
+            //            coh.x = (-cohesion.1.0 + Double(pos.x))
+            //            coh.y = (-cohesion.1.1 + Double(pos.y))
             let mag = sqrt(coh.x*coh.x + coh.y*coh.y)
 
             if (mag != 0) {
                 coh.x = coh.x / mag
                 coh.y = coh.y / mag
 
-            //            assert(coh.x > 0)
-            //            assert(coh.y > 0)
+                //            assert(coh.x > 0)
+                //            assert(coh.y > 0)
 
                 if (cohesion.0 > 5) {
-//                vel.x *= -1
-//                vel.y *= -1
+                    //                vel.x *= -1
+                    //                vel.y *= -1
                     vel.x = (vel.x * 0.15 - coh.x * 0.85) * 3
                     vel.y = (vel.y * 0.15 - coh.y * 0.85) * 3
                 }
@@ -546,6 +579,8 @@ class PositionResetSystem {
     let family = nexus.family(requiresAll: Position.self, Velocity.self)
 
     func update() {
+        os_signpost(.begin, log: log, name: "PositionResetSystem")
+        defer { os_signpost(.end, log: log, name: "PositionResetSystem") }
         family
             .forEach { (pos: Position, vel: Velocity) in
                 pos.x = (Int32 (randNorm() * (Double (width))))
@@ -560,6 +595,8 @@ class ColorSystem {
     let family = nexus.family(requires: Color.self)
 
     func update() {
+        os_signpost(.begin, log: log, name: "ColorSystem")
+        defer { os_signpost(.end, log: log, name: "ColorSystem") }
         family
             .forEach { (color: Color) in
                 color.r = randColor()
@@ -588,7 +625,8 @@ class RenderSystem {
     }
 
     func render() {
-
+        os_signpost(.begin, log: log, name: "RenderSystem")
+        defer { os_signpost(.end, log: log, name: "RenderSystem") }
         SDL_SetRenderDrawColor( hRenderer, 0, 0, 0, 255 ) // black
         SDL_RenderClear(hRenderer) // clear screen
 
@@ -599,7 +637,7 @@ class RenderSystem {
                 }
 
                 var rect = SDL_Rect(x: pos.x, y: pos.y, w: 2, h: 2)
-//                print(color.r, color.g, color.b)
+                //                print(color.r, color.g, color.b)
                 SDL_SetRenderDrawColor(self.hRenderer, color.r, color.g, color.b, 255)
                 SDL_SetRenderDrawBlendMode(self.hRenderer, SDL_BLENDMODE_NONE)
                 SDL_RenderFillRect(self.hRenderer, &rect)
@@ -666,6 +704,8 @@ initialiseColorMapping(greyScale)
 print("================ RUNNING ================")
 SDL_SetWindowPosition(hWin, Int32(SDL_WINDOWPOS_CENTERED_MASK), Int32(SDL_WINDOWPOS_CENTERED_MASK))
 while quit == false {
+    os_signpost(.begin, log: log, name: "Loop")
+    defer { os_signpost(.end, log: log, name: "Loop") }
     tFrame.start()
     while SDL_PollEvent(&event) == 1 {
         switch SDL_EventType(rawValue: event.type) {
@@ -680,7 +720,7 @@ while quit == false {
             case SDLK_c:
                 colorGridSystem.update()
                 colourNeighbourSystem.update2(spatialIndexSystem)
-//                colorSystem.update()
+            //                colorSystem.update()
             case SDLK_r:
                 positionResetSystem.update()
                 spatialIndexSystem.update()
@@ -728,14 +768,12 @@ while quit == false {
     }
 
     spatialIndexSystem.update()
-//    colorGridSystem.update()
+    //    colorGridSystem.update()
     alignmentSystem.update()
     cohesionSystem.update2(spatialIndexSystem)
     dispersionSystem.update2(spatialIndexSystem)
     positionSystem.update()
     colourNeighbourSystem.update2(spatialIndexSystem)
-
-
 
     renderSystem.render()
     tFrame.stop()
