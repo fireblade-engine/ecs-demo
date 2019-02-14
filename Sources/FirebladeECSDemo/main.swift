@@ -1,9 +1,10 @@
 import CSDL2
 import FirebladeECS
 
+let kDefaultVelocity: Double = 6.0
 var tFrame = Timer()
 var tSetup = Timer()
-var velocity: Double = 4.0
+var velocity: Double = kDefaultVelocity
 var currentCount: Int = 0
 
 tSetup.start()
@@ -22,7 +23,6 @@ let width: Int32 = 800
 let height: Int32 = 600
 let winFlags: UInt32 = SDL_WINDOW_SHOWN.rawValue | SDL_WINDOW_RESIZABLE.rawValue
 let hWin = SDL_CreateWindow(windowTitle, 100, 100, width, height, winFlags)
-
 
 if hWin == nil {
     SDL_Quit()
@@ -49,17 +49,17 @@ class Color: Component {
 }
 
 func createScene() {
-    
+
     let numEntities: Int = 10_000
-    
+
     for i in 0..<numEntities {
         createDefaultEntity(name: "\(i)")
     }
 }
 
 func batchCreateEntities(count: Int) {
-    for _ in 0..<count {
-        createDefaultEntity(name: nil)
+    for i in 0..<count {
+        createDefaultEntity(name: "\(i)")
     }
 }
 
@@ -71,7 +71,7 @@ func batchDestroyEntities(count: Int) {
         .forEach { (entity: Entity) in
             entity.destroy()
     }
-    
+
 }
 
 func createDefaultEntity(name: String?) {
@@ -82,34 +82,34 @@ func createDefaultEntity(name: String?) {
 
 class PositionSystem {
     let family = nexus.family(requires: Position.self)
-    
+
     func update() {
-        
+
         family
             .forEach { (pos: Position) in
-                
+
                 let deltaX: Double = velocity*((randNorm() * 2) - 1)
                 let deltaY: Double = velocity*((randNorm() * 2) - 1)
                 var x = pos.x + Int32(deltaX)
                 var y = pos.y + Int32(deltaY)
-                
+
                 if x < 0 || x > width {
                     x = -x
                 }
                 if y < 0 || y > height {
                     y = -y
                 }
-                
+
                 pos.x = x
                 pos.y = y
         }
     }
-    
+
 }
 
 class PositionResetSystem {
     let family = nexus.family(requires: Position.self)
-    
+
     func update() {
         family
             .forEach { (pos: Position) in
@@ -121,12 +121,12 @@ class PositionResetSystem {
 
 class ColorSystem {
     let family = nexus.family(requires: Color.self)
-    
+
     func update() {
-        
+
         family
             .forEach { (color: Color) in
-                
+
                 color.r = randColor()
                 color.g = randColor()
                 color.b = randColor()
@@ -137,7 +137,7 @@ class ColorSystem {
 class RenderSystem {
     let hRenderer: OpaquePointer?
     let family = nexus.family(requiresAll: Position.self, Color.self)
-    
+
     init(hWin: OpaquePointer?) {
         let flags: UInt32 = SDL_RENDERER_ACCELERATED.rawValue | SDL_RENDERER_PRESENTVSYNC.rawValue
         hRenderer = SDL_CreateRenderer(hWin, -1, flags)
@@ -147,29 +147,29 @@ class RenderSystem {
             fatalError("could not create renderer")
         }
     }
-    
+
     deinit {
         SDL_DestroyRenderer(hRenderer)
     }
-    
+
     func render() {
-        
+
         SDL_SetRenderDrawColor( hRenderer, 0, 0, 0, 255 ) // black
         SDL_RenderClear(hRenderer) // clear screen
-        
+
         family
             .forEach { [weak self] (pos: Position, color: Color) in
-            guard let `self` = self else {
-                return
-            }
-            
-            var rect = SDL_Rect(x: pos.x, y: pos.y, w: 2, h: 2)
-            
-            SDL_SetRenderDrawColor(self.hRenderer, color.r, color.g, color.b, 255)
-            SDL_SetRenderDrawBlendMode(self.hRenderer, SDL_BLENDMODE_NONE)
-            SDL_RenderFillRect(self.hRenderer, &rect)
+                guard let `self` = self else {
+                    return
+                }
+
+                var rect = SDL_Rect(x: pos.x, y: pos.y, w: 2, h: 2)
+
+                SDL_SetRenderDrawColor(self.hRenderer, color.r, color.g, color.b, 255)
+                SDL_SetRenderDrawBlendMode(self.hRenderer, SDL_BLENDMODE_NONE)
+                SDL_RenderFillRect(self.hRenderer, &rect)
         }
-        
+
         SDL_RenderPresent(hRenderer)
     }
 }
@@ -234,7 +234,7 @@ while quit == false {
             case SDLK_MINUS:
                 velocity -= 0.1
             case SDLK_SPACE:
-                velocity = 4.0
+                velocity = kDefaultVelocity
             case SDLK_e:
                 batchCreateEntities(count: 1)
             case SDLK_d:
@@ -250,28 +250,28 @@ while quit == false {
             break
         }
     }
-    
+
     positionSystem.update()
-    
+
     renderSystem.render()
     tFrame.stop()
-    
+
     frameTimes.append(tFrame.nanoSeconds)
-    
+
     // Print a report once per second
     currentTime = SDL_GetTicks()
     if (currentTime > lastTime + 1000) {
-        
+
         let count = UInt(frameTimes.count)
         frameCount += count
         let sum: UInt64 = frameTimes.reduce(0, { $0 + $1 })
         frameTimes.removeAll(keepingCapacity: true)
-        
+
         let avergageNanos: Double = Double(sum)/Double(count)
-        
+
         fps = 1.0 / (avergageNanos * 1.0e-9)
         fps.round()
-        
+
         SDL_SetWindowTitle(hWin, windowTitle)
         lastTime = currentTime
     }
