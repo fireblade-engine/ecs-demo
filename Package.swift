@@ -7,8 +7,8 @@ let package = Package(
     name: "FirebladeECSDemo",
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-		.package(url: "https://github.com/fireblade-engine/ecs.git", from: "0.5.1")
 		.package(url: "https://github.com/ctreffs/CSDL2.git", from: "1.0.0"),
+		.package(url: "https://github.com/fireblade-engine/ecs.git", from: "0.6.0")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
