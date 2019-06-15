@@ -1,7 +1,7 @@
 # Fireblade ECS Demo
 
 [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
-[![swift version](https://img.shields.io/badge/swift-4-brightgreen.svg)](#)
+[![swift version](https://img.shields.io/badge/swift-5-brightgreen.svg)](#)
 [![platforms](https://img.shields.io/badge/platform-macOS%20-brightgreen.svg)](#)
 
 <p align="center">
@@ -21,7 +21,7 @@ These instructions will get you a copy of the project up and running on your loc
 ## Prerequisites
 
 - [Swift Package Manager (SPM)](https://github.com/apple/swift-package-manager)
-- [Xcode 9+](https://developer.apple.com/xcode/)
+- [Xcode 10+](https://developer.apple.com/xcode/)
 - [Simple DirectMedia Layer 2 (SDL2)](https://www.libsdl.org/download-2.0.php)
 	- Download and install i.e. via [Homebrew](https://brew.sh)   
 		`brew install sdl2`
