@@ -12,11 +12,11 @@
       },
       {
         "package": "FirebladeECS",
-        "repositoryURL": "https://gitlab.com/fireblade/ecs.git",
+        "repositoryURL": "https://github.com/fireblade-engine/ecs.git",
         "state": {
           "branch": null,
-          "revision": "85c7e2296bdb33e47cb021cec63201833306b4d2",
-          "version": "0.6.3"
+          "revision": "3f9bdf701f1221385d28926f8a467701724cde71",
+          "version": "0.7.0"
         }
       }
     ]
