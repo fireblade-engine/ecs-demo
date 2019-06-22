@@ -5,9 +5,14 @@ import PackageDescription
 
 let package = Package(
     name: "FirebladeECSDemo",
+    platforms: [
+        .macOS(.v10_14),
+        .iOS(.v11),
+        .tvOS(.v11)
+    ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-		.package(url: "https://github.com/ctreffs/CSDL2.git", from: "1.0.0"),
+		.package(url: "https://github.com/ctreffs/CSDL2.git", from: "1.1.0"),
 		.package(url: "https://github.com/fireblade-engine/ecs.git", from: "0.7.0")
     ],
     targets: [
