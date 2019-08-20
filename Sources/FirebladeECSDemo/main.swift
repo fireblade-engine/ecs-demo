@@ -37,7 +37,12 @@ func randNorm() -> Double {
 func randColor() -> UInt8 {
     return UInt8(randNorm() * 254) + 1
 }
-
+class Name: Component {
+    let name: String
+    init(_ name: String) {
+        self.name = name
+    }
+}
 class Position: Component {
     var x: Int32 = width/2
     var y: Int32 = height/2
@@ -53,13 +58,13 @@ func createScene() {
     let numEntities: Int = 10_000
 
     for i in 0..<numEntities {
-        createDefaultEntity(name: "\(i)")
+        createDefaultEntity(i)
     }
 }
 
 func batchCreateEntities(count: Int) {
     for i in 0..<count {
-        createDefaultEntity(name: "\(i)")
+        createDefaultEntity(i)
     }
 }
 
@@ -74,8 +79,9 @@ func batchDestroyEntities(count: Int) {
 
 }
 
-func createDefaultEntity(name: String?) {
-    let e = nexus.create(entity: name)
+func createDefaultEntity(_ number: Int) {
+    let e = nexus.createEntity()
+    e.assign(Name("\(number)"))
     e.assign(Position())
     e.assign(Color())
 }
