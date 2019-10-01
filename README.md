@@ -1,7 +1,7 @@
 # Fireblade ECS Demo
 
 [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
-[![swift version](https://img.shields.io/badge/swift-5-brightgreen.svg)](#)
+[![swift version](https://img.shields.io/badge/swift-5+-brightgreen.svg)](#)
 [![platforms](https://img.shields.io/badge/platform-macOS%20-brightgreen.svg)](#)
 
 <p align="center">

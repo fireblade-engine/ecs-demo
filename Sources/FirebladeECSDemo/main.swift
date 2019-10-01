@@ -19,9 +19,9 @@ let nexus = Nexus()
 var windowTitle: String {
     return "Fireblade ECS demo: [entities:\(nexus.numEntities) components:\(nexus.numComponents) families:\(nexus.numFamilies) velocity:\(velocity)] @ [FPS: \(fps), frames: \(frameCount)]"
 }
-let width: Int32 = 800
-let height: Int32 = 600
-let winFlags: UInt32 = SDL_WINDOW_SHOWN.rawValue | SDL_WINDOW_RESIZABLE.rawValue
+var width: Int32 = 800
+var height: Int32 = 600
+let winFlags: UInt32 = SDL_WINDOW_SHOWN.rawValue | SDL_WINDOW_RESIZABLE.rawValue //| SDL_WINDOW_ALLOW_HIGHDPI.rawValue
 let hWin = SDL_CreateWindow(windowTitle, 100, 100, width, height, winFlags)
 
 if hWin == nil {
@@ -76,7 +76,6 @@ func batchDestroyEntities(count: Int) {
         .forEach { (entity: Entity) in
             entity.destroy()
     }
-
 }
 
 func createDefaultEntity(_ number: Int) {
@@ -145,8 +144,19 @@ class RenderSystem {
     let family = nexus.family(requiresAll: Position.self, Color.self)
 
     init(hWin: OpaquePointer?) {
+
         let flags: UInt32 = SDL_RENDERER_ACCELERATED.rawValue | SDL_RENDERER_PRESENTVSYNC.rawValue
-        hRenderer = SDL_CreateRenderer(hWin, -1, flags)
+
+        var infos = [SDL_RendererInfo](repeating: SDL_RendererInfo(), count: Int(SDL_GetNumRenderDrivers()))
+        for i in 0..<SDL_GetNumRenderDrivers() {
+            let success = SDL_GetRenderDriverInfo(i, &infos[Int(i)])
+            precondition(success == 0)
+        }
+        // FIXME: metal backend seems to be broken under macOS 10.14.6 beta
+        // we fallback to opengl here for now
+        let index = infos.firstIndex { String(cString: $0.name) == "opengl"  }!
+
+        hRenderer = SDL_CreateRenderer(hWin, Int32(index), flags)
         if hRenderer == nil {
             SDL_DestroyWindow(hWin)
             SDL_Quit()
@@ -224,6 +234,11 @@ while quit == false {
         case SDL_QUIT:
             quit = true
             break
+        case SDL_WINDOWEVENT:
+            if event.window.event == SDL_WINDOWEVENT_SIZE_CHANGED.rawValue {
+                width = Int32(event.window.data1)
+                height = Int32(event.window.data2)
+            }
         case SDL_KEYDOWN:
             switch Int(event.key.keysym.sym) {
             case SDLK_ESCAPE:
