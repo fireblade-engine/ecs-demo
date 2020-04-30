@@ -150,7 +150,7 @@ class RenderSystem {
 
     init(hWin: OpaquePointer?) {
 
-        let flags: UInt32 = SDL_RENDERER_ACCELERATED.rawValue | SDL_RENDERER_PRESENTVSYNC.rawValue
+        let flags: UInt32 = SDL_RENDERER_ACCELERATED.rawValue // | SDL_RENDERER_PRESENTVSYNC.rawValue
         hRenderer = SDL_CreateRenderer(hWin, -1, flags)
         if hRenderer == nil {
             SDL_DestroyWindow(hWin)
