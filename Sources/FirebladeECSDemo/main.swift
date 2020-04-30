@@ -1,16 +1,20 @@
 import CSDL2
 import FirebladeECS
 
-let kDefaultVelocity: Double = 6.0
+if SDL_Init(SDL_INIT_VIDEO) != 0 {
+    fatalError("could not init video")
+}
+
+var displayMode = SDL_DisplayMode()
+SDL_GetCurrentDisplayMode(0, &displayMode)
+
+let kDefaultVelocity: Double = max(Double(displayMode.refresh_rate) / 10.0, 6.0)
 var tFrame = Timer()
 var tSetup = Timer()
 var velocity: Double = kDefaultVelocity
 var currentCount: Int = 0
 
 tSetup.start()
-if SDL_Init(SDL_INIT_VIDEO) != 0 {
-    fatalError("could not init video")
-}
 
 var frameCount: UInt = 0
 var fps: Double = 0
@@ -19,8 +23,9 @@ let nexus = Nexus()
 var windowTitle: String {
     return "Fireblade ECS demo: [entities:\(nexus.numEntities) components:\(nexus.numComponents) families:\(nexus.numFamilies) velocity:\(velocity)] @ [FPS: \(fps), frames: \(frameCount)]"
 }
-var width: Int32 = 800
-var height: Int32 = 600
+var width: Int32 = max(displayMode.w / 2, 800)
+var height: Int32 = max(displayMode.h / 2, 600)
+
 let winFlags: UInt32 = SDL_WINDOW_SHOWN.rawValue | SDL_WINDOW_RESIZABLE.rawValue //| SDL_WINDOW_ALLOW_HIGHDPI.rawValue
 let hWin = SDL_CreateWindow(windowTitle, 100, 100, width, height, winFlags)
 
@@ -146,17 +151,7 @@ class RenderSystem {
     init(hWin: OpaquePointer?) {
 
         let flags: UInt32 = SDL_RENDERER_ACCELERATED.rawValue | SDL_RENDERER_PRESENTVSYNC.rawValue
-
-        var infos = [SDL_RendererInfo](repeating: SDL_RendererInfo(), count: Int(SDL_GetNumRenderDrivers()))
-        for i in 0..<SDL_GetNumRenderDrivers() {
-            let success = SDL_GetRenderDriverInfo(i, &infos[Int(i)])
-            precondition(success == 0)
-        }
-        // FIXME: metal backend seems to be broken under macOS 10.14.6 beta
-        // we fallback to opengl here for now
-        let index = infos.firstIndex { String(cString: $0.name) == "opengl"  }!
-
-        hRenderer = SDL_CreateRenderer(hWin, Int32(index), flags)
+        hRenderer = SDL_CreateRenderer(hWin, -1, flags)
         if hRenderer == nil {
             SDL_DestroyWindow(hWin)
             SDL_Quit()
@@ -174,11 +169,7 @@ class RenderSystem {
         SDL_RenderClear(hRenderer) // clear screen
 
         family
-            .forEach { [weak self] (pos: Position, color: Color) in
-                guard let `self` = self else {
-                    return
-                }
-
+            .forEach { [unowned self] (pos: Position, color: Color) in
                 var rect = SDL_Rect(x: pos.x, y: pos.y, w: 2, h: 2)
 
                 SDL_SetRenderDrawColor(self.hRenderer, color.r, color.g, color.b, 255)
@@ -240,7 +231,7 @@ while quit == false {
                 height = Int32(event.window.data2)
             }
         case SDL_KEYDOWN:
-            switch Int(event.key.keysym.sym) {
+            switch SDL_KeyCode(UInt32(event.key.keysym.sym)) {
             case SDLK_ESCAPE:
                 quit = true
                 break
@@ -281,7 +272,7 @@ while quit == false {
 
     // Print a report once per second
     currentTime = SDL_GetTicks()
-    if (currentTime > lastTime + 1000) {
+    if currentTime > lastTime + 1000 {
 
         let count = UInt(frameTimes.count)
         frameCount += count

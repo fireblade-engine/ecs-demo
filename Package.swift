@@ -12,7 +12,7 @@ let package = Package(
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-		.package(url: "https://github.com/ctreffs/CSDL2.git", from: "1.1.0"),
+		.package(url: "https://github.com/ctreffs/SwiftSDL2.git", from: "1.0.0"),
 		.package(url: "https://github.com/fireblade-engine/ecs.git", from: "0.10.0")
     ],
     targets: [
