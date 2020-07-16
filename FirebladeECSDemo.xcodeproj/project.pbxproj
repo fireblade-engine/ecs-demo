@@ -9,7 +9,7 @@
 /* Begin PBXAggregateTarget section */
 		"SDL2::CSDL2::ProductTarget" /* CSDL2 */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = OBJ_48 /* Build configuration list for PBXAggregateTarget "CSDL2" */;
+			buildConfigurationList = OBJ_49 /* Build configuration list for PBXAggregateTarget "CSDL2" */;
 			buildPhases = (
 			);
 			dependencies = (
@@ -20,40 +20,41 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		OBJ_103 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* Package.swift */; };
-		OBJ_56 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* Component.swift */; };
-		OBJ_57 /* ComponentIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* ComponentIdentifier.swift */; };
-		OBJ_58 /* Entity+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* Entity+Component.swift */; };
-		OBJ_59 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* Entity.swift */; };
-		OBJ_60 /* EntityIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* EntityIdentifier.swift */; };
-		OBJ_61 /* Family.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* Family.swift */; };
-		OBJ_62 /* Family1.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* Family1.swift */; };
-		OBJ_63 /* Family2.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* Family2.swift */; };
-		OBJ_64 /* Family3.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* Family3.swift */; };
-		OBJ_65 /* Family4.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* Family4.swift */; };
-		OBJ_66 /* Family5.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* Family5.swift */; };
-		OBJ_67 /* FamilyRequirementsManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* FamilyRequirementsManaging.swift */; };
-		OBJ_68 /* FamilyTraitSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* FamilyTraitSet.swift */; };
-		OBJ_69 /* Hashing.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* Hashing.swift */; };
-		OBJ_70 /* ManagedContiguousArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* ManagedContiguousArray.swift */; };
-		OBJ_71 /* Nexus+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* Nexus+Component.swift */; };
-		OBJ_72 /* Nexus+Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* Nexus+Entity.swift */; };
-		OBJ_73 /* Nexus+Family.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* Nexus+Family.swift */; };
-		OBJ_74 /* Nexus+FamilyUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* Nexus+FamilyUpdate.swift */; };
-		OBJ_75 /* Nexus+SceneGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* Nexus+SceneGraph.swift */; };
-		OBJ_76 /* Nexus.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* Nexus.swift */; };
-		OBJ_77 /* NexusEventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* NexusEventDelegate.swift */; };
-		OBJ_78 /* NexusEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* NexusEvents.swift */; };
-		OBJ_79 /* Single.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* Single.swift */; };
-		OBJ_80 /* UnorderedSparseSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_39 /* UnorderedSparseSet.swift */; };
-		OBJ_87 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Timer.swift */; };
-		OBJ_88 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* main.swift */; };
-		OBJ_90 /* FirebladeECS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "FirebladeECS::FirebladeECS::Product" /* FirebladeECS.framework */; };
-		OBJ_97 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
+		OBJ_105 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* Package.swift */; };
+		OBJ_57 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* Component.swift */; };
+		OBJ_58 /* ComponentIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* ComponentIdentifier.swift */; };
+		OBJ_59 /* Entity+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* Entity+Component.swift */; };
+		OBJ_60 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* Entity.swift */; };
+		OBJ_61 /* EntityIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* EntityIdentifier.swift */; };
+		OBJ_62 /* EntityIdentifierGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* EntityIdentifierGenerator.swift */; };
+		OBJ_63 /* Family.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* Family.swift */; };
+		OBJ_64 /* Family1.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* Family1.swift */; };
+		OBJ_65 /* Family2.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* Family2.swift */; };
+		OBJ_66 /* Family3.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* Family3.swift */; };
+		OBJ_67 /* Family4.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* Family4.swift */; };
+		OBJ_68 /* Family5.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* Family5.swift */; };
+		OBJ_69 /* FamilyRequirementsManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* FamilyRequirementsManaging.swift */; };
+		OBJ_70 /* FamilyTraitSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* FamilyTraitSet.swift */; };
+		OBJ_71 /* Hashing.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* Hashing.swift */; };
+		OBJ_72 /* ManagedContiguousArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* ManagedContiguousArray.swift */; };
+		OBJ_73 /* Nexus+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* Nexus+Component.swift */; };
+		OBJ_74 /* Nexus+Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* Nexus+Entity.swift */; };
+		OBJ_75 /* Nexus+Family.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* Nexus+Family.swift */; };
+		OBJ_76 /* Nexus+FamilyUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* Nexus+FamilyUpdate.swift */; };
+		OBJ_77 /* Nexus+SceneGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* Nexus+SceneGraph.swift */; };
+		OBJ_78 /* Nexus.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* Nexus.swift */; };
+		OBJ_79 /* NexusEventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* NexusEventDelegate.swift */; };
+		OBJ_80 /* NexusEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* NexusEvents.swift */; };
+		OBJ_81 /* Single.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_39 /* Single.swift */; };
+		OBJ_82 /* UnorderedSparseSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* UnorderedSparseSet.swift */; };
+		OBJ_89 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Timer.swift */; };
+		OBJ_90 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* main.swift */; };
+		OBJ_92 /* FirebladeECS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "FirebladeECS::FirebladeECS::Product" /* FirebladeECS.framework */; };
+		OBJ_99 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		F8DADF9B24B85ED30001E858 /* PBXContainerItemProxy */ = {
+		F82C67DE24C076DE00260161 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
@@ -63,7 +64,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		"FirebladeECS::FirebladeECS::Product" /* FirebladeECS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebladeECS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"FirebladeECS::FirebladeECS::Product" /* FirebladeECS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebladeECS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"FirebladeECSDemo::FirebladeECSDemo::Product" /* FirebladeECSDemo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = FirebladeECSDemo; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_10 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		OBJ_15 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
@@ -71,47 +72,48 @@
 		OBJ_17 /* Entity+Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entity+Component.swift"; sourceTree = "<group>"; };
 		OBJ_18 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 		OBJ_19 /* EntityIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityIdentifier.swift; sourceTree = "<group>"; };
-		OBJ_20 /* Family.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Family.swift; sourceTree = "<group>"; };
-		OBJ_21 /* Family1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Family1.swift; sourceTree = "<group>"; };
-		OBJ_22 /* Family2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Family2.swift; sourceTree = "<group>"; };
-		OBJ_23 /* Family3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Family3.swift; sourceTree = "<group>"; };
-		OBJ_24 /* Family4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Family4.swift; sourceTree = "<group>"; };
-		OBJ_25 /* Family5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Family5.swift; sourceTree = "<group>"; };
-		OBJ_26 /* FamilyRequirementsManaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyRequirementsManaging.swift; sourceTree = "<group>"; };
-		OBJ_27 /* FamilyTraitSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyTraitSet.swift; sourceTree = "<group>"; };
-		OBJ_28 /* Hashing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hashing.swift; sourceTree = "<group>"; };
-		OBJ_29 /* ManagedContiguousArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedContiguousArray.swift; sourceTree = "<group>"; };
-		OBJ_30 /* Nexus+Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Nexus+Component.swift"; sourceTree = "<group>"; };
-		OBJ_31 /* Nexus+Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Nexus+Entity.swift"; sourceTree = "<group>"; };
-		OBJ_32 /* Nexus+Family.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Nexus+Family.swift"; sourceTree = "<group>"; };
-		OBJ_33 /* Nexus+FamilyUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Nexus+FamilyUpdate.swift"; sourceTree = "<group>"; };
-		OBJ_34 /* Nexus+SceneGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Nexus+SceneGraph.swift"; sourceTree = "<group>"; };
-		OBJ_35 /* Nexus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nexus.swift; sourceTree = "<group>"; };
-		OBJ_36 /* NexusEventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NexusEventDelegate.swift; sourceTree = "<group>"; };
-		OBJ_37 /* NexusEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NexusEvents.swift; sourceTree = "<group>"; };
-		OBJ_38 /* Single.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Single.swift; sourceTree = "<group>"; };
-		OBJ_39 /* UnorderedSparseSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnorderedSparseSet.swift; sourceTree = "<group>"; };
-		OBJ_40 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/ctreffs/Development/personal/game-dev/fireblade/ecs-demo/.build/checkouts/ecs/Package.swift"; sourceTree = "<group>"; };
-		OBJ_44 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		OBJ_45 /* demo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = demo.png; sourceTree = "<group>"; };
-		OBJ_46 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		OBJ_20 /* EntityIdentifierGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityIdentifierGenerator.swift; sourceTree = "<group>"; };
+		OBJ_21 /* Family.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Family.swift; sourceTree = "<group>"; };
+		OBJ_22 /* Family1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Family1.swift; sourceTree = "<group>"; };
+		OBJ_23 /* Family2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Family2.swift; sourceTree = "<group>"; };
+		OBJ_24 /* Family3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Family3.swift; sourceTree = "<group>"; };
+		OBJ_25 /* Family4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Family4.swift; sourceTree = "<group>"; };
+		OBJ_26 /* Family5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Family5.swift; sourceTree = "<group>"; };
+		OBJ_27 /* FamilyRequirementsManaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyRequirementsManaging.swift; sourceTree = "<group>"; };
+		OBJ_28 /* FamilyTraitSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyTraitSet.swift; sourceTree = "<group>"; };
+		OBJ_29 /* Hashing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hashing.swift; sourceTree = "<group>"; };
+		OBJ_30 /* ManagedContiguousArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedContiguousArray.swift; sourceTree = "<group>"; };
+		OBJ_31 /* Nexus+Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Nexus+Component.swift"; sourceTree = "<group>"; };
+		OBJ_32 /* Nexus+Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Nexus+Entity.swift"; sourceTree = "<group>"; };
+		OBJ_33 /* Nexus+Family.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Nexus+Family.swift"; sourceTree = "<group>"; };
+		OBJ_34 /* Nexus+FamilyUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Nexus+FamilyUpdate.swift"; sourceTree = "<group>"; };
+		OBJ_35 /* Nexus+SceneGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Nexus+SceneGraph.swift"; sourceTree = "<group>"; };
+		OBJ_36 /* Nexus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nexus.swift; sourceTree = "<group>"; };
+		OBJ_37 /* NexusEventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NexusEventDelegate.swift; sourceTree = "<group>"; };
+		OBJ_38 /* NexusEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NexusEvents.swift; sourceTree = "<group>"; };
+		OBJ_39 /* Single.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Single.swift; sourceTree = "<group>"; };
+		OBJ_40 /* UnorderedSparseSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnorderedSparseSet.swift; sourceTree = "<group>"; };
+		OBJ_41 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/ctreffs/Development/personal/game-dev/fireblade/ecs-demo/.build/checkouts/ecs/Package.swift"; sourceTree = "<group>"; };
+		OBJ_45 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		OBJ_46 /* demo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = demo.png; sourceTree = "<group>"; };
+		OBJ_47 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		OBJ_9 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		OBJ_81 /* Frameworks */ = {
+		OBJ_83 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_89 /* Frameworks */ = {
+		OBJ_91 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_90 /* FirebladeECS.framework in Frameworks */,
+				OBJ_92 /* FirebladeECS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,18 +130,18 @@
 		OBJ_12 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_13 /* FirebladeECS 0.12.0 */,
+				OBJ_13 /* FirebladeECS 0.12.1 */,
 			);
 			name = Dependencies;
 			sourceTree = "<group>";
 		};
-		OBJ_13 /* FirebladeECS 0.12.0 */ = {
+		OBJ_13 /* FirebladeECS 0.12.1 */ = {
 			isa = PBXGroup;
 			children = (
 				OBJ_14 /* FirebladeECS */,
-				OBJ_40 /* Package.swift */,
+				OBJ_41 /* Package.swift */,
 			);
-			name = "FirebladeECS 0.12.0";
+			name = "FirebladeECS 0.12.1";
 			sourceTree = SOURCE_ROOT;
 		};
 		OBJ_14 /* FirebladeECS */ = {
@@ -150,32 +152,33 @@
 				OBJ_17 /* Entity+Component.swift */,
 				OBJ_18 /* Entity.swift */,
 				OBJ_19 /* EntityIdentifier.swift */,
-				OBJ_20 /* Family.swift */,
-				OBJ_21 /* Family1.swift */,
-				OBJ_22 /* Family2.swift */,
-				OBJ_23 /* Family3.swift */,
-				OBJ_24 /* Family4.swift */,
-				OBJ_25 /* Family5.swift */,
-				OBJ_26 /* FamilyRequirementsManaging.swift */,
-				OBJ_27 /* FamilyTraitSet.swift */,
-				OBJ_28 /* Hashing.swift */,
-				OBJ_29 /* ManagedContiguousArray.swift */,
-				OBJ_30 /* Nexus+Component.swift */,
-				OBJ_31 /* Nexus+Entity.swift */,
-				OBJ_32 /* Nexus+Family.swift */,
-				OBJ_33 /* Nexus+FamilyUpdate.swift */,
-				OBJ_34 /* Nexus+SceneGraph.swift */,
-				OBJ_35 /* Nexus.swift */,
-				OBJ_36 /* NexusEventDelegate.swift */,
-				OBJ_37 /* NexusEvents.swift */,
-				OBJ_38 /* Single.swift */,
-				OBJ_39 /* UnorderedSparseSet.swift */,
+				OBJ_20 /* EntityIdentifierGenerator.swift */,
+				OBJ_21 /* Family.swift */,
+				OBJ_22 /* Family1.swift */,
+				OBJ_23 /* Family2.swift */,
+				OBJ_24 /* Family3.swift */,
+				OBJ_25 /* Family4.swift */,
+				OBJ_26 /* Family5.swift */,
+				OBJ_27 /* FamilyRequirementsManaging.swift */,
+				OBJ_28 /* FamilyTraitSet.swift */,
+				OBJ_29 /* Hashing.swift */,
+				OBJ_30 /* ManagedContiguousArray.swift */,
+				OBJ_31 /* Nexus+Component.swift */,
+				OBJ_32 /* Nexus+Entity.swift */,
+				OBJ_33 /* Nexus+Family.swift */,
+				OBJ_34 /* Nexus+FamilyUpdate.swift */,
+				OBJ_35 /* Nexus+SceneGraph.swift */,
+				OBJ_36 /* Nexus.swift */,
+				OBJ_37 /* NexusEventDelegate.swift */,
+				OBJ_38 /* NexusEvents.swift */,
+				OBJ_39 /* Single.swift */,
+				OBJ_40 /* UnorderedSparseSet.swift */,
 			);
 			name = FirebladeECS;
 			path = .build/checkouts/ecs/Sources/FirebladeECS;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_41 /* Products */ = {
+		OBJ_42 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				"FirebladeECS::FirebladeECS::Product" /* FirebladeECS.framework */,
@@ -191,10 +194,10 @@
 				OBJ_7 /* Sources */,
 				OBJ_11 /* Tests */,
 				OBJ_12 /* Dependencies */,
-				OBJ_41 /* Products */,
-				OBJ_44 /* LICENSE */,
-				OBJ_45 /* demo.png */,
-				OBJ_46 /* README.md */,
+				OBJ_42 /* Products */,
+				OBJ_45 /* LICENSE */,
+				OBJ_46 /* demo.png */,
+				OBJ_47 /* README.md */,
 			);
 			name = "";
 			sourceTree = "<group>";
@@ -222,10 +225,10 @@
 /* Begin PBXNativeTarget section */
 		"FirebladeECS::FirebladeECS" /* FirebladeECS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_52 /* Build configuration list for PBXNativeTarget "FirebladeECS" */;
+			buildConfigurationList = OBJ_53 /* Build configuration list for PBXNativeTarget "FirebladeECS" */;
 			buildPhases = (
-				OBJ_55 /* Sources */,
-				OBJ_81 /* Frameworks */,
+				OBJ_56 /* Sources */,
+				OBJ_83 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -238,9 +241,9 @@
 		};
 		"FirebladeECS::SwiftPMPackageDescription" /* FirebladeECSPackageDescription */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_99 /* Build configuration list for PBXNativeTarget "FirebladeECSPackageDescription" */;
+			buildConfigurationList = OBJ_101 /* Build configuration list for PBXNativeTarget "FirebladeECSPackageDescription" */;
 			buildPhases = (
-				OBJ_102 /* Sources */,
+				OBJ_104 /* Sources */,
 			);
 			buildRules = (
 			);
@@ -252,15 +255,15 @@
 		};
 		"FirebladeECSDemo::FirebladeECSDemo" /* FirebladeECSDemo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_83 /* Build configuration list for PBXNativeTarget "FirebladeECSDemo" */;
+			buildConfigurationList = OBJ_85 /* Build configuration list for PBXNativeTarget "FirebladeECSDemo" */;
 			buildPhases = (
-				OBJ_86 /* Sources */,
-				OBJ_89 /* Frameworks */,
+				OBJ_88 /* Sources */,
+				OBJ_91 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				OBJ_91 /* PBXTargetDependency */,
+				OBJ_93 /* PBXTargetDependency */,
 			);
 			name = FirebladeECSDemo;
 			productName = FirebladeECSDemo;
@@ -269,9 +272,9 @@
 		};
 		"FirebladeECSDemo::SwiftPMPackageDescription" /* FirebladeECSDemoPackageDescription */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_93 /* Build configuration list for PBXNativeTarget "FirebladeECSDemoPackageDescription" */;
+			buildConfigurationList = OBJ_95 /* Build configuration list for PBXNativeTarget "FirebladeECSDemoPackageDescription" */;
 			buildPhases = (
-				OBJ_96 /* Sources */,
+				OBJ_98 /* Sources */,
 			);
 			buildRules = (
 			);
@@ -288,7 +291,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 9999;
-				LastUpgradeCheck = 1150;
+				LastUpgradeCheck = 1200;
 			};
 			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "FirebladeECSDemo" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -299,7 +302,7 @@
 				Base,
 			);
 			mainGroup = OBJ_5 /*  */;
-			productRefGroup = OBJ_41 /* Products */;
+			productRefGroup = OBJ_42 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -313,75 +316,76 @@
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		OBJ_102 /* Sources */ = {
+		OBJ_104 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_103 /* Package.swift in Sources */,
+				OBJ_105 /* Package.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_55 /* Sources */ = {
+		OBJ_56 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_56 /* Component.swift in Sources */,
-				OBJ_57 /* ComponentIdentifier.swift in Sources */,
-				OBJ_58 /* Entity+Component.swift in Sources */,
-				OBJ_59 /* Entity.swift in Sources */,
-				OBJ_60 /* EntityIdentifier.swift in Sources */,
-				OBJ_61 /* Family.swift in Sources */,
-				OBJ_62 /* Family1.swift in Sources */,
-				OBJ_63 /* Family2.swift in Sources */,
-				OBJ_64 /* Family3.swift in Sources */,
-				OBJ_65 /* Family4.swift in Sources */,
-				OBJ_66 /* Family5.swift in Sources */,
-				OBJ_67 /* FamilyRequirementsManaging.swift in Sources */,
-				OBJ_68 /* FamilyTraitSet.swift in Sources */,
-				OBJ_69 /* Hashing.swift in Sources */,
-				OBJ_70 /* ManagedContiguousArray.swift in Sources */,
-				OBJ_71 /* Nexus+Component.swift in Sources */,
-				OBJ_72 /* Nexus+Entity.swift in Sources */,
-				OBJ_73 /* Nexus+Family.swift in Sources */,
-				OBJ_74 /* Nexus+FamilyUpdate.swift in Sources */,
-				OBJ_75 /* Nexus+SceneGraph.swift in Sources */,
-				OBJ_76 /* Nexus.swift in Sources */,
-				OBJ_77 /* NexusEventDelegate.swift in Sources */,
-				OBJ_78 /* NexusEvents.swift in Sources */,
-				OBJ_79 /* Single.swift in Sources */,
-				OBJ_80 /* UnorderedSparseSet.swift in Sources */,
+				OBJ_57 /* Component.swift in Sources */,
+				OBJ_58 /* ComponentIdentifier.swift in Sources */,
+				OBJ_59 /* Entity+Component.swift in Sources */,
+				OBJ_60 /* Entity.swift in Sources */,
+				OBJ_61 /* EntityIdentifier.swift in Sources */,
+				OBJ_62 /* EntityIdentifierGenerator.swift in Sources */,
+				OBJ_63 /* Family.swift in Sources */,
+				OBJ_64 /* Family1.swift in Sources */,
+				OBJ_65 /* Family2.swift in Sources */,
+				OBJ_66 /* Family3.swift in Sources */,
+				OBJ_67 /* Family4.swift in Sources */,
+				OBJ_68 /* Family5.swift in Sources */,
+				OBJ_69 /* FamilyRequirementsManaging.swift in Sources */,
+				OBJ_70 /* FamilyTraitSet.swift in Sources */,
+				OBJ_71 /* Hashing.swift in Sources */,
+				OBJ_72 /* ManagedContiguousArray.swift in Sources */,
+				OBJ_73 /* Nexus+Component.swift in Sources */,
+				OBJ_74 /* Nexus+Entity.swift in Sources */,
+				OBJ_75 /* Nexus+Family.swift in Sources */,
+				OBJ_76 /* Nexus+FamilyUpdate.swift in Sources */,
+				OBJ_77 /* Nexus+SceneGraph.swift in Sources */,
+				OBJ_78 /* Nexus.swift in Sources */,
+				OBJ_79 /* NexusEventDelegate.swift in Sources */,
+				OBJ_80 /* NexusEvents.swift in Sources */,
+				OBJ_81 /* Single.swift in Sources */,
+				OBJ_82 /* UnorderedSparseSet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_86 /* Sources */ = {
+		OBJ_88 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_87 /* Timer.swift in Sources */,
-				OBJ_88 /* main.swift in Sources */,
+				OBJ_89 /* Timer.swift in Sources */,
+				OBJ_90 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_96 /* Sources */ = {
+		OBJ_98 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_97 /* Package.swift in Sources */,
+				OBJ_99 /* Package.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		OBJ_91 /* PBXTargetDependency */ = {
+		OBJ_93 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "FirebladeECS::FirebladeECS" /* FirebladeECS */;
-			targetProxy = F8DADF9B24B85ED30001E858 /* PBXContainerItemProxy */;
+			targetProxy = F82C67DE24C076DE00260161 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		OBJ_100 /* Debug */ = {
+		OBJ_102 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -390,7 +394,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_101 /* Release */ = {
+		OBJ_103 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -415,6 +419,7 @@
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -468,6 +473,7 @@
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -501,19 +507,19 @@
 			};
 			name = Release;
 		};
-		OBJ_49 /* Debug */ = {
+		OBJ_50 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 			};
 			name = Debug;
 		};
-		OBJ_50 /* Release */ = {
+		OBJ_51 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 			};
 			name = Release;
 		};
-		OBJ_53 /* Debug */ = {
+		OBJ_54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -523,7 +529,7 @@
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FirebladeECSDemo.xcodeproj/FirebladeECS_Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				OTHER_CFLAGS = "$(inherited)";
@@ -536,12 +542,12 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = FirebladeECS;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
-		OBJ_54 /* Release */ = {
+		OBJ_55 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -551,7 +557,7 @@
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FirebladeECSDemo.xcodeproj/FirebladeECS_Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				OTHER_CFLAGS = "$(inherited)";
@@ -564,12 +570,12 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = FirebladeECS;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
-		OBJ_84 /* Debug */ = {
+		OBJ_86 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
@@ -582,7 +588,7 @@
 					"$(SRCROOT)/.build/checkouts/SwiftSDL2/Sources/CSDL2",
 				);
 				INFOPLIST_FILE = FirebladeECSDemo.xcodeproj/FirebladeECSDemo_Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx @executable_path";
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				OTHER_CFLAGS = (
@@ -600,12 +606,12 @@
 				SWIFT_FORCE_STATIC_LINK_STDLIB = NO;
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = FirebladeECSDemo;
-				TVOS_DEPLOYMENT_TARGET = 11.0;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
-		OBJ_85 /* Release */ = {
+		OBJ_87 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
@@ -618,7 +624,7 @@
 					"$(SRCROOT)/.build/checkouts/SwiftSDL2/Sources/CSDL2",
 				);
 				INFOPLIST_FILE = FirebladeECSDemo.xcodeproj/FirebladeECSDemo_Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx @executable_path";
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				OTHER_CFLAGS = (
@@ -636,12 +642,12 @@
 				SWIFT_FORCE_STATIC_LINK_STDLIB = NO;
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = FirebladeECSDemo;
-				TVOS_DEPLOYMENT_TARGET = 11.0;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
-		OBJ_94 /* Debug */ = {
+		OBJ_96 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -650,7 +656,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_95 /* Release */ = {
+		OBJ_97 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -662,6 +668,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		OBJ_101 /* Build configuration list for PBXNativeTarget "FirebladeECSPackageDescription" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_102 /* Debug */,
+				OBJ_103 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		OBJ_2 /* Build configuration list for PBXProject "FirebladeECSDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -671,47 +686,38 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		OBJ_48 /* Build configuration list for PBXAggregateTarget "CSDL2" */ = {
+		OBJ_49 /* Build configuration list for PBXAggregateTarget "CSDL2" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_49 /* Debug */,
-				OBJ_50 /* Release */,
+				OBJ_50 /* Debug */,
+				OBJ_51 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		OBJ_52 /* Build configuration list for PBXNativeTarget "FirebladeECS" */ = {
+		OBJ_53 /* Build configuration list for PBXNativeTarget "FirebladeECS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_53 /* Debug */,
-				OBJ_54 /* Release */,
+				OBJ_54 /* Debug */,
+				OBJ_55 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		OBJ_83 /* Build configuration list for PBXNativeTarget "FirebladeECSDemo" */ = {
+		OBJ_85 /* Build configuration list for PBXNativeTarget "FirebladeECSDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_84 /* Debug */,
-				OBJ_85 /* Release */,
+				OBJ_86 /* Debug */,
+				OBJ_87 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		OBJ_93 /* Build configuration list for PBXNativeTarget "FirebladeECSDemoPackageDescription" */ = {
+		OBJ_95 /* Build configuration list for PBXNativeTarget "FirebladeECSDemoPackageDescription" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_94 /* Debug */,
-				OBJ_95 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		OBJ_99 /* Build configuration list for PBXNativeTarget "FirebladeECSPackageDescription" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				OBJ_100 /* Debug */,
-				OBJ_101 /* Release */,
+				OBJ_96 /* Debug */,
+				OBJ_97 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
