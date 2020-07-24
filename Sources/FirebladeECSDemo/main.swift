@@ -1,4 +1,4 @@
-import CSDL2
+import SDL2
 import FirebladeECS
 
 if SDL_Init(SDL_INIT_VIDEO) != 0 {
@@ -38,10 +38,6 @@ func randNorm() -> Double {
     return Double(arc4random()) / Double(UInt32.max)
 }
 
-// won't produce pure black
-func randColor() -> UInt8 {
-    return UInt8(randNorm() * 254) + 1
-}
 class Name: Component {
     let name: String
     init(_ name: String) {
@@ -53,9 +49,9 @@ class Position: Component {
     var y: Int32 = height/2
 }
 class Color: Component {
-    var r: UInt8 = randColor()
-    var g: UInt8 = randColor()
-    var b: UInt8 = randColor()
+    var r: UInt8 = UInt8.random(in: 1...255)
+    var g: UInt8 = UInt8.random(in: 1...255)
+    var b: UInt8 = UInt8.random(in: 1...255)
 }
 
 func createScene() {
@@ -83,11 +79,9 @@ func batchDestroyEntities(count: Int) {
     }
 }
 
-func createDefaultEntity(_ number: Int) {
-    let e = nexus.createEntity()
-    e.assign(Name("\(number)"))
-    e.assign(Position())
-    e.assign(Color())
+@discardableResult
+func createDefaultEntity(_ number: Int) -> Entity {
+    return nexus.createEntity(with: Name("\(number)"), Position(), Color())
 }
 
 class PositionSystem {
@@ -133,13 +127,11 @@ class ColorSystem {
     let family = nexus.family(requires: Color.self)
 
     func update() {
-
         family
             .forEach { (color: Color) in
-
-                color.r = randColor()
-                color.g = randColor()
-                color.b = randColor()
+                color.r = UInt8.random(in: 1...255)
+                color.g = UInt8.random(in: 1...255)
+                color.b = UInt8.random(in: 1...255)
         }
     }
 }
@@ -242,9 +234,9 @@ while quit == false {
             case SDLK_s:
                 velocity = 0.0
             case SDLK_PLUS:
-                velocity += 0.1
+                velocity += 1
             case SDLK_MINUS:
-                velocity -= 0.1
+                velocity -= 1
             case SDLK_SPACE:
                 velocity = kDefaultVelocity
             case SDLK_e:
