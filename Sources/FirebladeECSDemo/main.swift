@@ -55,17 +55,14 @@ class Color: Component {
 }
 
 func createScene() {
-
-    let numEntities: Int = 10_000
-
-    for i in 0..<numEntities {
-        createDefaultEntity(i)
-    }
+    createDefaultEntities(count: 10_000)
 }
 
-func batchCreateEntities(count: Int) {
-    for i in 0..<count {
-        createDefaultEntity(i)
+func createDefaultEntities(count: Int) {
+    nexus.createEntities(count: count) { ctx in
+        Name("\(ctx.index)")
+        Position()
+        Color()
     }
 }
 
@@ -77,11 +74,6 @@ func batchDestroyEntities(count: Int) {
         .forEach { (entity: Entity) in
             entity.destroy()
     }
-}
-
-@discardableResult
-func createDefaultEntity(_ number: Int) -> Entity {
-    return nexus.createEntity(with: Name("\(number)"), Position(), Color())
 }
 
 class PositionSystem {
@@ -240,11 +232,11 @@ while quit == false {
             case SDLK_SPACE:
                 velocity = kDefaultVelocity
             case SDLK_e:
-                batchCreateEntities(count: 1)
+                createDefaultEntities(count: 1)
             case SDLK_d:
                 batchDestroyEntities(count: 1)
             case SDLK_8:
-                batchCreateEntities(count: 10_000)
+                createDefaultEntities(count: 10_000)
             case SDLK_9:
                 batchDestroyEntities(count: 10_000)
             default:
