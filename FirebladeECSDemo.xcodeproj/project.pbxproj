@@ -5,10 +5,10 @@
    objects = {
       "FirebladeECS::FirebladeECS" = {
          isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_58";
+         buildConfigurationList = "OBJ_57";
          buildPhases = (
-            "OBJ_61",
-            "OBJ_91"
+            "OBJ_60",
+            "OBJ_88"
          );
          dependencies = (
          );
@@ -24,9 +24,9 @@
       };
       "FirebladeECS::SwiftPMPackageDescription" = {
          isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_112";
+         buildConfigurationList = "OBJ_109";
          buildPhases = (
-            "OBJ_115"
+            "OBJ_112"
          );
          dependencies = (
          );
@@ -36,14 +36,14 @@
       };
       "FirebladeECSDemo::FirebladeECSDemo" = {
          isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_93";
+         buildConfigurationList = "OBJ_90";
          buildPhases = (
-            "OBJ_96",
-            "OBJ_99"
+            "OBJ_93",
+            "OBJ_96"
          );
          dependencies = (
-            "OBJ_102",
-            "OBJ_104"
+            "OBJ_99",
+            "OBJ_101"
          );
          name = "FirebladeECSDemo";
          productName = "FirebladeECSDemo";
@@ -57,9 +57,9 @@
       };
       "FirebladeECSDemo::SwiftPMPackageDescription" = {
          isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_106";
+         buildConfigurationList = "OBJ_103";
          buildPhases = (
-            "OBJ_109"
+            "OBJ_106"
          );
          dependencies = (
          );
@@ -81,7 +81,7 @@
             "en"
          );
          mainGroup = "OBJ_5";
-         productRefGroup = "OBJ_50";
+         productRefGroup = "OBJ_49";
          projectDirPath = ".";
          targets = (
             "FirebladeECS::FirebladeECS",
@@ -97,32 +97,20 @@
          path = "main.swift";
          sourceTree = "<group>";
       };
-      "OBJ_100" = {
-         isa = "PBXBuildFile";
-         fileRef = "SDL2::SDL2::Product";
-      };
       "OBJ_101" = {
-         isa = "PBXBuildFile";
-         fileRef = "FirebladeECS::FirebladeECS::Product";
-      };
-      "OBJ_102" = {
-         isa = "PBXTargetDependency";
-         target = "SDL2::SDL2";
-      };
-      "OBJ_104" = {
          isa = "PBXTargetDependency";
          target = "FirebladeECS::FirebladeECS";
       };
-      "OBJ_106" = {
+      "OBJ_103" = {
          isa = "XCConfigurationList";
          buildConfigurations = (
-            "OBJ_107",
-            "OBJ_108"
+            "OBJ_104",
+            "OBJ_105"
          );
          defaultConfigurationIsVisible = "0";
          defaultConfigurationName = "Release";
       };
-      "OBJ_107" = {
+      "OBJ_104" = {
          isa = "XCBuildConfiguration";
          buildSettings = {
             LD = "/usr/bin/true";
@@ -142,7 +130,7 @@
          };
          name = "Debug";
       };
-      "OBJ_108" = {
+      "OBJ_105" = {
          isa = "XCBuildConfiguration";
          buildSettings = {
             LD = "/usr/bin/true";
@@ -162,11 +150,24 @@
          };
          name = "Release";
       };
-      "OBJ_109" = {
+      "OBJ_106" = {
          isa = "PBXSourcesBuildPhase";
          files = (
-            "OBJ_110"
+            "OBJ_107"
          );
+      };
+      "OBJ_107" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_6";
+      };
+      "OBJ_109" = {
+         isa = "XCConfigurationList";
+         buildConfigurations = (
+            "OBJ_110",
+            "OBJ_111"
+         );
+         defaultConfigurationIsVisible = "0";
+         defaultConfigurationName = "Release";
       };
       "OBJ_11" = {
          isa = "PBXGroup";
@@ -177,78 +178,65 @@
          sourceTree = "SOURCE_ROOT";
       };
       "OBJ_110" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_6";
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            LD = "/usr/bin/true";
+            OTHER_SWIFT_FLAGS = (
+               "-swift-version",
+               "5",
+               "-I",
+               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2",
+               "-target",
+               "x86_64-apple-macosx10.10",
+               "-sdk",
+               "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk",
+               "-package-description-version",
+               "5.1.0"
+            );
+            SWIFT_VERSION = "5.0";
+         };
+         name = "Debug";
+      };
+      "OBJ_111" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            LD = "/usr/bin/true";
+            OTHER_SWIFT_FLAGS = (
+               "-swift-version",
+               "5",
+               "-I",
+               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2",
+               "-target",
+               "x86_64-apple-macosx10.10",
+               "-sdk",
+               "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk",
+               "-package-description-version",
+               "5.1.0"
+            );
+            SWIFT_VERSION = "5.0";
+         };
+         name = "Release";
       };
       "OBJ_112" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_113",
-            "OBJ_114"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_113" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            LD = "/usr/bin/true";
-            OTHER_SWIFT_FLAGS = (
-               "-swift-version",
-               "5",
-               "-I",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2",
-               "-target",
-               "x86_64-apple-macosx10.10",
-               "-sdk",
-               "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk",
-               "-package-description-version",
-               "5.1.0"
-            );
-            SWIFT_VERSION = "5.0";
-         };
-         name = "Debug";
-      };
-      "OBJ_114" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            LD = "/usr/bin/true";
-            OTHER_SWIFT_FLAGS = (
-               "-swift-version",
-               "5",
-               "-I",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2",
-               "-target",
-               "x86_64-apple-macosx10.10",
-               "-sdk",
-               "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk",
-               "-package-description-version",
-               "5.1.0"
-            );
-            SWIFT_VERSION = "5.0";
-         };
-         name = "Release";
-      };
-      "OBJ_115" = {
          isa = "PBXSourcesBuildPhase";
          files = (
-            "OBJ_116"
+            "OBJ_113"
          );
       };
-      "OBJ_116" = {
+      "OBJ_113" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_44";
+         fileRef = "OBJ_43";
       };
-      "OBJ_117" = {
+      "OBJ_114" = {
          isa = "XCConfigurationList";
          buildConfigurations = (
-            "OBJ_118",
-            "OBJ_119"
+            "OBJ_115",
+            "OBJ_116"
          );
          defaultConfigurationIsVisible = "0";
          defaultConfigurationName = "Release";
       };
-      "OBJ_118" = {
+      "OBJ_115" = {
          isa = "XCBuildConfiguration";
          buildSettings = {
             ENABLE_TESTABILITY = "YES";
@@ -294,7 +282,7 @@
          };
          name = "Debug";
       };
-      "OBJ_119" = {
+      "OBJ_116" = {
          isa = "XCBuildConfiguration";
          buildSettings = {
             ENABLE_TESTABILITY = "YES";
@@ -339,42 +327,42 @@
             WATCHOS_DEPLOYMENT_TARGET = "2.0";
          };
          name = "Release";
+      };
+      "OBJ_117" = {
+         isa = "PBXSourcesBuildPhase";
+         files = (
+            "OBJ_118"
+         );
+      };
+      "OBJ_118" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_47";
+      };
+      "OBJ_119" = {
+         isa = "PBXFrameworksBuildPhase";
+         files = (
+         );
       };
       "OBJ_12" = {
          isa = "PBXGroup";
          children = (
             "OBJ_13",
-            "OBJ_45"
+            "OBJ_44"
          );
          name = "Dependencies";
          path = "";
          sourceTree = "<group>";
       };
-      "OBJ_120" = {
-         isa = "PBXSourcesBuildPhase";
-         files = (
-            "OBJ_121"
-         );
-      };
       "OBJ_121" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_48";
-      };
-      "OBJ_122" = {
-         isa = "PBXFrameworksBuildPhase";
-         files = (
-         );
-      };
-      "OBJ_124" = {
          isa = "XCConfigurationList";
          buildConfigurations = (
-            "OBJ_125",
-            "OBJ_126"
+            "OBJ_122",
+            "OBJ_123"
          );
          defaultConfigurationIsVisible = "0";
          defaultConfigurationName = "Release";
       };
-      "OBJ_125" = {
+      "OBJ_122" = {
          isa = "XCBuildConfiguration";
          buildSettings = {
             LD = "/usr/bin/true";
@@ -394,7 +382,7 @@
          };
          name = "Debug";
       };
-      "OBJ_126" = {
+      "OBJ_123" = {
          isa = "XCBuildConfiguration";
          buildSettings = {
             LD = "/usr/bin/true";
@@ -414,23 +402,23 @@
          };
          name = "Release";
       };
-      "OBJ_127" = {
+      "OBJ_124" = {
          isa = "PBXSourcesBuildPhase";
          files = (
-            "OBJ_128"
+            "OBJ_125"
          );
       };
-      "OBJ_128" = {
+      "OBJ_125" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_49";
+         fileRef = "OBJ_48";
       };
       "OBJ_13" = {
          isa = "PBXGroup";
          children = (
             "OBJ_14",
-            "OBJ_44"
+            "OBJ_43"
          );
-         name = "FirebladeECS 0.14.0";
+         name = "FirebladeECS 0.15.0";
          path = "";
          sourceTree = "SOURCE_ROOT";
       };
@@ -452,7 +440,6 @@
             "OBJ_27",
             "OBJ_28",
             "OBJ_29",
-            "OBJ_30",
             "OBJ_31",
             "OBJ_32",
             "OBJ_33",
@@ -464,8 +451,7 @@
             "OBJ_39",
             "OBJ_40",
             "OBJ_41",
-            "OBJ_42",
-            "OBJ_43"
+            "OBJ_42"
          );
          name = "FirebladeECS";
          path = ".build/checkouts/ecs/Sources/FirebladeECS";
@@ -473,27 +459,27 @@
       };
       "OBJ_15" = {
          isa = "PBXFileReference";
-         path = "Component.swift";
+         path = "CodingStrategy.swift";
          sourceTree = "<group>";
       };
       "OBJ_16" = {
          isa = "PBXFileReference";
-         path = "ComponentIdentifier.swift";
+         path = "Component.swift";
          sourceTree = "<group>";
       };
       "OBJ_17" = {
          isa = "PBXFileReference";
-         path = "Entity+Component.swift";
+         path = "ComponentIdentifier.swift";
          sourceTree = "<group>";
       };
       "OBJ_18" = {
          isa = "PBXFileReference";
-         path = "Entity.swift";
+         path = "Entity+Component.swift";
          sourceTree = "<group>";
       };
       "OBJ_19" = {
          isa = "PBXFileReference";
-         path = "EntityIdentifier.swift";
+         path = "Entity.swift";
          sourceTree = "<group>";
       };
       "OBJ_2" = {
@@ -507,52 +493,56 @@
       };
       "OBJ_20" = {
          isa = "PBXFileReference";
-         path = "EntityIdentifierGenerator.swift";
+         path = "EntityIdentifier.swift";
          sourceTree = "<group>";
       };
       "OBJ_21" = {
          isa = "PBXFileReference";
-         path = "Family+Coding.swift";
+         path = "EntityIdentifierGenerator.swift";
          sourceTree = "<group>";
       };
       "OBJ_22" = {
          isa = "PBXFileReference";
-         path = "Family.swift";
+         path = "Family+Coding.swift";
          sourceTree = "<group>";
       };
       "OBJ_23" = {
          isa = "PBXFileReference";
-         path = "Family1.swift";
+         path = "Family.swift";
          sourceTree = "<group>";
       };
       "OBJ_24" = {
          isa = "PBXFileReference";
-         path = "Family2.swift";
+         path = "FamilyDecoding.swift";
          sourceTree = "<group>";
       };
       "OBJ_25" = {
          isa = "PBXFileReference";
-         path = "Family3.swift";
+         path = "FamilyEncoding.swift";
          sourceTree = "<group>";
       };
       "OBJ_26" = {
          isa = "PBXFileReference";
-         path = "Family4.swift";
+         path = "FamilyRequirementsManaging.swift";
          sourceTree = "<group>";
       };
       "OBJ_27" = {
          isa = "PBXFileReference";
-         path = "Family5.swift";
+         path = "FamilyTraitSet.swift";
          sourceTree = "<group>";
       };
       "OBJ_28" = {
          isa = "PBXFileReference";
-         path = "FamilyProtocols.swift";
+         path = "Foundation+Extensions.swift";
          sourceTree = "<group>";
       };
       "OBJ_29" = {
-         isa = "PBXFileReference";
-         path = "FamilyTraitSet.swift";
+         isa = "PBXGroup";
+         children = (
+            "OBJ_30"
+         );
+         name = "Generated";
+         path = "Generated";
          sourceTree = "<group>";
       };
       "OBJ_3" = {
@@ -599,7 +589,7 @@
       };
       "OBJ_30" = {
          isa = "PBXFileReference";
-         path = "Foundation+Extensions.swift";
+         path = "Family.generated.swift";
          sourceTree = "<group>";
       };
       "OBJ_31" = {
@@ -639,12 +629,12 @@
       };
       "OBJ_38" = {
          isa = "PBXFileReference";
-         path = "Nexus+SceneGraph.swift";
+         path = "Nexus.swift";
          sourceTree = "<group>";
       };
       "OBJ_39" = {
          isa = "PBXFileReference";
-         path = "Nexus.swift";
+         path = "NexusEvent.swift";
          sourceTree = "<group>";
       };
       "OBJ_4" = {
@@ -692,38 +682,33 @@
       };
       "OBJ_41" = {
          isa = "PBXFileReference";
-         path = "NexusEvents.swift";
+         path = "Single.swift";
          sourceTree = "<group>";
       };
       "OBJ_42" = {
          isa = "PBXFileReference";
-         path = "Single.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_43" = {
-         isa = "PBXFileReference";
          path = "UnorderedSparseSet.swift";
          sourceTree = "<group>";
       };
-      "OBJ_44" = {
+      "OBJ_43" = {
          isa = "PBXFileReference";
          explicitFileType = "sourcecode.swift";
          name = "Package.swift";
          path = "/Users/ctreffs/Development/personal/game-dev/fireblade/ecs-demo/.build/checkouts/ecs/Package.swift";
          sourceTree = "<group>";
       };
-      "OBJ_45" = {
+      "OBJ_44" = {
          isa = "PBXGroup";
          children = (
+            "OBJ_45",
             "OBJ_46",
-            "OBJ_47",
-            "OBJ_49"
+            "OBJ_48"
          );
          name = "SDL2 1.1.0";
          path = "";
          sourceTree = "SOURCE_ROOT";
       };
-      "OBJ_46" = {
+      "OBJ_45" = {
          isa = "PBXGroup";
          children = (
          );
@@ -731,26 +716,37 @@
          path = ".build/checkouts/SwiftSDL2/Sources/CSDL2";
          sourceTree = "SOURCE_ROOT";
       };
-      "OBJ_47" = {
+      "OBJ_46" = {
          isa = "PBXGroup";
          children = (
-            "OBJ_48"
+            "OBJ_47"
          );
          name = "SDL2";
          path = ".build/checkouts/SwiftSDL2/Sources/SDL2";
          sourceTree = "SOURCE_ROOT";
       };
-      "OBJ_48" = {
+      "OBJ_47" = {
          isa = "PBXFileReference";
          path = "SDL2.swift";
          sourceTree = "<group>";
       };
-      "OBJ_49" = {
+      "OBJ_48" = {
          isa = "PBXFileReference";
          explicitFileType = "sourcecode.swift";
          name = "Package.swift";
          path = "/Users/ctreffs/Development/personal/game-dev/fireblade/ecs-demo/.build/checkouts/SwiftSDL2/Package.swift";
          sourceTree = "<group>";
+      };
+      "OBJ_49" = {
+         isa = "PBXGroup";
+         children = (
+            "FirebladeECSDemo::FirebladeECSDemo::Product",
+            "SDL2::SDL2::Product",
+            "FirebladeECS::FirebladeECS::Product"
+         );
+         name = "Products";
+         path = "";
+         sourceTree = "BUILT_PRODUCTS_DIR";
       };
       "OBJ_5" = {
          isa = "PBXGroup";
@@ -759,48 +755,78 @@
             "OBJ_7",
             "OBJ_11",
             "OBJ_12",
-            "OBJ_50",
+            "OBJ_49",
+            "OBJ_53",
             "OBJ_54",
-            "OBJ_55",
-            "OBJ_56"
+            "OBJ_55"
          );
          path = "";
          sourceTree = "<group>";
       };
-      "OBJ_50" = {
-         isa = "PBXGroup";
-         children = (
-            "FirebladeECS::FirebladeECS::Product",
-            "SDL2::SDL2::Product",
-            "FirebladeECSDemo::FirebladeECSDemo::Product"
-         );
-         name = "Products";
-         path = "";
-         sourceTree = "BUILT_PRODUCTS_DIR";
-      };
-      "OBJ_54" = {
+      "OBJ_53" = {
          isa = "PBXFileReference";
          path = "LICENSE";
          sourceTree = "<group>";
       };
-      "OBJ_55" = {
+      "OBJ_54" = {
          isa = "PBXFileReference";
          path = "demo.png";
          sourceTree = "<group>";
       };
-      "OBJ_56" = {
+      "OBJ_55" = {
          isa = "PBXFileReference";
          path = "README.md";
          sourceTree = "<group>";
       };
-      "OBJ_58" = {
+      "OBJ_57" = {
          isa = "XCConfigurationList";
          buildConfigurations = (
-            "OBJ_59",
-            "OBJ_60"
+            "OBJ_58",
+            "OBJ_59"
          );
          defaultConfigurationIsVisible = "0";
          defaultConfigurationName = "Release";
+      };
+      "OBJ_58" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            ENABLE_TESTABILITY = "YES";
+            FRAMEWORK_SEARCH_PATHS = (
+               "$(inherited)",
+               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
+            );
+            HEADER_SEARCH_PATHS = (
+               "$(inherited)"
+            );
+            INFOPLIST_FILE = "FirebladeECSDemo.xcodeproj/FirebladeECS_Info.plist";
+            IPHONEOS_DEPLOYMENT_TARGET = "8.0";
+            LD_RUNPATH_SEARCH_PATHS = (
+               "$(inherited)",
+               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
+            );
+            MACOSX_DEPLOYMENT_TARGET = "10.10";
+            OTHER_CFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_LDFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_SWIFT_FLAGS = (
+               "$(inherited)"
+            );
+            PRODUCT_BUNDLE_IDENTIFIER = "FirebladeECS";
+            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+            SKIP_INSTALL = "YES";
+            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+               "$(inherited)"
+            );
+            SWIFT_VERSION = "5.0";
+            TARGET_NAME = "FirebladeECS";
+            TVOS_DEPLOYMENT_TARGET = "9.0";
+            WATCHOS_DEPLOYMENT_TARGET = "2.0";
+         };
+         name = "Debug";
       };
       "OBJ_59" = {
          isa = "XCBuildConfiguration";
@@ -841,7 +867,7 @@
             TVOS_DEPLOYMENT_TARGET = "9.0";
             WATCHOS_DEPLOYMENT_TARGET = "2.0";
          };
-         name = "Debug";
+         name = "Release";
       };
       "OBJ_6" = {
          isa = "PBXFileReference";
@@ -850,49 +876,9 @@
          sourceTree = "<group>";
       };
       "OBJ_60" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            ENABLE_TESTABILITY = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)"
-            );
-            INFOPLIST_FILE = "FirebladeECSDemo.xcodeproj/FirebladeECS_Info.plist";
-            IPHONEOS_DEPLOYMENT_TARGET = "8.0";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.10";
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)"
-            );
-            PRODUCT_BUNDLE_IDENTIFIER = "FirebladeECS";
-            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-            SKIP_INSTALL = "YES";
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            SWIFT_VERSION = "5.0";
-            TARGET_NAME = "FirebladeECS";
-            TVOS_DEPLOYMENT_TARGET = "9.0";
-            WATCHOS_DEPLOYMENT_TARGET = "2.0";
-         };
-         name = "Release";
-      };
-      "OBJ_61" = {
          isa = "PBXSourcesBuildPhase";
          files = (
+            "OBJ_61",
             "OBJ_62",
             "OBJ_63",
             "OBJ_64",
@@ -918,43 +904,44 @@
             "OBJ_84",
             "OBJ_85",
             "OBJ_86",
-            "OBJ_87",
-            "OBJ_88",
-            "OBJ_89",
-            "OBJ_90"
+            "OBJ_87"
          );
       };
-      "OBJ_62" = {
+      "OBJ_61" = {
          isa = "PBXBuildFile";
          fileRef = "OBJ_15";
       };
-      "OBJ_63" = {
+      "OBJ_62" = {
          isa = "PBXBuildFile";
          fileRef = "OBJ_16";
       };
-      "OBJ_64" = {
+      "OBJ_63" = {
          isa = "PBXBuildFile";
          fileRef = "OBJ_17";
       };
-      "OBJ_65" = {
+      "OBJ_64" = {
          isa = "PBXBuildFile";
          fileRef = "OBJ_18";
       };
-      "OBJ_66" = {
+      "OBJ_65" = {
          isa = "PBXBuildFile";
          fileRef = "OBJ_19";
       };
-      "OBJ_67" = {
+      "OBJ_66" = {
          isa = "PBXBuildFile";
          fileRef = "OBJ_20";
       };
-      "OBJ_68" = {
+      "OBJ_67" = {
          isa = "PBXBuildFile";
          fileRef = "OBJ_21";
       };
-      "OBJ_69" = {
+      "OBJ_68" = {
          isa = "PBXBuildFile";
          fileRef = "OBJ_22";
+      };
+      "OBJ_69" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_23";
       };
       "OBJ_7" = {
          isa = "PBXGroup";
@@ -967,43 +954,43 @@
       };
       "OBJ_70" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_23";
+         fileRef = "OBJ_24";
       };
       "OBJ_71" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_24";
+         fileRef = "OBJ_25";
       };
       "OBJ_72" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_25";
+         fileRef = "OBJ_26";
       };
       "OBJ_73" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_26";
+         fileRef = "OBJ_27";
       };
       "OBJ_74" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_27";
+         fileRef = "OBJ_28";
       };
       "OBJ_75" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_28";
+         fileRef = "OBJ_30";
       };
       "OBJ_76" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_29";
+         fileRef = "OBJ_31";
       };
       "OBJ_77" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_30";
+         fileRef = "OBJ_32";
       };
       "OBJ_78" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_31";
+         fileRef = "OBJ_33";
       };
       "OBJ_79" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_32";
+         fileRef = "OBJ_34";
       };
       "OBJ_8" = {
          isa = "PBXGroup";
@@ -1017,43 +1004,40 @@
       };
       "OBJ_80" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_33";
+         fileRef = "OBJ_35";
       };
       "OBJ_81" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_34";
+         fileRef = "OBJ_36";
       };
       "OBJ_82" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_35";
+         fileRef = "OBJ_37";
       };
       "OBJ_83" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_36";
+         fileRef = "OBJ_38";
       };
       "OBJ_84" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_37";
+         fileRef = "OBJ_39";
       };
       "OBJ_85" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_38";
+         fileRef = "OBJ_40";
       };
       "OBJ_86" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_39";
+         fileRef = "OBJ_41";
       };
       "OBJ_87" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_40";
+         fileRef = "OBJ_42";
       };
       "OBJ_88" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_41";
-      };
-      "OBJ_89" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_42";
+         isa = "PBXFrameworksBuildPhase";
+         files = (
+         );
       };
       "OBJ_9" = {
          isa = "PBXFileReference";
@@ -1061,24 +1045,15 @@
          sourceTree = "<group>";
       };
       "OBJ_90" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_43";
-      };
-      "OBJ_91" = {
-         isa = "PBXFrameworksBuildPhase";
-         files = (
-         );
-      };
-      "OBJ_93" = {
          isa = "XCConfigurationList";
          buildConfigurations = (
-            "OBJ_94",
-            "OBJ_95"
+            "OBJ_91",
+            "OBJ_92"
          );
          defaultConfigurationIsVisible = "0";
          defaultConfigurationName = "Release";
       };
-      "OBJ_94" = {
+      "OBJ_91" = {
          isa = "XCBuildConfiguration";
          buildSettings = {
             FRAMEWORK_SEARCH_PATHS = (
@@ -1122,7 +1097,7 @@
          };
          name = "Debug";
       };
-      "OBJ_95" = {
+      "OBJ_92" = {
          isa = "XCBuildConfiguration";
          buildSettings = {
             FRAMEWORK_SEARCH_PATHS = (
@@ -1166,8 +1141,23 @@
          };
          name = "Release";
       };
-      "OBJ_96" = {
+      "OBJ_93" = {
          isa = "PBXSourcesBuildPhase";
+         files = (
+            "OBJ_94",
+            "OBJ_95"
+         );
+      };
+      "OBJ_94" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_9";
+      };
+      "OBJ_95" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_10";
+      };
+      "OBJ_96" = {
+         isa = "PBXFrameworksBuildPhase";
          files = (
             "OBJ_97",
             "OBJ_98"
@@ -1175,25 +1165,22 @@
       };
       "OBJ_97" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_9";
+         fileRef = "SDL2::SDL2::Product";
       };
       "OBJ_98" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_10";
+         fileRef = "FirebladeECS::FirebladeECS::Product";
       };
       "OBJ_99" = {
-         isa = "PBXFrameworksBuildPhase";
-         files = (
-            "OBJ_100",
-            "OBJ_101"
-         );
+         isa = "PBXTargetDependency";
+         target = "SDL2::SDL2";
       };
       "SDL2::SDL2" = {
          isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_117";
+         buildConfigurationList = "OBJ_114";
          buildPhases = (
-            "OBJ_120",
-            "OBJ_122"
+            "OBJ_117",
+            "OBJ_119"
          );
          dependencies = (
          );
@@ -1209,9 +1196,9 @@
       };
       "SDL2::SwiftPMPackageDescription" = {
          isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_124";
+         buildConfigurationList = "OBJ_121";
          buildPhases = (
-            "OBJ_127"
+            "OBJ_124"
          );
          dependencies = (
          );

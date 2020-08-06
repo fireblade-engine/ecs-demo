@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/fireblade-engine/ecs.git",
         "state": {
           "branch": null,
-          "revision": "c81558b2d96ac8efa925a4772f3ffa0d02cf5d6f",
-          "version": "0.14.0"
+          "revision": "5717c145f12c8767e10ec7e2cfe7ca0559eaf40b",
+          "version": "0.15.0"
         }
       },
       {
