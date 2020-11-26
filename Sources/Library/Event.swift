@@ -1,6 +1,6 @@
 //
 //  Event.swift
-//
+//  FirebladeECSDemo
 //
 //  Created by Igor Kravchenko on 14.11.2020.
 //

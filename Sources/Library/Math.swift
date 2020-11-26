@@ -1,6 +1,6 @@
 //
 //  Math.swift
-//
+//  FirebladeECSDemo
 //
 //  Created by Igor Kravchenko on 29.10.2020.
 //
