@@ -43,8 +43,8 @@ let winFlags: UInt32 = SDL_WINDOW_SHOWN.rawValue // make window visible
 // create window
 let hWin = SDL_CreateWindow(
     windowTitle,
-    100, // x
-    100, // y
+    Int32(SDL_WINDOWPOS_CENTERED_MASK), // x
+    Int32(SDL_WINDOWPOS_CENTERED_MASK), // y
     width,
     height,
     winFlags
