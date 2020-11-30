@@ -6,7 +6,7 @@
 //
 
 import FirebladeECS
-import Library
+import AsteroidsGameLibrary
 import SDL2
 
 final class RenderSystem {

@@ -5,7 +5,7 @@
 //  Created by Igor Kravchenko on 25.10.2020.
 //
 
-import Library
+import AsteroidsGameLibrary
 
 final class ClickToStartView: Label {
     init() {

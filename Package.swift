@@ -24,10 +24,10 @@ let package = Package(
             dependencies: ["FirebladeECS", "SDL2"]),
         .target(
             name: "Asteroids",
-            dependencies: ["FirebladeECS", "SDL2", "FirebladeMath", "Library"],
+            dependencies: ["FirebladeECS", "SDL2", "FirebladeMath", "AsteroidsGameLibrary"],
             exclude: ["Resources/source.txt"],
             resources: [.copy("Resources/asteroid.wav"), .copy("Resources/ship.wav"), .copy("Resources/shoot.wav")]),
-        .target(name: "Library",
+        .target(name: "AsteroidsGameLibrary",
                 dependencies: ["FirebladeMath"])
     ]
 )

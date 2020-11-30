@@ -6,7 +6,7 @@
 //
 
 import FirebladeECS
-import Library
+import AsteroidsGameLibrary
 
 final class MovementSystem {
     private let config: GameConfig

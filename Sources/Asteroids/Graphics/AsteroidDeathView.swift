@@ -5,7 +5,7 @@
 //  Created by Igor Kravchenko on 23.10.2020.
 //
 
-import Library
+import AsteroidsGameLibrary
 
 final class AsteroidDeathView: Renderable, Animatable {
     static let numDots = 8

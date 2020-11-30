@@ -6,7 +6,7 @@
 //
 
 import FirebladeECS
-import Library
+import AsteroidsGameLibrary
 
 final class CollisionSystem {
     private let creator: EntityCreator

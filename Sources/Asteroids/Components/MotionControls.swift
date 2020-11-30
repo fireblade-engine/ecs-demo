@@ -6,17 +6,17 @@
 //
 
 import FirebladeECS
-import Library
+import AsteroidsGameLibrary
 
 final class MotionControls: ComponentInitializable {
-    var left: Int32
-    var right: Int32
-    var accelerate: Int32
+    var left: Set<Int32>
+    var right: Set<Int32>
+    var accelerate: Set<Int32>
 
     var accelerationRate: Double
     var rotationRate: Double
 
-    init(left: Int32, right: Int32, accelerate: Int32, accelerationRate: Double, rotationRate: Double) {
+    init(left: Set<Int32>, right:Set<Int32>, accelerate: Set<Int32>, accelerationRate: Double, rotationRate: Double) {
         self.left = left
         self.right = right
         self.accelerate = accelerate
@@ -25,9 +25,9 @@ final class MotionControls: ComponentInitializable {
     }
 
     required init() {
-        left = 0
-        right = 0
-        accelerate = 0
+        left = []
+        right = []
+        accelerate = []
         accelerationRate = 0
         rotationRate = 0
     }

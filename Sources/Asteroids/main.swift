@@ -1,5 +1,5 @@
 import FirebladeECS
-import Library
+import AsteroidsGameLibrary
 import SDL2
 
 // MARK: SDL and Nexus Engines Setup
@@ -8,7 +8,7 @@ import SDL2
 
 // initialize the SDL library with video and audio
 if SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0 {
-    fatalError("could not init video/audio")
+    fatalError("could not init video/audio - reason: \(String(cString: SDL_GetError()))")
 }
 
 // description of a display mode
@@ -43,8 +43,8 @@ let winFlags: UInt32 = SDL_WINDOW_SHOWN.rawValue // make window visible
 // create window
 let hWin = SDL_CreateWindow(
     windowTitle,
-    100, // x
-    100, // y
+    Int32(SDL_WINDOWPOS_CENTERED_MASK), // x
+    Int32(SDL_WINDOWPOS_CENTERED_MASK), // y
     width,
     height,
     winFlags
@@ -61,9 +61,9 @@ func printHelp() {
     let help: String = """
     ================ FIREBLADE ASTEROIDS DEMO ===============
     press:
-    ←          rotate spaceship to the left
-    →          rotate spaceship to the right
-    ↑          accelerate spaceship
+    ← or A     rotate spaceship to the left
+    → or D     rotate spaceship to the right
+    ↑ or W     accelerate spaceship
     SPACE      shoot bullet
     ESC        quit
     """
