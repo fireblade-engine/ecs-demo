@@ -5,7 +5,7 @@
 //  Created by Igor Kravchenko on 11.10.2020.
 //
 
-import Library
+import AsteroidsGameLibrary
 
 final class BulletView: Renderable {
     override init() {

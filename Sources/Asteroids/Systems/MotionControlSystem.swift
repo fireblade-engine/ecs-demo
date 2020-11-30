@@ -6,7 +6,7 @@
 //
 
 import FirebladeECS
-import Library
+import AsteroidsGameLibrary
 
 final class MotionControlSystem {
     private let isKeyDown: (Int32) -> Bool

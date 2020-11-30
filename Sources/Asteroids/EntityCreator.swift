@@ -6,7 +6,7 @@
 //
 
 import FirebladeECS
-import Library
+import AsteroidsGameLibrary
 import SDL2
 
 final class EntityCreator {
@@ -111,8 +111,8 @@ final class EntityCreator {
 
     @discardableResult
     func createBullet(gun: Gun, parentPosition: Position) -> Entity {
-        let cos = Library.cos(parentPosition.rotation)
-        let sin = Library.sin(parentPosition.rotation)
+        let cos = AsteroidsGameLibrary.cos(parentPosition.rotation)
+        let sin = AsteroidsGameLibrary.sin(parentPosition.rotation)
         return nexus
             .createEntity()
             .assign(

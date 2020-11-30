@@ -6,7 +6,7 @@
 //
 
 import FirebladeECS
-import Library
+import AsteroidsGameLibrary
 
 final class MotionControls: ComponentInitializable {
     var left: Set<Int32>

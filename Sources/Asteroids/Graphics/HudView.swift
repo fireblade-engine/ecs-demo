@@ -5,7 +5,7 @@
 //  Created by Igor Kravchenko on 12.11.2020.
 //
 
-import Library
+import AsteroidsGameLibrary
 
 final class HudView: Renderable {
     private let score: Label

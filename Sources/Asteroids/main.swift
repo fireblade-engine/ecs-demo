@@ -1,5 +1,5 @@
 import FirebladeECS
-import Library
+import AsteroidsGameLibrary
 import SDL2
 
 // MARK: SDL and Nexus Engines Setup

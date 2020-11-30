@@ -5,7 +5,7 @@
 //  Created by Igor Kravchenko on 13.11.2020.
 //
 
-import Library
+import AsteroidsGameLibrary
 
 final class WaitForStartView: Renderable {
     private let gameOver: Label

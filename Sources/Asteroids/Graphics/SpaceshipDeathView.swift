@@ -5,7 +5,7 @@
 //  Created by Igor Kravchenko on 19.10.2020.
 //
 
-import Library
+import AsteroidsGameLibrary
 
 class SpaceshipDeathView: Renderable {
     private let shape1 = Renderable()
