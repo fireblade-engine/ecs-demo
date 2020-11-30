@@ -8,7 +8,7 @@ import SDL2
 
 // initialize the SDL library with video and audio
 if SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0 {
-    fatalError("could not init video/audio")
+    fatalError("could not init video/audio - reason: \(String(cString: SDL_GetError()))")
 }
 
 // description of a display mode
