@@ -2,7 +2,7 @@ import SDL2
 import FirebladeECS
 
 if SDL_Init(SDL_INIT_VIDEO) != 0 {
-    fatalError("could not init video")
+    fatalError("Could not initialize video \(String(cString: SDL_GetError()))")
 }
 
 var displayMode = SDL_DisplayMode()
@@ -21,13 +21,18 @@ var fps: Double = 0
 let nexus = Nexus()
 
 var windowTitle: String {
-    return "Fireblade ECS demo: [entities:\(nexus.numEntities) components:\(nexus.numComponents) families:\(nexus.numFamilies) velocity:\(velocity)] @ [FPS: \(fps), frames: \(frameCount)]"
+    return "Particles demo: [entities:\(nexus.numEntities) components:\(nexus.numComponents) families:\(nexus.numFamilies) velocity:\(velocity)] @ [FPS: \(fps), frames: \(frameCount)]"
 }
 var width: Int32 = max(displayMode.w / 2, 800)
 var height: Int32 = max(displayMode.h / 2, 600)
 
 let winFlags: UInt32 = SDL_WINDOW_SHOWN.rawValue | SDL_WINDOW_RESIZABLE.rawValue //| SDL_WINDOW_ALLOW_HIGHDPI.rawValue
-let hWin = SDL_CreateWindow(windowTitle, 100, 100, width, height, winFlags)
+let hWin = SDL_CreateWindow(windowTitle,
+                            Int32(SDL_WINDOWPOS_CENTERED_MASK),
+                            Int32(SDL_WINDOWPOS_CENTERED_MASK),
+                            width,
+                            height,
+                            winFlags)
 
 if hWin == nil {
     SDL_Quit()
@@ -141,6 +146,7 @@ class RenderSystem {
             SDL_Quit()
             fatalError("could not create renderer")
         }
+        SDL_GL_SetSwapInterval(0)
     }
 
     deinit {
@@ -151,14 +157,12 @@ class RenderSystem {
 
         SDL_SetRenderDrawColor( hRenderer, 0, 0, 0, 255 ) // black
         SDL_RenderClear(hRenderer) // clear screen
+        SDL_SetRenderDrawBlendMode(self.hRenderer, SDL_BLENDMODE_NONE)
 
-        family
-            .forEach { [unowned self] (pos: Position, color: Color) in
-                var rect = SDL_Rect(x: pos.x, y: pos.y, w: 2, h: 2)
-
-                SDL_SetRenderDrawColor(self.hRenderer, color.r, color.g, color.b, 255)
-                SDL_SetRenderDrawBlendMode(self.hRenderer, SDL_BLENDMODE_NONE)
-                SDL_RenderFillRect(self.hRenderer, &rect)
+        for (pos, color) in family {
+            var rect = SDL_Rect(x: pos.x, y: pos.y, w: 2, h: 2)
+            SDL_SetRenderDrawColor(self.hRenderer, color.r, color.g, color.b, 255)
+            SDL_RenderFillRect(self.hRenderer, &rect)
         }
 
         SDL_RenderPresent(hRenderer)
