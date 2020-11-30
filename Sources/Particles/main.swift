@@ -21,7 +21,7 @@ var fps: Double = 0
 let nexus = Nexus()
 
 var windowTitle: String {
-    return "Fireblade ECS demo: [entities:\(nexus.numEntities) components:\(nexus.numComponents) families:\(nexus.numFamilies) velocity:\(velocity)] @ [FPS: \(fps), frames: \(frameCount)]"
+    return "Particles demo: [entities:\(nexus.numEntities) components:\(nexus.numComponents) families:\(nexus.numFamilies) velocity:\(velocity)] @ [FPS: \(fps), frames: \(frameCount)]"
 }
 var width: Int32 = max(displayMode.w / 2, 800)
 var height: Int32 = max(displayMode.h / 2, 600)
