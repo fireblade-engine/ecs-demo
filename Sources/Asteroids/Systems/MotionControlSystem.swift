@@ -19,15 +19,15 @@ final class MotionControlSystem {
 
     func update(time: Double) {
         for (control, position, motion) in motionControls {
-            if isKeyDown(control.left) {
+            for key in control.left where isKeyDown(key) {
                 position.rotation -= control.rotationRate * time
             }
 
-            if isKeyDown(control.right) {
+            for key in control.right where isKeyDown(key) {
                 position.rotation += control.rotationRate * time
             }
 
-            if isKeyDown(control.accelerate) {
+            for key in control.accelerate where isKeyDown(key) {
                 motion.velocity.x += cos(position.rotation) * control.accelerationRate * time
                 motion.velocity.y += sin(position.rotation) * control.accelerationRate * time
             }

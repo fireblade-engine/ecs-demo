@@ -61,9 +61,9 @@ func printHelp() {
     let help: String = """
     ================ FIREBLADE ASTEROIDS DEMO ===============
     press:
-    ←          rotate spaceship to the left
-    →          rotate spaceship to the right
-    ↑          accelerate spaceship
+    ← or A     rotate spaceship to the left
+    → or D     rotate spaceship to the right
+    ↑ or W     accelerate spaceship
     SPACE      shoot bullet
     ESC        quit
     """

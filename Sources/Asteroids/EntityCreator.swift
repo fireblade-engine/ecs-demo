@@ -81,9 +81,9 @@ final class EntityCreator {
             .addInstance(Motion(velocityX: 0, velocityY: 0, angularVelocity: 0, damping: 15))
             .addInstance(
                 MotionControls(
-                    left: Int32(SDLK_LEFT.rawValue),
-                    right: Int32(SDLK_RIGHT.rawValue),
-                    accelerate: Int32(SDLK_UP.rawValue),
+                    left: [Int32(SDLK_LEFT.rawValue), Int32(SDLK_a.rawValue)],
+                    right: [Int32(SDLK_RIGHT.rawValue), Int32(SDLK_d.rawValue)],
+                    accelerate: [Int32(SDLK_UP.rawValue), Int32(SDLK_w.rawValue)],
                     accelerationRate: 100,
                     rotationRate: 3
                 )
