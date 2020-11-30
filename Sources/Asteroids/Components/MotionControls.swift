@@ -16,7 +16,7 @@ final class MotionControls: ComponentInitializable {
     var accelerationRate: Double
     var rotationRate: Double
 
-    init(left: Set<Int32>, right:Set<Int32>, accelerate: Set<Int32>, accelerationRate: Double, rotationRate: Double) {
+    init(left: Set<Int32>, right: Set<Int32>, accelerate: Set<Int32>, accelerationRate: Double, rotationRate: Double) {
         self.left = left
         self.right = right
         self.accelerate = accelerate

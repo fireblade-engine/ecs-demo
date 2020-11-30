@@ -31,18 +31,18 @@ class AnimationPlaceholder: Renderable, Animatable {
         .init(x: -15.72, y: 21.64),
         .init(x: -15.26, y: 4.96),
         .init(x: -25.44, y: -8.27),
-        .init(x: -9.43, y: -12.98),
+        .init(x: -9.43, y: -12.98)
     ]
-    
+
     private var step = 0.0
-    
+
     func animate(time: Double) {
         step += time
-        
+
         if step >= .pi * 2 {
             step = .zero
         }
-        
+
         graphics.clear(keepingCapacity: true)
         var mtx = Matrix()
         mtx.rotate(step)
