@@ -6,8 +6,17 @@
         "repositoryURL": "https://github.com/fireblade-engine/ecs.git",
         "state": {
           "branch": null,
-          "revision": "36e8c79e822ad28d68302709681a5605b87aa6e4",
-          "version": "0.16.0"
+          "revision": "c997e078178113ff20e733942b81dea341c84f3d",
+          "version": "0.17.4"
+        }
+      },
+      {
+        "package": "FirebladeMath",
+        "repositoryURL": "https://github.com/fireblade-engine/math.git",
+        "state": {
+          "branch": null,
+          "revision": "6008d56ffe8eefbd50f01ac4e31ce44519c63da7",
+          "version": "0.9.2"
         }
       },
       {
