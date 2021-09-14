@@ -39,8 +39,10 @@ if hWin == nil {
     fatalError("could not crate window")
 }
 
+var rng = SystemRandomNumberGenerator()
+
 func randNorm() -> Double {
-    return Double(arc4random()) / Double(UInt32.max)
+    return Double.random(in: 0...1, using: &rng)
 }
 
 class Name: Component {
