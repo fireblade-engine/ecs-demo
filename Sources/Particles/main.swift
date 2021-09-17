@@ -1,7 +1,7 @@
-import SDL2
+import SDLKit
 import FirebladeECS
 
-if SDL_Init(SDL_INIT_VIDEO) != 0 {
+if !SDL_Init(subsystems: [.video]) {
     fatalError("Could not initialize video \(String(cString: SDL_GetError()))")
 }
 
@@ -26,7 +26,7 @@ var windowTitle: String {
 var width: Int32 = max(displayMode.w / 2, 800)
 var height: Int32 = max(displayMode.h / 2, 600)
 
-let winFlags: UInt32 = SDL_WINDOW_SHOWN.rawValue | SDL_WINDOW_RESIZABLE.rawValue //| SDL_WINDOW_ALLOW_HIGHDPI.rawValue
+let winFlags : SDL_WindowFlags = [.shown, .resizable] // .allowHighDPI
 let hWin = SDL_CreateWindow(windowTitle,
                             Int32(SDL_WINDOWPOS_CENTERED_MASK),
                             Int32(SDL_WINDOWPOS_CENTERED_MASK),
@@ -141,7 +141,7 @@ class RenderSystem {
 
     init(hWin: OpaquePointer?) {
 
-        let flags: UInt32 = SDL_RENDERER_ACCELERATED.rawValue // | SDL_RENDERER_PRESENTVSYNC.rawValue
+        let flags : SDL_RendererFlags = [.accelerated] // .presentVSync
         hRenderer = SDL_CreateRenderer(hWin, -1, flags)
         if hRenderer == nil {
             SDL_DestroyWindow(hWin)
@@ -211,17 +211,17 @@ SDL_SetWindowPosition(hWin, Int32(SDL_WINDOWPOS_CENTERED_MASK), Int32(SDL_WINDOW
 while quit == false {
     tFrame.start()
     while SDL_PollEvent(&event) == 1 {
-        switch SDL_EventType(rawValue: event.type) {
+        switch event.eventType {
         case SDL_QUIT:
             quit = true
             break
         case SDL_WINDOWEVENT:
-            if event.window.event == SDL_WINDOWEVENT_SIZE_CHANGED.rawValue {
+            if event.windowEvent == SDL_WINDOWEVENT_SIZE_CHANGED {
                 width = Int32(event.window.data1)
                 height = Int32(event.window.data2)
             }
         case SDL_KEYDOWN:
-            switch SDL_KeyCode(UInt32(event.key.keysym.sym)) {
+            switch event.keyCode {
             case SDLK_ESCAPE:
                 quit = true
                 break
