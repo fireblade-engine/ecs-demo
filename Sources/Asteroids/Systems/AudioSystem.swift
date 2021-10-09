@@ -112,6 +112,7 @@ class MixingAudioPlayer {
         data = UnsafeMutablePointer<MixCallbackData>.allocate(capacity: 1)
         
         var want = audioSpec
+        want.samples = 512
         want.callback = mixAudioCallback
         want.userdata = UnsafeMutableRawPointer(data)
         var have = SDL_AudioSpec()
