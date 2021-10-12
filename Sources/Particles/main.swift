@@ -26,7 +26,7 @@ var windowTitle: String {
 var width: Int32 = max(displayMode.w / 2, 800)
 var height: Int32 = max(displayMode.h / 2, 600)
 
-let winFlags : SDL_WindowFlags = [.shown, .resizable] // .allowHighDPI
+let winFlags: SDL_WindowFlags = [.shown, .resizable] // .allowHighDPI
 let hWin = SDL_CreateWindow(windowTitle,
                             Int32(SDL_WINDOWPOS_CENTERED_MASK),
                             Int32(SDL_WINDOWPOS_CENTERED_MASK),
@@ -141,7 +141,7 @@ class RenderSystem {
 
     init(hWin: OpaquePointer?) {
 
-        let flags : SDL_RendererFlags = [.accelerated] // .presentVSync
+        let flags: SDL_RendererFlags = [.accelerated] // .presentVSync
         hRenderer = SDL_CreateRenderer(hWin, -1, flags)
         if hRenderer == nil {
             SDL_DestroyWindow(hWin)

@@ -5,10 +5,10 @@
 import Foundation
 @_exported import SDL2
 
-protocol FlagsValue : RawRepresentable  {
+protocol FlagsValue: RawRepresentable {
 }
 
-extension FlagsValue where RawValue : BinaryInteger {
+extension FlagsValue where RawValue: BinaryInteger {
     #if os(Windows)
     typealias Value = UInt32
     #else
@@ -16,13 +16,13 @@ extension FlagsValue where RawValue : BinaryInteger {
     #endif
 
     /// Returns platform specific flags values, which doesn't always match RawValue.
-    var flagsValue : Value {
+    var flagsValue: Value {
         Value(rawValue)
     }
 }
 
 /// Option set for the flags passed to `SDL_Init()`.
-public struct SDLK_SubsytemFlags : OptionSet, FlagsValue {
+public struct SDLK_SubsytemFlags: OptionSet, FlagsValue {
     public let rawValue: UInt32
 
     public init(rawValue: UInt32) {
@@ -52,7 +52,7 @@ public func SDL_Init(subsystems: SDLK_SubsytemFlags) -> Bool {
     return true
 }
 
-extension SDL_WindowFlags : OptionSet, FlagsValue {
+extension SDL_WindowFlags: OptionSet, FlagsValue {
     public static let fullScreen = SDL_WINDOW_FULLSCREEN
     public static let fullScreenDesktop = SDL_WINDOW_FULLSCREEN_DESKTOP
     public static let borderless = SDL_WINDOW_BORDERLESS
@@ -66,19 +66,19 @@ extension SDL_WindowFlags : OptionSet, FlagsValue {
     public static let metal = SDL_WINDOW_METAL
 }
 
-public func SDL_CreateWindow(_ name : String, _ x : Int32, _ y : Int32, _ w : Int32, _ h : Int32, _ flags : SDL_WindowFlags)
+public func SDL_CreateWindow(_ name: String, _ x: Int32, _ y: Int32, _ w: Int32, _ h: Int32, _ flags: SDL_WindowFlags)
  -> OpaquePointer! {
     SDL_CreateWindow(name, x, y, w, h, flags.flagsValue)
 }
 
-extension SDL_RendererFlags : OptionSet, FlagsValue {
+extension SDL_RendererFlags: OptionSet, FlagsValue {
     public static let software = SDL_RENDERER_SOFTWARE              /**< The renderer is a software fallback */
     public static let accelerated = SDL_RENDERER_ACCELERATED        /**< The renderer uses hardware acceleration */
     public static let presentVSync = SDL_RENDERER_PRESENTVSYNC      /**< Present is synchronized with the refresh rate */
     public static let targetTexture = SDL_RENDERER_TARGETTEXTURE    /**< The renderer supports rendering to texture */
 }
 
-public func SDL_CreateRenderer(_ window : OpaquePointer!, _ index : Int32, _ flags : SDL_RendererFlags) -> OpaquePointer! {
+public func SDL_CreateRenderer(_ window: OpaquePointer!, _ index: Int32, _ flags: SDL_RendererFlags) -> OpaquePointer! {
     SDL_CreateRenderer(window, index, flags.flagsValue)
 }
 
@@ -89,7 +89,7 @@ public typealias SDLK_RawValue = UInt32
 #endif
 
 extension SDL_Event {
-    @inlinable public var eventType : SDL_EventType {
+    @inlinable public var eventType: SDL_EventType {
         SDL_EventType(rawValue: SDLK_RawValue(self.type))
     }
 
@@ -97,32 +97,32 @@ extension SDL_Event {
         SDL_PollEvent(&self) == 1 ? self.eventType : nil
     }
 
-    public var keyCode : SDL_KeyCode {
+    public var keyCode: SDL_KeyCode {
         SDL_KeyCode(rawValue: SDLK_RawValue(self.key.keysym.sym))
     }
 
-    public var keyRepeat : Bool {
+    public var keyRepeat: Bool {
         self.key.repeat != 0
     }
 
-    public var keyName : String {
+    public var keyName: String {
         String(cString: SDL_GetKeyName(self.key.keysym.sym))
     }
 
-    public var controllerAxis : SDL_GameControllerAxis {
+    public var controllerAxis: SDL_GameControllerAxis {
         self.eventType == SDL_CONTROLLERAXISMOTION ?
                 SDL_GameControllerAxis(rawValue: Int32(self.caxis.axis)) :
                 SDL_CONTROLLER_AXIS_INVALID
     }
 
-    public var controllerButton : SDL_GameControllerButton {
+    public var controllerButton: SDL_GameControllerButton {
         let type = self.eventType
         return (type == SDL_CONTROLLERBUTTONDOWN || type == SDL_CONTROLLERBUTTONUP) ?
                 SDL_GameControllerButton(rawValue: Int32(self.cbutton.button)) :
                 SDL_CONTROLLER_BUTTON_INVALID
     }
 
-    public var windowEvent : SDL_WindowEventID {
+    public var windowEvent: SDL_WindowEventID {
         self.eventType == SDL_WINDOWEVENT ?
                 SDL_WindowEventID(rawValue: SDLK_RawValue(self.window.event)) :
                 SDL_WINDOWEVENT_NONE

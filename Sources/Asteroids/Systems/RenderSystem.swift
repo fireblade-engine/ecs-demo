@@ -23,7 +23,7 @@ final class RenderSystem {
          handleComponentRemoved: @escaping Parallel,
          nexus: Nexus) {
         // use hardware accelerated renderer
-        let flags : SDL_RendererFlags = [.accelerated]
+        let flags: SDL_RendererFlags = [.accelerated]
         renderer = SDL_CreateRenderer(window,
                                       -1, // -1 to initialize the first driver supporting the requested flags
                                       flags)

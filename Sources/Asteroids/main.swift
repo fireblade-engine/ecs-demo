@@ -38,7 +38,7 @@ var width: Int32 = max(displayMode.w / 2, 800)
 var height: Int32 = max(displayMode.h / 2, 600)
 
 // flags for window to be created with
-let winFlags : SDL_WindowFlags = [
+let winFlags: SDL_WindowFlags = [
     .shown,     // make window visible
     .resizable  // and resizable
 ]
