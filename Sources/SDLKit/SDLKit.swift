@@ -132,3 +132,12 @@ extension SDL_Event {
             SDL_WINDOWEVENT_NONE
     }
 }
+
+extension SDL_KeyCode {
+    public static func ==(lhs: Int, rhs: SDL_KeyCode) -> Bool {
+        return lhs == Int(rhs.rawValue)
+    }
+    public static func ==(lhs: SDL_KeyCode, rhs: Int) -> Bool {
+        return Int(lhs.rawValue) == rhs
+    }
+}
