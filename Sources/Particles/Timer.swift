@@ -5,46 +5,43 @@
 //  Created by Christian Treffs on 28.10.17.
 //
 
-import Darwin.Mach.mach_time
+import SDL2
 
 public struct Timer {
-	private let numerator: UInt64
-	private let denominator: UInt64
-	private var startTime: UInt64 = 0
-	private var stopTime: UInt64 = 0
+    private let countPerSecond: UInt64
+    private var startTime: UInt64 = 0
+    private var stopTime: UInt64 = 0
 
-	public init() {
-		var timeBaseInfo = mach_timebase_info.init(numer: 0, denom: 0 )
-		let success: kern_return_t = mach_timebase_info(&timeBaseInfo)
-		assert(KERN_SUCCESS == success)
-		numerator = UInt64(timeBaseInfo.numer)
-		denominator = UInt64(timeBaseInfo.denom)
-	}
+    public init() {
+        countPerSecond = SDL_GetPerformanceFrequency()
+    }
 
-	public mutating func start() {
-		startTime = mach_absolute_time()
-	}
-	public mutating func stop() {
-		stopTime = mach_absolute_time()
-	}
-	public mutating func reset() {
-		startTime = 0
-		stopTime = 0
-	}
+    public mutating func start() {
+        startTime = SDL_GetPerformanceCounter()
+    }
 
-	public var nanoSeconds: UInt64 {
-		return ((stopTime - startTime) * numerator) / denominator
-	}
+    public mutating func stop() {
+        stopTime = SDL_GetPerformanceCounter()
+    }
 
-	public var microSeconds: Double {
-		return Double(nanoSeconds) / 1.0e3
-	}
+    public mutating func reset() {
+        startTime = 0
+        stopTime = 0
+    }
 
-	public var milliSeconds: Double {
-		return Double(nanoSeconds) / 1.0e6
-	}
+    public var nanoSeconds: UInt64 {
+        return ((stopTime - startTime) * 1_000_000_000) / countPerSecond
+    }
 
-	public var seconds: Double {
-		return Double(nanoSeconds) / 1.0e9
-	}
+    public var microSeconds: Double {
+        return Double((stopTime - startTime) * 1_000_000) / Double(countPerSecond)
+    }
+
+    public var milliSeconds: Double {
+        return Double((stopTime - startTime) * 1_000) / Double(countPerSecond)
+    }
+
+    public var seconds: Double {
+        return Double(stopTime - startTime) / Double(countPerSecond)
+    }
 }

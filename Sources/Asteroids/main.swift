@@ -1,13 +1,13 @@
 import FirebladeECS
 import AsteroidsGameLibrary
-import SDL2
+import SDLKit
 
 // MARK: SDL and Nexus Engines Setup
 
 // swiftlint:disable prefixed_toplevel_constant
 
 // initialize the SDL library with video and audio
-if SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0 {
+if !SDL_Init(subsystems: [.video, .audio]) {
     fatalError("could not init video/audio - reason: \(String(cString: SDL_GetError()))")
 }
 
@@ -38,8 +38,10 @@ var width: Int32 = max(displayMode.w / 2, 800)
 var height: Int32 = max(displayMode.h / 2, 600)
 
 // flags for window to be created with
-let winFlags: UInt32 = SDL_WINDOW_SHOWN.rawValue // make window visible
-    | SDL_WINDOW_RESIZABLE.rawValue // and resizable
+let winFlags: SDL_WindowFlags = [
+    .shown,     // make window visible
+    .resizable  // and resizable
+]
 // create window
 let hWin = SDL_CreateWindow(
     windowTitle,
@@ -222,17 +224,17 @@ while quit == false {
     // while event is received process its type
     while SDL_PollEvent(&event) == 1 {
         // determine what kind of event is received in order to react to it
-        switch SDL_EventType(rawValue: event.type) {
+        switch event.eventType {
         case SDL_QUIT:
             quit = true
 
-        case SDL_WINDOWEVENT where event.window.event == SDL_WINDOWEVENT_SIZE_CHANGED.rawValue:
+        case SDL_WINDOWEVENT where event.windowEvent == SDL_WINDOWEVENT_SIZE_CHANGED:
             width = Int32(event.window.data1)
             height = Int32(event.window.data2)
 
         case SDL_KEYDOWN:
             keysDown.insert(event.key.keysym.sym)
-            switch SDL_KeyCode(UInt32(event.key.keysym.sym)) {
+            switch event.keyCode {
             case SDLK_ESCAPE:
                 quit = true
 
