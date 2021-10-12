@@ -102,7 +102,7 @@ extension SDL_Event {
     }
 
     public var keyCode: SDL_KeyCode {
-        SDL_KeyCode(rawValue: SDLK_RawValue(self.key.keysym.sym))
+        SDL_KeyCode(SDLK_RawValue(self.key.keysym.sym))
     }
 
     public var keyRepeat: Bool {
