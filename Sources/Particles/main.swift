@@ -80,7 +80,7 @@ func batchDestroyEntities(count: Int) {
         .prefix(count)
         .forEach { (entity: Entity) in
             entity.destroy()
-    }
+        }
 }
 
 class PositionSystem {
@@ -105,7 +105,7 @@ class PositionSystem {
 
                 pos.x = x
                 pos.y = y
-        }
+            }
     }
 
 }
@@ -118,7 +118,7 @@ class PositionResetSystem {
             .forEach { (pos: Position) in
                 pos.x = width/2
                 pos.y = height/2
-        }
+            }
     }
 }
 
@@ -131,7 +131,7 @@ class ColorSystem {
                 color.r = UInt8.random(in: 1...255)
                 color.g = UInt8.random(in: 1...255)
                 color.b = UInt8.random(in: 1...255)
-        }
+            }
     }
 }
 
@@ -177,20 +177,20 @@ let colorSystem = ColorSystem()
 
 func printHelp() {
     let help: String = """
-	================ FIREBLADE ECS DEMO ===============
-	press:
-	ESC		quit
-	c		change all colors (random)
-	r		reset all positions (to center)
-	s		stop movement
-	+		increase movement speed
-	-		reduce movement speed
-	space	reset to default movement speed
-	e		create 1 entity
-	d		destroy 1 entity
-	8		batch create 10k entities
-	9		batch destroy 10k entities
-	"""
+    ================ FIREBLADE ECS DEMO ===============
+    press:
+    ESC		quit
+    c		change all colors (random)
+    r		reset all positions (to center)
+    s		stop movement
+    +		increase movement speed
+    -		reduce movement speed
+    space	reset to default movement speed
+    e		create 1 entity
+    d		destroy 1 entity
+    8		batch create 10k entities
+    9		batch destroy 10k entities
+    """
     print(help)
 }
 
