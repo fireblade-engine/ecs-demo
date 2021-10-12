@@ -12,28 +12,28 @@ import SDL2
 
 /// In-memory copy of a sound file. Currently these remain loaded forever to avoid audio dropouts.
 struct AudioData {
-    var sound : Audio.Sound
-    var spec : SDL_AudioSpec
-    var buffer : UnsafeMutableRawPointer
-    var length : Int
+    var sound: Audio.Sound
+    var spec: SDL_AudioSpec
+    var buffer: UnsafeMutableRawPointer
+    var length: Int
 }
 
 typealias MixBuffer = (count: Int, format: SDL_AudioFormat, pointer: UnsafeMutableRawPointer)
 
 struct MixCallbackData {
-    var player : MixingAudioPlayer
-    var queue : DispatchQueue
-    var buffers : [MixBuffer] = []
+    var player: MixingAudioPlayer
+    var queue: DispatchQueue
+    var buffers: [MixBuffer] = []
 }
 
 /// helper function to convert arrays or inout parameters into scoped pointers.
-@inlinable public func withPointer<R, T1>(_ p1 : UnsafePointer<T1>,
+@inlinable public func withPointer<R, T1>(_ p1: UnsafePointer<T1>,
                                           _ body: (UnsafePointer<T1>) throws -> R)
 rethrows -> R {
     try body(p1)
 }
 
-@inlinable public func withMutablePointer<R, T1>(_ p1 : UnsafeMutablePointer<T1>,
+@inlinable public func withMutablePointer<R, T1>(_ p1: UnsafeMutablePointer<T1>,
                                                  _ body: (UnsafeMutablePointer<T1>) throws -> R)
 rethrows -> R {
     try body(p1)
@@ -45,8 +45,7 @@ typealias Mixer = (MutableSamplePtr, SamplePtr, SDL_AudioFormat, Int) -> Void
 
 func mixAudioBuffers(_ data: inout MixCallbackData,
                      _ audioStream: MutableSamplePtr,
-                     _ length: Int) -> Bool
-{
+                     _ length: Int) -> Bool {
     var finished = false
     func mixBuffer(_ buffer : inout MixBuffer, mixer: Mixer) {
         let count = min(length, buffer.count)
@@ -86,10 +85,9 @@ func mixAudioBuffers(_ data: inout MixCallbackData,
     return finished
 }
 
-func mixAudioCallback(userDataOrNil : UnsafeMutableRawPointer?,
+func mixAudioCallback(userDataOrNil: UnsafeMutableRawPointer?,
                       audioStreamOrNil: UnsafeMutablePointer<UInt8>?,
-                      length : Int32)
-{
+                      length: Int32) {
     // validate that pointers aren't nil
     if let userData = userDataOrNil, let audioStream = audioStreamOrNil {
         let data = userData.assumingMemoryBound(to: MixCallbackData.self)
@@ -104,13 +102,13 @@ func mixAudioCallback(userDataOrNil : UnsafeMutableRawPointer?,
 }
 
 class MixingAudioPlayer {
-    let data : UnsafeMutablePointer<MixCallbackData>
-    var device : SDL_AudioDeviceID
+    let data: UnsafeMutablePointer<MixCallbackData>
+    var device: SDL_AudioDeviceID
     var playing = false
-    
-    init(_ queue : DispatchQueue, _ audioSpec : SDL_AudioSpec) {
+
+    init(_ queue: DispatchQueue, _ audioSpec: SDL_AudioSpec) {
         data = UnsafeMutablePointer<MixCallbackData>.allocate(capacity: 1)
-        
+
         var want = audioSpec
         want.samples = 512
         want.callback = mixAudioCallback
@@ -121,7 +119,7 @@ class MixingAudioPlayer {
             data.initialize(to: MixCallbackData(player: self, queue: queue))
         }
     }
-    
+
     deinit {
         if device > 0 {
             SDL_CloseAudioDevice(device)
@@ -131,13 +129,13 @@ class MixingAudioPlayer {
         // so the `CallbackData` blocks are leaked deliberately.
         // data.deallocate()
     }
-    
+
     /// Prepare the player to play audio data. In theory, this could be called
     /// at any moment, to interrupt the currently playing sound, but in practice
     /// that will cause clicks, so this is only ever called when the audio
     /// device is paused.
     /// - Parameter audioData:
-    func prepare(_ audioData : AudioData) {
+    func prepare(_ audioData: AudioData) {
         SDL_LockAudioDevice(device)
         data.pointee.buffers.append(
             (count: audioData.length,
@@ -145,7 +143,7 @@ class MixingAudioPlayer {
              pointer: audioData.buffer))
         SDL_UnlockAudioDevice(device)
     }
-    
+
     func buffersFinished() {
         SDL_LockAudioDevice(device)
         data.pointee.buffers = data.pointee.buffers.filter { $0.count > 0 }
@@ -154,21 +152,21 @@ class MixingAudioPlayer {
             self.pause()
         }
     }
-    
+
     func start() {
         if !playing {
             SDL_PauseAudioDevice(device, 0)
             playing = true
         }
     }
-    
+
     func pause() {
         if playing {
             SDL_PauseAudioDevice(device, 1)
             playing = false
         }
     }
-    
+
     func dump() {
         Swift.dump(data.pointee, maxDepth: 1)
     }
@@ -203,7 +201,7 @@ class AudioSystem {
         }
     }
 
-    private var audioDataCache: [Audio.Sound : AudioData] = [:]
+    private var audioDataCache: [Audio.Sound: AudioData] = [:]
 
     func fetchAudioData(_ sound: Audio.Sound) -> AudioData? {
         if let audioData = audioDataCache[sound] {
@@ -214,7 +212,7 @@ class AudioSystem {
                 var spec = SDL_AudioSpec()
                 var length: UInt32 = 0
                 var bufferOrNil: UnsafeMutablePointer<UInt8>?
-                if SDL_LoadWAV_RW(ops, 1, &spec, &bufferOrNil, &length) != nil, let buffer = bufferOrNil  {
+                if SDL_LoadWAV_RW(ops, 1, &spec, &bufferOrNil, &length) != nil, let buffer = bufferOrNil {
                     let audioData = AudioData(sound: sound, spec: spec, buffer: UnsafeMutableRawPointer(buffer), length: Int(length))
                     audioDataCache[sound] = audioData
                     return audioData
@@ -227,9 +225,9 @@ class AudioSystem {
         return nil
     }
 
-    private var mixingPlayer : MixingAudioPlayer?
-    
-    func getMixingPlayer(_ audioSpec : SDL_AudioSpec) -> MixingAudioPlayer? {
+    private var mixingPlayer: MixingAudioPlayer?
+
+    func getMixingPlayer(_ audioSpec: SDL_AudioSpec) -> MixingAudioPlayer? {
         if let player = mixingPlayer {
             return player
         }
@@ -237,15 +235,15 @@ class AudioSystem {
         mixingPlayer = player
         return player
     }
-    
-    private func play(audio audioData : AudioData) {
+
+    private func play(audio audioData: AudioData) {
         if let player = getMixingPlayer(audioData.spec) {
             player.prepare(audioData)
             player.start()
         }
     }
 
-    private func prepare(audio audioData : AudioData) -> Bool {
+    private func prepare(audio audioData: AudioData) -> Bool {
         getMixingPlayer(audioData.spec) != nil
     }
 
@@ -267,7 +265,7 @@ class AudioSystem {
             play(audio: audioData)
         }
     }
-    
+
     /// Preloads audio data and starts the audio system so sounds will play immediately.
     @discardableResult func prepare(sound: Audio.Sound) -> Bool {
         if let audioData = fetchAudioData(sound) {
