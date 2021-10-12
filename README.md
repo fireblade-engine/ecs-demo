@@ -1,8 +1,8 @@
 # Fireblade ECS Demo
 
 [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
-[![swift version](https://img.shields.io/badge/swift-5.3+-brightgreen.svg)](#)
-[![platforms](https://img.shields.io/badge/platform-macOS%20-brightgreen.svg)](#)
+[![macOS](https://github.com/fireblade-engine/ecs-demo/actions/workflows/ci-macos.yml/badge.svg)](https://github.com/fireblade-engine/ecs-demo/actions/workflows/ci-macos.yml)
+[![Linux](https://github.com/fireblade-engine/ecs-demo/actions/workflows/ci-linux.yml/badge.svg)](https://github.com/fireblade-engine/ecs-demo/actions/workflows/ci-linux.yml)
 
 <p align="center">
 		<img height="315" src="./asteroids.gif"/> <img height="315" src="./particles.gif" />
