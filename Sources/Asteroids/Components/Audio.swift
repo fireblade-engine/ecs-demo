@@ -17,7 +17,7 @@ final class Audio: Component {
 }
 
 extension Audio {
-    enum Sound: String {
+    enum Sound: String, CaseIterable {
         case explodeAsteroid = "asteroid.wav"
         case explodeShip = "ship.wav"
         case shootGun = "shoot.wav"
