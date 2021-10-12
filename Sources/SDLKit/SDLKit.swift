@@ -34,9 +34,11 @@ public struct SDLK_SubsytemFlags: OptionSet, FlagsValue {
     public static let gameController = Self(rawValue: SDL_INIT_GAMECONTROLLER)
     public static let haptic = Self(rawValue: SDL_INIT_HAPTIC)
     public static let joystick = Self(rawValue: SDL_INIT_JOYSTICK)
-    public static let sensor = Self(rawValue: SDL_INIT_SENSOR)
     public static let timer = Self(rawValue: SDL_INIT_TIMER)
     public static let video = Self(rawValue: SDL_INIT_VIDEO)
+    #if !os(Linux)
+    public static let sensor = Self(rawValue: SDL_INIT_SENSOR)
+    #endif
 }
 
 /**
@@ -63,11 +65,13 @@ extension SDL_WindowFlags: OptionSet, FlagsValue {
 
     public static let openGL = SDL_WINDOW_OPENGL
     public static let vulkan = SDL_WINDOW_VULKAN
+    #if os(macOS) || os(iOS) || os(tvOS)
     public static let metal = SDL_WINDOW_METAL
+    #endif
 }
 
 public func SDL_CreateWindow(_ name: String, _ x: Int32, _ y: Int32, _ w: Int32, _ h: Int32, _ flags: SDL_WindowFlags)
- -> OpaquePointer! {
+-> OpaquePointer! {
     SDL_CreateWindow(name, x, y, w, h, flags.flagsValue)
 }
 
@@ -98,7 +102,7 @@ extension SDL_Event {
     }
 
     public var keyCode: SDL_KeyCode {
-        SDL_KeyCode(rawValue: SDLK_RawValue(self.key.keysym.sym))
+        SDL_KeyCode(SDLK_RawValue(self.key.keysym.sym))
     }
 
     public var keyRepeat: Bool {
@@ -111,20 +115,39 @@ extension SDL_Event {
 
     public var controllerAxis: SDL_GameControllerAxis {
         self.eventType == SDL_CONTROLLERAXISMOTION ?
-                SDL_GameControllerAxis(rawValue: Int32(self.caxis.axis)) :
-                SDL_CONTROLLER_AXIS_INVALID
+            SDL_GameControllerAxis(rawValue: Int32(self.caxis.axis)) :
+            SDL_CONTROLLER_AXIS_INVALID
     }
 
     public var controllerButton: SDL_GameControllerButton {
         let type = self.eventType
         return (type == SDL_CONTROLLERBUTTONDOWN || type == SDL_CONTROLLERBUTTONUP) ?
-                SDL_GameControllerButton(rawValue: Int32(self.cbutton.button)) :
-                SDL_CONTROLLER_BUTTON_INVALID
+            SDL_GameControllerButton(rawValue: Int32(self.cbutton.button)) :
+            SDL_CONTROLLER_BUTTON_INVALID
     }
 
     public var windowEvent: SDL_WindowEventID {
         self.eventType == SDL_WINDOWEVENT ?
-                SDL_WindowEventID(rawValue: SDLK_RawValue(self.window.event)) :
-                SDL_WINDOWEVENT_NONE
+            SDL_WindowEventID(rawValue: SDLK_RawValue(self.window.event)) :
+            SDL_WINDOWEVENT_NONE
+    }
+}
+
+extension SDL_KeyCode {
+    
+    public static func ~= (lhs: Int, rhs: SDL_KeyCode) -> Bool {
+        return lhs == rhs
+    }
+    
+    public static func ~= (lhs: SDL_KeyCode, rhs: Int) -> Bool {
+        return lhs == rhs
+    }
+
+    public static func ==(lhs: Int, rhs: SDL_KeyCode) -> Bool {
+        return SDL_KeyCode(UInt32(lhs)) == rhs
+    }
+
+    public static func ==(lhs: SDL_KeyCode, rhs: Int) -> Bool {
+        return lhs == SDL_KeyCode(UInt32(rhs))
     }
 }
