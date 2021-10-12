@@ -134,9 +134,19 @@ extension SDL_Event {
 }
 
 extension SDL_KeyCode {
+    
+    public static func ~= (lhs: Int, rhs: SDL_KeyCode) -> Bool {
+        return lhs == rhs
+    }
+    
+    public static func ~= (lhs: SDL_KeyCode, rhs: Int) -> Bool {
+        return lhs == rhs
+    }
+
     public static func ==(lhs: Int, rhs: SDL_KeyCode) -> Bool {
         return SDL_KeyCode(UInt32(lhs)) == rhs
     }
+
     public static func ==(lhs: SDL_KeyCode, rhs: Int) -> Bool {
         return lhs == SDL_KeyCode(UInt32(rhs))
     }
