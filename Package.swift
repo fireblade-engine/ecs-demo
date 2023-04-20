@@ -11,7 +11,7 @@ let package = Package(
     dependencies: [
         .package(name: "SDL2", url: "https://github.com/ctreffs/SwiftSDL2.git", from: "1.3.0"),
         .package(name: "FirebladeECS", url: "https://github.com/fireblade-engine/ecs.git", from: "0.17.5"),
-        .package(name: "FirebladeMath", url: "https://github.com/fireblade-engine/math.git", from: "0.11.0")
+        .package(name: "FirebladeMath", url: "https://github.com/fireblade-engine/math.git", from: "0.13.0")
     ],
     targets: [
         .target(
