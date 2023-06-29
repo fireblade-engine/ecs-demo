@@ -9,7 +9,7 @@ let package = Package(
         .tvOS(.v11)
     ],
     dependencies: [
-        .package(name: "SDL2", url: "https://github.com/ctreffs/SwiftSDL2.git", from: "1.3.2"),
+        .package(name: "SDL2", url: "https://github.com/ctreffs/SwiftSDL2.git", from: "1.4.1"),
         .package(name: "FirebladeECS", url: "https://github.com/fireblade-engine/ecs.git", from: "0.17.5"),
         .package(name: "FirebladeMath", url: "https://github.com/fireblade-engine/math.git", from: "0.13.0")
     ],
