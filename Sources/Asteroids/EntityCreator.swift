@@ -7,7 +7,7 @@
 
 import FirebladeECS
 import AsteroidsGameLibrary
-import SDL2
+import SDL
 
 final class EntityCreator {
     private let nexus: Nexus
