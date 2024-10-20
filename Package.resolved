@@ -1,34 +1,32 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "FirebladeECS",
-        "repositoryURL": "https://github.com/fireblade-engine/ecs.git",
-        "state": {
-          "branch": null,
-          "revision": "fd57037a6df5aa7fb8070d6af105650fb84c340c",
-          "version": "0.17.5"
-        }
-      },
-      {
-        "package": "FirebladeMath",
-        "repositoryURL": "https://github.com/fireblade-engine/math.git",
-        "state": {
-          "branch": null,
-          "revision": "d42d22cb727931cc17c15ba424b1eae5fde4dd96",
-          "version": "0.13.0"
-        }
-      },
-      {
-        "package": "SDL",
-        "repositoryURL": "https://github.com/ctreffs/SwiftSDL2.git",
-        "state": {
-          "branch": null,
-          "revision": "30a2886bd68e43fc19ba29b63ffe230ac0e4db7a",
-          "version": "1.4.1"
-        }
+  "pins" : [
+    {
+      "identity" : "ecs",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/fireblade-engine/ecs.git",
+      "state" : {
+        "revision" : "0b3ba9241be23e4787ae9421728faab9bd9ba9e6",
+        "version" : "0.17.6"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "math",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/fireblade-engine/math.git",
+      "state" : {
+        "revision" : "d42d22cb727931cc17c15ba424b1eae5fde4dd96",
+        "version" : "0.13.0"
+      }
+    },
+    {
+      "identity" : "swiftsdl2",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ctreffs/SwiftSDL2.git",
+      "state" : {
+        "revision" : "30a2886bd68e43fc19ba29b63ffe230ac0e4db7a",
+        "version" : "1.4.1"
+      }
+    }
+  ],
+  "version" : 2
 }
