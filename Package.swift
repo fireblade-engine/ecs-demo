@@ -5,27 +5,39 @@ let package = Package(
     name: "FirebladeECSDemo",
     platforms: [
         .macOS(.v11),
-        .iOS(.v11),
-        .tvOS(.v11)
+        .iOS(.v13),
+        .tvOS(.v13)
     ],
     dependencies: [
-        .package(name: "SDL", url: "https://github.com/ctreffs/SwiftSDL2.git", from: "1.4.1"),
-        .package(name: "FirebladeECS", url: "https://github.com/fireblade-engine/ecs.git", from: "0.17.6"),
-        .package(name: "FirebladeMath", url: "https://github.com/fireblade-engine/math.git", from: "0.13.0")
+        .package(url: "https://github.com/ctreffs/SwiftSDL2.git", from: "1.4.1"),
+        .package(url: "https://github.com/fireblade-engine/ecs.git", from: "0.17.6"),
+        .package(url: "https://github.com/fireblade-engine/math.git", from: "0.13.0")
     ],
     targets: [
         .target(
             name: "SDLKit",
-            dependencies: ["SDL"]),
-        .target(
+            dependencies: [
+                .product(name: "SDL", package: "SwiftSDL2")
+            ]),
+        .executableTarget(
             name: "Particles",
-            dependencies: ["FirebladeECS", "SDL", "SDLKit"]),
-        .target(
+            dependencies: [
+                .product(name: "FirebladeECS", package: "ecs"),
+                .product(name: "SDL", package: "SwiftSDL2"),
+                "SDLKit"
+            ]),
+        .executableTarget(
             name: "Asteroids",
-            dependencies: ["FirebladeECS", "SDL", "SDLKit", "FirebladeMath", "AsteroidsGameLibrary"],
+            dependencies: [
+                .product(name: "FirebladeECS", package: "ecs"),
+                .product(name: "SDL", package: "SwiftSDL2"),
+                "SDLKit",
+                .product(name: "FirebladeMath", package: "math"),
+                "AsteroidsGameLibrary"
+            ],
             exclude: ["Resources/source.txt"],
             resources: [.copy("Resources/asteroid.wav"), .copy("Resources/ship.wav"), .copy("Resources/shoot.wav")]),
         .target(name: "AsteroidsGameLibrary",
-                dependencies: ["FirebladeMath"])
+                dependencies: [.product(name: "FirebladeMath", package: "math")])
     ]
 )
