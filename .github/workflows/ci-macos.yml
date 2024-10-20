@@ -5,13 +5,14 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+  workflow_dispatch:
 
 jobs:
   macos-test-build-release-xcode:
     runs-on: macOS-latest
     strategy:
       matrix:
-        xcode: ["14.3"]
+        xcode: ["15.4", "16.0"]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -48,15 +49,23 @@ jobs:
           DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode }}.app/Contents/Developer
       
       - name: Upload build artifacts
-        if: failure()
-        uses: actions/upload-artifact@v3.1.2
+        if: always()
+        uses: actions/upload-artifact@v4.4.3
         with:
           name: build-artifacts-${{ matrix.xcode }}-${{ github.run_id }}
           path: |
-            *.lcov
             .build/*.yaml
-            .build/**/*.a
-            .build/**/*.so
-            .build/**/*.dylib
-            .build/**/*.dSYM 
+            .build/*.xml
+            .build/*.json
+            .build/*.txt
             .build/**/*.json
+            .build/**/*.txt
+            .build/**/Asteroids
+            .build/**/Asteroids.dSYM
+            .build/**/libFirebladeMath.a
+            .build/**/libSDL2.a
+            .build/**/Particles
+            .build/**/Particles.dSYM
+          if-no-files-found: warn
+          include-hidden-files: true
+
