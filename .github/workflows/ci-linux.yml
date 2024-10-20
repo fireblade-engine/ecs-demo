@@ -42,11 +42,11 @@ jobs:
       - name: Build Release
         run: swift build -c release
 
-      - name: Upload test artifacts
+      - name: Upload artifacts
         if: always()
         uses: actions/upload-artifact@v4.4.3
         with:
-          name: test-artifacts-linux-${{ matrix.swift }}-${{ github.run_id }}
+          name: build-artifacts-linux-${{ matrix.swift }}-${{ github.run_id }}
           path: |
             .build/*.yaml
             .build/*.xml
@@ -57,6 +57,7 @@ jobs:
             .build/**/*.a
             .build/**/*.dSYM
             .build/**/*.gdb
+            .build/**/*.bundle
             .build/**/Asteroids
             .build/**/Particles
           if-no-files-found: warn

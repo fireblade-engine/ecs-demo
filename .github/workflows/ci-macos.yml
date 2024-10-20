@@ -63,6 +63,7 @@ jobs:
             .build/**/*.a
             .build/**/*.dSYM
             .build/**/*.gdb
+            .build/**/*.bundle
             .build/**/Asteroids
             .build/**/Particles
           if-no-files-found: warn
