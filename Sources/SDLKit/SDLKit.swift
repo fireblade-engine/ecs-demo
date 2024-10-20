@@ -3,7 +3,7 @@
 //
 
 import Foundation
-@_exported import SDL2
+@_exported import SDL
 
 protocol FlagsValue: RawRepresentable {
 }

@@ -15,17 +15,17 @@
         "repositoryURL": "https://github.com/fireblade-engine/math.git",
         "state": {
           "branch": null,
-          "revision": "65aa6b5045d8dd59bc8512b87ab4ec25a18dd82d",
-          "version": "0.11.0"
+          "revision": "d42d22cb727931cc17c15ba424b1eae5fde4dd96",
+          "version": "0.13.0"
         }
       },
       {
-        "package": "SDL2",
+        "package": "SDL",
         "repositoryURL": "https://github.com/ctreffs/SwiftSDL2.git",
         "state": {
           "branch": null,
-          "revision": "dc30ee99e4fb5bb4272bfed2e6336d6bc48d8aba",
-          "version": "1.3.1"
+          "revision": "30a2886bd68e43fc19ba29b63ffe230ac0e4db7a",
+          "version": "1.4.1"
         }
       }
     ]

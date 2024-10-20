@@ -5,7 +5,7 @@
 //  Created by Christian Treffs on 28.10.17.
 //
 
-import SDL2
+import SDL
 
 public struct Timer {
     private let countPerSecond: UInt64

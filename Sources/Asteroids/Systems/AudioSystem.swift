@@ -8,7 +8,7 @@
 
 import Dispatch
 import FirebladeECS
-import SDL2
+import SDL
 
 /// In-memory copy of a sound file. Currently these remain loaded forever to avoid audio dropouts.
 struct AudioData {
