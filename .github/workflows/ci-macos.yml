@@ -60,12 +60,11 @@ jobs:
             .build/*.txt
             .build/**/*.json
             .build/**/*.txt
+            .build/**/*.a
+            .build/**/*.dSYM
+            .build/**/*.gdb
             .build/**/Asteroids
-            .build/**/Asteroids.dSYM
-            .build/**/libFirebladeMath.a
-            .build/**/libSDL2.a
             .build/**/Particles
-            .build/**/Particles.dSYM
           if-no-files-found: warn
           include-hidden-files: true
 
