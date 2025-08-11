@@ -16,7 +16,7 @@ jobs:
       image: swift:${{ matrix.swift }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Restore APT cache
         uses: actions/cache@v4
