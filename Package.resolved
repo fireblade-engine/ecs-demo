@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/fireblade-engine/math.git",
       "state" : {
-        "revision" : "d42d22cb727931cc17c15ba424b1eae5fde4dd96",
-        "version" : "0.13.0"
+        "revision" : "dc4e0972047e1e2b3a99a9119b8e54ebba68ae5f",
+        "version" : "1.1.0"
       }
     },
     {
