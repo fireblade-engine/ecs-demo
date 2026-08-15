@@ -9,8 +9,8 @@ import FirebladeECS
 
 final class LayoutSystem {
     private let config: GameConfig
-    private let huds: Family1<Hud>
-    private let waits: Family1<WaitForStart>
+    private let huds: Family<Hud>
+    private let waits: Family<WaitForStart>
 
     init(config: GameConfig, nexus: Nexus) {
         self.config = config

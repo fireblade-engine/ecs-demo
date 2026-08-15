@@ -9,7 +9,7 @@ import FirebladeECS
 
 final class DeathThroesSystem {
     private let creator: EntityCreator
-    private let family: Family<Requires1<DeathThroes>>
+    private let family: Family<DeathThroes>
 
     init(creator: EntityCreator, nexus: Nexus) {
         self.creator = creator

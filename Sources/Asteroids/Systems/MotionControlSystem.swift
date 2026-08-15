@@ -10,7 +10,7 @@ import AsteroidsGameLibrary
 
 final class MotionControlSystem {
     private let isKeyDown: (Int32) -> Bool
-    private let motionControls: Family3<MotionControls, Position, Motion>
+    private let motionControls: Family<MotionControls, Position, Motion>
 
     init(isKeyDown: @escaping (Int32) -> Bool, nexus: Nexus) {
         self.isKeyDown = isKeyDown

@@ -8,7 +8,7 @@
 import FirebladeECS
 
 final class AnimationSystem {
-    private let family: Family1<Animation>
+    private let family: Family<Animation>
 
     init(nexus: Nexus) {
         family = nexus.family(requires: Animation.self)

@@ -10,7 +10,7 @@ import FirebladeECS
 final class GunControlSystem {
     private let isKeyDown: (Int32) -> Bool
     private let creator: EntityCreator
-    private let gunControllsFamily: Family4<Gun, GunControls, Position, Audio>
+    private let gunControllsFamily: Family<Gun, GunControls, Position, Audio>
 
     init(isKeyDown: @escaping (Int32) -> Bool, creator: EntityCreator, nexus: Nexus) {
         self.isKeyDown = isKeyDown

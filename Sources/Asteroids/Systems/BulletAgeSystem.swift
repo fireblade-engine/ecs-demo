@@ -9,7 +9,7 @@ import FirebladeECS
 
 final class BulletAgeSystem {
     private let creator: EntityCreator
-    private let family: Family1<Bullet>
+    private let family: Family<Bullet>
 
     init(creator: EntityCreator, nexus: Nexus) {
         self.creator = creator

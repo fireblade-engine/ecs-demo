@@ -10,9 +10,9 @@ import FirebladeECS
 final class WaitForStartSystem {
     private let creator: EntityCreator
     private let config: GameConfig
-    private let games: Family1<GameState>
-    private let waits: Family1<WaitForStart>
-    private let asteroids: Family1<Asteroid>
+    private let games: Family<GameState>
+    private let waits: Family<WaitForStart>
+    private let asteroids: Family<Asteroid>
 
     init(creator: EntityCreator, nexus: Nexus, config: GameConfig) {
         self.creator = creator
