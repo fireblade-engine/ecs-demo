@@ -10,10 +10,10 @@ import AsteroidsGameLibrary
 
 final class CollisionSystem {
     private let creator: EntityCreator
-    private let games: Family1<GameState>
-    private let spaceships: Family4<Spaceship, Position, Collision, Audio>
-    private let asteroids: Family4<Asteroid, Position, Collision, Audio>
-    private let bullets: Family3<Bullet, Position, Collision>
+    private let games: Family<GameState>
+    private let spaceships: Family<Spaceship, Position, Collision, Audio>
+    private let asteroids: Family<Asteroid, Position, Collision, Audio>
+    private let bullets: Family<Bullet, Position, Collision>
 
     init(creator: EntityCreator, nexus: Nexus) {
         self.creator = creator

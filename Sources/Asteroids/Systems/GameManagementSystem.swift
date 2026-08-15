@@ -11,10 +11,10 @@ import AsteroidsGameLibrary
 final class GameManagementSystem {
     private let config: GameConfig
     private let creator: EntityCreator
-    private let games: Family1<GameState>
-    private let spaceships: Family2<Spaceship, Position>
-    private let asteroids: Family3<Asteroid, Position, Collision>
-    private let bullets: Family3<Bullet, Position, Collision>
+    private let games: Family<GameState>
+    private let spaceships: Family<Spaceship, Position>
+    private let asteroids: Family<Asteroid, Position, Collision>
+    private let bullets: Family<Bullet, Position, Collision>
 
     init(creator: EntityCreator, config: GameConfig, nexus: Nexus) {
         self.creator = creator

@@ -8,7 +8,7 @@
 import FirebladeECS
 
 final class HudSystem {
-    private let huds: Family2<GameState, Hud>
+    private let huds: Family<GameState, Hud>
 
     init(nexus: Nexus) {
         huds = nexus.family(requiresAll: GameState.self, Hud.self)

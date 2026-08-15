@@ -1,17 +1,17 @@
-// swift-tools-version:5.8
+// swift-tools-version:5.9
 import PackageDescription
 
 let package = Package(
     name: "FirebladeECSDemo",
     platforms: [
-        .macOS(.v11),
-        .iOS(.v13),
-        .tvOS(.v13)
+        .macOS(.v14),
+        .iOS(.v14),
+        .tvOS(.v14)
     ],
     dependencies: [
         .package(url: "https://github.com/ctreffs/SwiftSDL2.git", from: "1.4.1"),
-        .package(url: "https://github.com/fireblade-engine/ecs.git", from: "0.17.6"),
-        .package(url: "https://github.com/fireblade-engine/math.git", from: "0.13.0")
+        .package(url: "https://github.com/fireblade-engine/ecs.git", from: "1.1.2"),
+        .package(url: "https://github.com/fireblade-engine/math.git", from: "1.1.0")
     ],
     targets: [
         .target(

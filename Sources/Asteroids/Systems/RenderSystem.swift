@@ -13,7 +13,7 @@ final class RenderSystem {
     typealias Parallel = (@escaping (Component) -> Void) -> Void
     private let renderer: OpaquePointer?
     private let scene: Renderable
-    private let renderables: Family2<Display, Position>
+    private let renderables: Family<Display, Position>
 
     private var rectangles = [SDL_FRect]()
 

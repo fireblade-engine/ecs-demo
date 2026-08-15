@@ -178,7 +178,7 @@ class AudioSystem {
                                       attributes: .concurrent,
                                       autoreleaseFrequency: .workItem,
                                       target: .none)
-    private let family: Family1<Audio>
+    private let family: Family<Audio>
 
     init(nexus: Nexus) {
         family = nexus.family(requires: Audio.self)

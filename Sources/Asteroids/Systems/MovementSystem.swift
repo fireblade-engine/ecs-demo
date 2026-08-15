@@ -10,7 +10,7 @@ import AsteroidsGameLibrary
 
 final class MovementSystem {
     private let config: GameConfig
-    private let movements: Family2<Position, Motion>
+    private let movements: Family<Position, Motion>
 
     init(config: GameConfig, nexus: Nexus) {
         self.config = config
