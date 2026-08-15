@@ -2,41 +2,33 @@ name: Linux
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, main ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, main ]
+  workflow_dispatch:
 
 jobs:
-  linux-test-build-release:
+  linux:
+    name: Linux (Swift ${{ matrix.swift }})
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        swift: ["latest"]
-    container:
-      image: swift:${{ matrix.swift }}
+        swift: ["6.1", "6.2"]
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
-      - name: Restore APT cache
-        uses: actions/cache@v4
+      - name: Setup Swift
+        uses: swift-actions/setup-swift@v2
         with:
-          path: /var/cache/apt
-          key: ${{ runner.os }}-apt
-      
-      - name: Restore cached SPM dependencies
-        uses: actions/cache@v4
-        with:
-          path: .build
-          key: swiftpm-${{ runner.os }}-${{ inputs.swift-version }}-${{ hashFiles('Package.swift') }}
-          restore-keys: |
-            swiftpm-${{ runner.os }}-${{ inputs.swift-version }}-
-            swiftpm-${{ runner.os }}-
+          swift-version: ${{ matrix.swift }}
 
       - name: Install dependencies
         run: |
-          apt update
-          apt-get install -y libsdl2-dev
+          sudo apt-get update
+          sudo apt-get install -y libsdl2-dev
           sdl2-config --version
 
       - name: Build Release
@@ -44,21 +36,10 @@ jobs:
 
       - name: Upload artifacts
         if: always()
-        uses: actions/upload-artifact@v4.4.3
+        uses: actions/upload-artifact@v4
         with:
           name: build-artifacts-linux-${{ matrix.swift }}-${{ github.run_id }}
           path: |
-            .build/*.yaml
-            .build/*.xml
-            .build/*.json
-            .build/*.txt
-            .build/**/*.json
-            .build/**/*.txt
-            .build/**/*.a
-            .build/**/*.dSYM
-            .build/**/*.gdb
-            .build/**/*.bundle
             .build/**/Asteroids
             .build/**/Particles
           if-no-files-found: warn
-          include-hidden-files: true
