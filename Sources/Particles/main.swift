@@ -1,5 +1,6 @@
+import Foundation
 import SDLKit
-import FirebladeECS
+import FirebladeECSMacros
 
 if !SDL_Init(subsystems: [.video]) {
     fatalError("Could not initialize video \(String(cString: SDL_GetError()))")
@@ -19,6 +20,13 @@ tSetup.start()
 var frameCount: UInt = 0
 var fps: Double = 0
 let nexus = Nexus()
+// Register the component types up front so snapshots referencing them can be restored.
+do {
+    try nexus.register([Name.self, Position.self, Color.self])
+} catch {
+    fatalError("could not register component types: \(error)")
+}
+let snapshotURL = FileManager.default.temporaryDirectory.appendingPathComponent("fireblade-particles-snapshot.json")
 
 var windowTitle: String {
     return "Particles demo: [entities:\(nexus.numEntities) components:\(nexus.numComponents) families:\(nexus.numFamilies) velocity:\(velocity)] @ [FPS: \(fps), frames: \(frameCount)]"
@@ -39,40 +47,26 @@ if hWin == nil {
     fatalError("could not crate window")
 }
 
-var rng = SystemRandomNumberGenerator()
-
 func randNorm() -> Double {
-    return Double.random(in: 0...1, using: &rng)
+    Double.random(in: 0...1)
 }
 
-class Name: Component {
-    let name: String
-    init(_ name: String) {
-        self.name = name
-    }
-}
-class Position: Component {
-    var x: Int32 = width/2
-    var y: Int32 = height/2
-}
-class Color: Component {
-    var r: UInt8 = UInt8.random(in: 1...255)
-    var g: UInt8 = UInt8.random(in: 1...255)
-    var b: UInt8 = UInt8.random(in: 1...255)
-}
-
+@MainActor
 func createScene() {
     createDefaultEntities(count: 10_000)
 }
 
+@MainActor
 func createDefaultEntities(count: Int) {
+    let center = (x: width / 2, y: height / 2)
     nexus.createEntities(count: count) { ctx in
         Name("\(ctx.index)")
-        Position()
+        Position(x: center.x, y: center.y)
         Color()
     }
 }
 
+@MainActor
 func batchDestroyEntities(count: Int) {
     let family = nexus.family(requires: Position.self)
     family
@@ -83,7 +77,48 @@ func batchDestroyEntities(count: Int) {
         }
 }
 
-class PositionSystem {
+/// Duplicates entities with all their components using `CloneableComponent`.
+@MainActor
+func cloneEntities(count: Int) {
+    let family = nexus.family(requires: Position.self)
+    do {
+        let clones = try nexus.clone(entities: Array(family.entities.prefix(count)))
+        print("[CLONE]: cloned \(clones.count) entities")
+    } catch {
+        print("[CLONE]: failed - \(error)")
+    }
+}
+
+/// Writes all entities and their serializable components to a JSON snapshot.
+@MainActor
+func saveSnapshot() {
+    do {
+        var encoder = JSONEncoder()
+        let data = try nexus.encodeSnapshot(using: &encoder, handling: .skip)
+        try data.write(to: snapshotURL)
+        print("[SNAPSHOT]: saved \(nexus.numEntities) entities (\(data.count) bytes) to \(snapshotURL.path)")
+    } catch {
+        print("[SNAPSHOT]: save failed - \(error)")
+    }
+}
+
+/// Replaces all entities with the ones stored in the JSON snapshot, keeping their identifiers.
+@MainActor
+func restoreSnapshot() {
+    do {
+        let data = try Data(contentsOf: snapshotURL)
+        let entities = Array(AnyIterator(nexus.makeEntitiesIterator()))
+        entities.forEach { $0.destroy() }
+        var decoder = JSONDecoder()
+        try nexus.restoreSnapshot(from: data, using: &decoder)
+        print("[SNAPSHOT]: restored \(nexus.numEntities) entities from \(snapshotURL.path)")
+    } catch {
+        print("[SNAPSHOT]: restore failed - \(error)")
+    }
+}
+
+@MainActor
+final class PositionSystem {
     let family = nexus.family(requires: Position.self)
 
     func update() {
@@ -110,7 +145,8 @@ class PositionSystem {
 
 }
 
-class PositionResetSystem {
+@MainActor
+final class PositionResetSystem {
     let family = nexus.family(requires: Position.self)
 
     func update() {
@@ -122,7 +158,8 @@ class PositionResetSystem {
     }
 }
 
-class ColorSystem {
+@MainActor
+final class ColorSystem {
     let family = nexus.family(requires: Color.self)
 
     func update() {
@@ -135,8 +172,10 @@ class ColorSystem {
     }
 }
 
-class RenderSystem {
-    let hRenderer: OpaquePointer?
+@MainActor
+final class RenderSystem {
+    // only released in deinit, after the last render call
+    nonisolated(unsafe) let hRenderer: OpaquePointer?
     let family = nexus.family(requiresAll: Position.self, Color.self)
 
     init(hWin: OpaquePointer?) {
@@ -190,6 +229,9 @@ func printHelp() {
     d		destroy 1 entity
     8		batch create 10k entities
     9		batch destroy 10k entities
+    x		clone 1k entities
+    k		save snapshot (JSON)
+    l		restore snapshot (JSON)
     """
     print(help)
 }
@@ -245,6 +287,12 @@ while quit == false {
                 createDefaultEntities(count: 10_000)
             case SDLK_9:
                 batchDestroyEntities(count: 10_000)
+            case SDLK_x:
+                cloneEntities(count: 1_000)
+            case SDLK_k:
+                saveSnapshot()
+            case SDLK_l:
+                restoreSnapshot()
             default:
                 break
             }

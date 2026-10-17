@@ -1,4 +1,4 @@
-import FirebladeECS
+import FirebladeECSMacros
 import AsteroidsGameLibrary
 import SDLKit
 
@@ -79,18 +79,24 @@ let isKeyDown: (Int32) -> Bool = { keysDown.contains($0) }
 
 // handle nexus events to keep track of what components are added to and removed from
 // entities in order to let systems know about it and react accordingly
-class NexusEventDelegateHandler: NexusEventDelegate {
+// the nexus emits its events synchronously on the game loop thread, hence `@unchecked Sendable`
+final class NexusEventDelegateHandler: NexusEventDelegate, @unchecked Sendable {
     typealias Callback = (Component) -> Void
 
-    var handleComponentAdded: Callback
-    var handleComponentRemoved: Callback
+    let handleComponentAdded: Callback
+    let handleComponentRemoved: Callback
     let componentByComponentIdEntityId: (ComponentIdentifier, EntityIdentifier) -> Component?
     // since it's not possible to use componentByComponentIdEntityId, during ComponentRemoved event, we must store
     // components in dictionary to be able to access them when they are being removed
     var components = [EntityIdentifier: [ComponentIdentifier: Component]]()
 
     init(nexus: Nexus, handleComponentAdded: @escaping Callback, handleComponentRemoved: @escaping Callback) {
-        componentByComponentIdEntityId = { [weak nexus] in nexus?.get(safe: $0, for: $1) }
+        componentByComponentIdEntityId = { [weak nexus] componentId, entityId in
+            guard let entity = nexus?.entity(from: entityId) else {
+                return nil
+            }
+            return AnyIterator(entity.makeComponentsIterator()).first { $0.identifier == componentId }
+        }
         self.handleComponentAdded = handleComponentAdded
         self.handleComponentRemoved = handleComponentRemoved
     }

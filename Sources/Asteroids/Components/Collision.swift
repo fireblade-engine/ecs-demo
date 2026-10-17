@@ -5,16 +5,13 @@
 //  Created by Igor Kravchenko on 18.11.2020.
 //
 
-import FirebladeECS
+import FirebladeECSMacros
 
-final class Collision: ComponentInitializable {
-    var radius: Double
+@Component
+final class Collision: Component, @unchecked Sendable {
+    var radius: Double = 0
 
     init(radius: Double) {
         self.radius = radius
-    }
-
-    required init() {
-        radius = 0
     }
 }

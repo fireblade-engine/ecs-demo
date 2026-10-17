@@ -7,7 +7,7 @@
 
 /// Used as drawing API for visual representation of shapes on the screen
 public class Graphics {
-    public private (set) var commands = [Command]()
+    public private(set) var commands = [Command]()
 
     public init() {}
 

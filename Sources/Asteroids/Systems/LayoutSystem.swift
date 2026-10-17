@@ -5,7 +5,7 @@
 //  Created by Igor Kravchenko on 23.11.2020.
 //
 
-import FirebladeECS
+import FirebladeECSMacros
 
 final class LayoutSystem {
     private let config: GameConfig

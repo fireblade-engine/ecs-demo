@@ -5,7 +5,7 @@
 //  Created by Igor Kravchenko on 19.11.2020.
 //
 
-import FirebladeECS
+import FirebladeECSMacros
 import AsteroidsGameLibrary
 import SDL
 
@@ -26,7 +26,7 @@ final class EntityCreator {
     func createGame() -> Entity {
         let hud = HudView()
         return nexus.createEntity()
-            .assign(
+            .set(
                 GameState(),
                 Hud(view: hud),
                 Display(renderable: hud),
@@ -38,12 +38,12 @@ final class EntityCreator {
     func createWaitForClick() -> Entity {
         let waitEntity: Entity = nexus.createEntity()
         let waitView = WaitForStartView()
-        waitEntity.assign(
+        waitEntity.set(
             WaitForStart(waitForStart: waitView),
             Display(renderable: waitView),
             Position(x: 0, y: 0, rotation: 0)
         )
-        waitEntity.get(component: WaitForStart.self)?.startGame = false
+        waitEntity.get(WaitForStart.self)?.startGame = false
         return waitEntity
     }
 
@@ -66,9 +66,9 @@ final class EntityCreator {
             .addInstance(Animation(animation: deathView))
 
         asteroid
-            .assign(Asteroid(fsm: fsm))
-            .assign(Position(x: x, y: y, rotation: 0))
-            .assign(Audio())
+            .set(Asteroid(fsm: fsm))
+            .set(Position(x: x, y: y, rotation: 0))
+            .set(Audio())
         fsm.changeState(name: .alive)
         return asteroid
     }
@@ -99,7 +99,7 @@ final class EntityCreator {
             .addInstance(Display(renderable: deathView))
             .addInstance(Animation(animation: deathView))
 
-        spaceship.assign(
+        spaceship.set(
             Spaceship(fsm: fsm),
             Position(x: config.width * 0.5, y: config.height * 0.5, rotation: 0),
             Audio()
@@ -115,7 +115,7 @@ final class EntityCreator {
         let sin = AsteroidsGameLibrary.sin(parentPosition.rotation)
         return nexus
             .createEntity()
-            .assign(
+            .set(
                 Bullet(lifetime: gun.bulletLifetime),
                 Position(
                     x: cos * gun.offsetFromParent.x - sin * gun.offsetFromParent.y + parentPosition.position.x,

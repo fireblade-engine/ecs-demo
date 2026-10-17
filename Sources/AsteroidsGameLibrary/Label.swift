@@ -19,8 +19,8 @@ open class Label: Renderable {
 
     private var rects = [Rect]()
 
-    public private (set) var width: Double = .zero
-    public private (set) var height: Double = .zero
+    public private(set) var width: Double = .zero
+    public private(set) var height: Double = .zero
 
     public var text: String = "" {
         didSet {

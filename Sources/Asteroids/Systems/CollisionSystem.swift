@@ -5,7 +5,7 @@
 //  Created by Igor Kravchenko on 20.11.2020.
 //
 
-import FirebladeECS
+import FirebladeECSMacros
 import AsteroidsGameLibrary
 
 final class CollisionSystem {

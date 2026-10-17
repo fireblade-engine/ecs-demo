@@ -22,7 +22,7 @@ extension FlagsValue where RawValue: BinaryInteger {
 }
 
 /// Option set for the flags passed to `SDL_Init()`.
-public struct SDLK_SubsytemFlags: OptionSet, FlagsValue {
+public struct SDLK_SubsytemFlags: OptionSet, FlagsValue, Sendable {
     public let rawValue: UInt32
 
     public init(rawValue: UInt32) {
@@ -54,7 +54,7 @@ public func SDL_Init(subsystems: SDLK_SubsytemFlags) -> Bool {
     return true
 }
 
-extension SDL_WindowFlags: OptionSet, FlagsValue {
+extension SDL_WindowFlags: @retroactive OptionSet, FlagsValue {
     public static let fullScreen = SDL_WINDOW_FULLSCREEN
     public static let fullScreenDesktop = SDL_WINDOW_FULLSCREEN_DESKTOP
     public static let borderless = SDL_WINDOW_BORDERLESS
@@ -75,7 +75,7 @@ public func SDL_CreateWindow(_ name: String, _ x: Int32, _ y: Int32, _ w: Int32,
     SDL_CreateWindow(name, x, y, w, h, flags.flagsValue)
 }
 
-extension SDL_RendererFlags: OptionSet, FlagsValue {
+extension SDL_RendererFlags: @retroactive OptionSet, FlagsValue {
     public static let software = SDL_RENDERER_SOFTWARE              /**< The renderer is a software fallback */
     public static let accelerated = SDL_RENDERER_ACCELERATED        /**< The renderer uses hardware acceleration */
     public static let presentVSync = SDL_RENDERER_PRESENTVSYNC      /**< Present is synchronized with the refresh rate */

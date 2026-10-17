@@ -7,7 +7,7 @@
 //
 
 import Dispatch
-import FirebladeECS
+import FirebladeECSMacros
 import SDL
 
 /// In-memory copy of a sound file. Currently these remain loaded forever to avoid audio dropouts.
@@ -90,7 +90,8 @@ func mixAudioCallback(userDataOrNil: UnsafeMutableRawPointer?,
                       length: Int32) {
     // validate that pointers aren't nil
     if let userData = userDataOrNil, let audioStream = audioStreamOrNil {
-        let data = userData.assumingMemoryBound(to: MixCallbackData.self)
+        // the player outlives every callback (see `MixingAudioPlayer.deinit`)
+        nonisolated(unsafe) let data = userData.assumingMemoryBound(to: MixCallbackData.self)
         let finished = mixAudioBuffers(&data.pointee, audioStream, Int(length))
         if finished {
             data.pointee.queue.async {
@@ -101,7 +102,8 @@ func mixAudioCallback(userDataOrNil: UnsafeMutableRawPointer?,
     }
 }
 
-class MixingAudioPlayer {
+// all state is confined to the serial audio queue and the SDL audio device lock
+final class MixingAudioPlayer: @unchecked Sendable {
     let data: UnsafeMutablePointer<MixCallbackData>
     var device: SDL_AudioDeviceID
     var playing = false
@@ -172,10 +174,10 @@ class MixingAudioPlayer {
     }
 }
 
-class AudioSystem {
+// the sound cache and the mixing player are only accessed on the serial audio queue
+final class AudioSystem: @unchecked Sendable {
     private let queue = DispatchQueue(label: "asteroids.audio",
                                       qos: .userInteractive,
-                                      attributes: .concurrent,
                                       autoreleaseFrequency: .workItem,
                                       target: .none)
     private let family: Family<Audio>
