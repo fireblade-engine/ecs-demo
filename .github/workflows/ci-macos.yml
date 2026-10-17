@@ -57,26 +57,32 @@ jobs:
           sdl2-config --version
 
       # Caches only depend on the toolchain and the dependency graph, so they hold the expensive
-      # swift-syntax build. PRs restore master's cache, only master saves it.
+      # swift-syntax build. After a dependency update the prefix still restores the last build of
+      # this toolchain, so only changed packages rebuild. PRs can read master's caches.
       - name: Restore Build Cache
         id: cache
         uses: actions/cache/restore@v6
         with:
           path: .build
           key: spm-macos-${{ matrix.xcode }}-release-${{ hashFiles('Package.swift', 'Package.resolved') }}
+          restore-keys: |
+            spm-macos-${{ matrix.xcode }}-release-
 
+      # One build for the apps and the tests: `swift test` alone would rebuild the whole graph with
+      # testability enabled. `-enable-testing` makes the release build usable for `@testable import`.
       - name: Build Release
-        run: swift build -c release -Xswiftc -warnings-as-errors
+        run: swift build -c release --build-tests -Xswiftc -enable-testing -Xswiftc -warnings-as-errors
 
-      - name: Run Tests (Release)
-        run: swift test -c release -Xswiftc -warnings-as-errors
-
+      # Saved right after a successful build, before the tests, so that a test failure still leaves a warm cache.
       - name: Save Build Cache
-        if: github.event_name == 'push' && steps.cache.outputs.cache-hit != 'true'
+        if: success() && steps.cache.outputs.cache-hit != 'true'
         uses: actions/cache/save@v6
         with:
           path: .build
           key: ${{ steps.cache.outputs.cache-primary-key }}
+
+      - name: Run Tests (Release)
+        run: swift test -c release --skip-build
 
       - name: Upload build artifacts
         if: always()
