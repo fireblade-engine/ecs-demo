@@ -1,6 +1,6 @@
 import Foundation
 import SDLKit
-import FirebladeECSMacros
+import FirebladeECS
 
 if !SDL_Init(subsystems: [.video]) {
     fatalError("Could not initialize video \(String(cString: SDL_GetError()))")

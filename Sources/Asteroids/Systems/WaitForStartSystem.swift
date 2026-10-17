@@ -5,7 +5,7 @@
 //  Created by Igor Kravchenko on 21.11.2020.
 //
 
-import FirebladeECSMacros
+import FirebladeECS
 
 final class WaitForStartSystem {
     private let creator: EntityCreator

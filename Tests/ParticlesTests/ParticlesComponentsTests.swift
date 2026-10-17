@@ -3,7 +3,7 @@
 //  FirebladeECSDemo
 //
 
-import FirebladeECSMacros
+import FirebladeECS
 import Foundation
 @testable import Particles
 import Testing

@@ -4,7 +4,7 @@
 //
 
 @testable import Asteroids
-import FirebladeECSMacros
+import FirebladeECS
 import Foundation
 import Testing
 

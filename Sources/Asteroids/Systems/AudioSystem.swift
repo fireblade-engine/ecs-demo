@@ -7,7 +7,7 @@
 //
 
 import Dispatch
-import FirebladeECSMacros
+import FirebladeECS
 import SDL
 
 /// In-memory copy of a sound file. Currently these remain loaded forever to avoid audio dropouts.

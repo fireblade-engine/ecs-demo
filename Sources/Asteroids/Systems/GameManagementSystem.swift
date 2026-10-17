@@ -5,7 +5,7 @@
 //  Created by Igor Kravchenko on 22.11.2020.
 //
 
-import FirebladeECSMacros
+import FirebladeECS
 import AsteroidsGameLibrary
 
 final class GameManagementSystem {

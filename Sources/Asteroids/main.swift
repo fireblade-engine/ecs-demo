@@ -1,4 +1,4 @@
-import FirebladeECSMacros
+import FirebladeECS
 import AsteroidsGameLibrary
 import SDLKit
 

@@ -5,11 +5,12 @@
 //  Created by Igor Kravchenko on 18.11.2020.
 //
 
+import FirebladeECS
 import FirebladeECSMacros
 import AsteroidsGameLibrary
 
 @Component
-final class MotionControls: Component, @unchecked Sendable {
+final class MotionControls: @unchecked Sendable {
     var left: Set<Int32> = []
     var right: Set<Int32> = []
     var accelerate: Set<Int32> = []
