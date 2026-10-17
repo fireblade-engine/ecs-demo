@@ -5,10 +5,11 @@
 //  Created by Igor Kravchenko on 18.11.2020.
 //
 
+import FirebladeECS
 import FirebladeECSMacros
 
 @Component
-final class GameState: Component, @unchecked Sendable {
+final class GameState: @unchecked Sendable {
     var lives: Int = 0
     var level: Int = 0
     var hits: Int = 0

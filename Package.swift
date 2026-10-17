@@ -10,7 +10,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/ctreffs/SwiftSDL2.git", from: "1.4.1"),
-        .package(url: "https://github.com/fireblade-engine/ecs.git", from: "1.4.1"),
+        .package(url: "https://github.com/fireblade-engine/ecs.git", from: "1.4.2"),
         .package(url: "https://github.com/fireblade-engine/math.git", from: "1.2.0")
     ],
     targets: [
@@ -22,6 +22,7 @@ let package = Package(
         .executableTarget(
             name: "Particles",
             dependencies: [
+                .product(name: "FirebladeECS", package: "ecs"),
                 .product(name: "FirebladeECSMacros", package: "ecs"),
                 .product(name: "SDL", package: "SwiftSDL2"),
                 "SDLKit"
@@ -29,6 +30,7 @@ let package = Package(
         .executableTarget(
             name: "Asteroids",
             dependencies: [
+                .product(name: "FirebladeECS", package: "ecs"),
                 .product(name: "FirebladeECSMacros", package: "ecs"),
                 .product(name: "SDL", package: "SwiftSDL2"),
                 "SDLKit",
@@ -40,9 +42,9 @@ let package = Package(
         .target(name: "AsteroidsGameLibrary",
                 dependencies: [.product(name: "FirebladeMath", package: "math")]),
         .testTarget(name: "ParticlesTests",
-                    dependencies: ["Particles"]),
+                    dependencies: ["Particles", .product(name: "FirebladeECS", package: "ecs")]),
         .testTarget(name: "AsteroidsTests",
-                    dependencies: ["Asteroids"])
+                    dependencies: ["Asteroids", .product(name: "FirebladeECS", package: "ecs")])
     ],
     swiftLanguageModes: [.v6]
 )

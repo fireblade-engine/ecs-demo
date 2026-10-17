@@ -5,11 +5,12 @@
 //  Created by Igor Kravchenko on 18.11.2020.
 //
 
+import FirebladeECS
 import FirebladeECSMacros
 import AsteroidsGameLibrary
 
 @Component
-final class Gun: Component, @unchecked Sendable {
+final class Gun: @unchecked Sendable {
     var shooting: Bool = false
     var offsetFromParent: Vector = .zero
     var timeSinceLastShot: Double = 0

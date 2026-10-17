@@ -5,11 +5,12 @@
 //  Created by Igor Kravchenko on 18.11.2020.
 //
 
+import FirebladeECS
 import FirebladeECSMacros
 import AsteroidsGameLibrary
 
 @Component(excluding: [.serializable, .cloneable])  // holds live views or state machines
-final class Animation: Component, @unchecked Sendable {
+final class Animation: @unchecked Sendable {
     var animation: Animatable
 
     init(animation: Animatable) {

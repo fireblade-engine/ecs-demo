@@ -5,7 +5,7 @@
 //  Created by Igor Kravchenko on 18.11.2020.
 //
 
-import FirebladeECSMacros
+import FirebladeECS
 
 final class AnimationSystem {
     private let family: Family<Animation>

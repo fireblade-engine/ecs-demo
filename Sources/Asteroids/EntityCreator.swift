@@ -5,7 +5,7 @@
 //  Created by Igor Kravchenko on 19.11.2020.
 //
 
-import FirebladeECSMacros
+import FirebladeECS
 import AsteroidsGameLibrary
 import SDL
 

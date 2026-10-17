@@ -5,7 +5,7 @@
 //  Created by Igor Kravchenko on 20.11.2020.
 //
 
-import FirebladeECSMacros
+import FirebladeECS
 
 final class BulletAgeSystem {
     private let creator: EntityCreator

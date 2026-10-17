@@ -5,11 +5,12 @@
 //  Created by Igor Kravchenko on 18.11.2020.
 //
 
+import FirebladeECS
 import FirebladeECSMacros
 import AsteroidsGameLibrary
 
 @Component
-final class Position: Component, @unchecked Sendable {
+final class Position: @unchecked Sendable {
     var position: Vector = .zero
     var rotation: Double = 0
 

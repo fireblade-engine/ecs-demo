@@ -5,10 +5,11 @@
 //  Created by Igor Kravchenko on 11.10.2020.
 //
 
+import FirebladeECS
 import FirebladeECSMacros
 
 @Component(excluding: [.serializable, .cloneable])  // holds live views or state machines
-final class Spaceship: Component, @unchecked Sendable {
+final class Spaceship: @unchecked Sendable {
     let fsm: EntityStateMachine<State>
 
     init(fsm: EntityStateMachine<State>) {
