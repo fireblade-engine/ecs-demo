@@ -69,12 +69,18 @@ jobs:
       - name: Run Tests (Release)
         run: swift test -c release --skip-build
 
+      # upload-artifact skips hidden directories such as .build, so stage the apps first. Asteroids finds
+      # its sounds through Bundle.module, which looks for the resource bundle next to the executable.
+      - name: Collect executables
+        run: |
+          BIN_PATH="$(swift build -c release --show-bin-path)"
+          mkdir -p artifacts
+          cp "$BIN_PATH/Asteroids" "$BIN_PATH/Particles" artifacts/
+          cp -R "$BIN_PATH"/FirebladeECSDemo_Asteroids.* artifacts/
+
       - name: Upload artifacts
-        if: always()
         uses: actions/upload-artifact@v7
         with:
           name: build-artifacts-linux-${{ matrix.swift }}-${{ github.run_id }}
-          path: |
-            .build/**/release/Asteroids
-            .build/**/release/Particles
-          if-no-files-found: warn
+          path: artifacts/
+          if-no-files-found: error
