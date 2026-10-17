@@ -29,11 +29,6 @@ jobs:
           - swift: "6.2"
             # renovate: datasource=docker depName=swift
             swift-full: "6.2.4"
-            # swift-syntax with a published prebuilt for this exact toolchain, so SwiftPM downloads it
-            # instead of compiling it (prebuilts exist for Linux and Swift 6.2 only). The 6.1 job keeps
-            # testing the version from Package.resolved.
-            swift-syntax: "602.0.0"
-            swift-syntax-revision: "4799286537280063c85a32f09884cfbca301b1a1"
 
     steps:
       - name: Checkout
@@ -54,17 +49,9 @@ jobs:
         uses: actions/cache/restore@v6
         with:
           path: .build
-          key: spm-linux-${{ matrix.swift-full }}-swift-syntax-${{ matrix.swift-syntax || 'resolved' }}-release-${{ hashFiles('Package.swift', 'Package.resolved') }}
+          key: spm-linux-${{ matrix.swift-full }}-release-${{ hashFiles('Package.swift', 'Package.resolved') }}
           restore-keys: |
-            spm-linux-${{ matrix.swift-full }}-swift-syntax-${{ matrix.swift-syntax || 'resolved' }}-release-
-
-      # Rewrites the pin instead of re-resolving: resolving from Package.resolved first would check out
-      # its version over the cached one and invalidate the cached build.
-      - name: Pin swift-syntax ${{ matrix.swift-syntax }}
-        if: matrix.swift-syntax != ''
-        run: |
-          sed -i -e '/"identity" : "swift-syntax"/,/}/{s/"revision" : "[^"]*"/"revision" : "${{ matrix.swift-syntax-revision }}"/;s/"version" : "[^"]*"/"version" : "${{ matrix.swift-syntax }}"/;}' Package.resolved
-          grep -A6 '"identity" : "swift-syntax"' Package.resolved | grep -qF '"version" : "${{ matrix.swift-syntax }}"'
+            spm-linux-${{ matrix.swift-full }}-release-
 
       # One build for the apps and the tests: `swift test` alone would rebuild the whole graph with
       # testability enabled. `-enable-testing` makes the release build usable for `@testable import`.
