@@ -24,7 +24,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 - [Swift Package Manager (SPM)](https://github.com/apple/swift-package-manager)
 - [Swift 6.1+](https://www.swift.org/install/), e.g. via [Xcode 16.4+](https://developer.apple.com/xcode/)
-- [Simple DirectMedia Layer 2 (SDL2)](https://www.libsdl.org/download-2.0.php)
+- [Simple DirectMedia Layer 2 (SDL2)](https://github.com/libsdl-org/SDL/tree/SDL2)
 	- Download and install i.e. via [Homebrew](https://brew.sh)   
 		`brew install sdl2` on macOS or `apt-get install libsdl2-dev` on Debian/Ubuntu
 

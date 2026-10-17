@@ -7,9 +7,9 @@ import FirebladeECSMacros
 
 // `@Component` makes each class cloneable, serializable (snapshots), inspectable and
 // default initializable, and registers it under a stable type name.
-// The explicit `Component` conformance is needed as long as the macro (FirebladeECS 1.4.1) doesn't list
-// `Component` among its extension conformances; without it, files compiled before the macro expands
-// fail with "type does not conform to protocol 'Component'".
+// The explicit `Component` conformance works around a compiler bug (swiftlang/swift#92390): the macro of
+// FirebladeECS 1.4.1 only implies `Component`, and the compiler loses implied conformances of macro-generated
+// extensions when another file looks up a member of the type first (fireblade-engine/ecs#154).
 
 @Component
 final class Name: Component, @unchecked Sendable {
