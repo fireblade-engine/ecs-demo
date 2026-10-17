@@ -7,6 +7,9 @@ runParticles:
 runAsteroids: 
 	swift run -c release Asteroids
 
+test:
+	swift test
+
 # Lint
 lint:
 	swiftlint autocorrect --format
