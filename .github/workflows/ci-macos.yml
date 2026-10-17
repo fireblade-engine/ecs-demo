@@ -7,43 +7,95 @@ on:
     branches: [ master, main ]
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   macos:
+    # Job names are required status checks on master; keep them stable.
     name: macOS (Swift ${{ matrix.swift }})
     runs-on: ${{ matrix.runner }}
+    timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
         include:
+          # Each entry pins the Xcode whose bundled toolchain provides the Swift version under test;
+          # the runner's default Xcode moves on with image updates.
           - swift: "6.1"
-            runner: "macos-14"
+            swift-full: "6.1.2"
+            runner: "macos-15"
+            xcode: "16.4"
           - swift: "6.2"
-            runner: "macos-latest"
+            swift-full: "6.2.4"
+            runner: "macos-26"
+            xcode: "26.3"
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
-      - name: Setup Swift
-        if: matrix.swift != '6.2'
-        uses: swift-actions/setup-swift@v2
-        with:
-          swift-version: ${{ matrix.swift }}
+      - name: Select Xcode
+        run: |
+          DEVELOPER_DIR="/Applications/Xcode_${{ matrix.xcode }}.app/Contents/Developer"
+          test -d "$DEVELOPER_DIR"
+          echo "DEVELOPER_DIR=$DEVELOPER_DIR" >> "$GITHUB_ENV"
+
+      - name: Verify Swift Version
+        run: |
+          xcodebuild -version
+          swift --version
+          swift --version 2>&1 | grep -qF "Swift version ${{ matrix.swift-full }} (" || {
+            echo "::error::Xcode ${{ matrix.xcode }} does not provide Swift ${{ matrix.swift-full }}"
+            exit 1
+          }
 
       - name: Install dependencies
         run: |
           brew install sdl2
           sdl2-config --version
 
+      # Caches only depend on the toolchain and the dependency graph, so they hold the expensive
+      # swift-syntax build. After a dependency update the prefix still restores the last build of
+      # this toolchain, so only changed packages rebuild. PRs can read master's caches.
+      - name: Restore Build Cache
+        id: cache
+        uses: actions/cache/restore@v6
+        with:
+          path: .build
+          key: spm-macos-${{ matrix.xcode }}-release-${{ hashFiles('Package.swift', 'Package.resolved') }}
+          restore-keys: |
+            spm-macos-${{ matrix.xcode }}-release-
+
+      # One build for the apps and the tests: `swift test` alone would rebuild the whole graph with
+      # testability enabled. `-enable-testing` makes the release build usable for `@testable import`.
       - name: Build Release
-        run: swift build -c release
+        run: swift build -c release --build-tests -Xswiftc -enable-testing -Xswiftc -warnings-as-errors
+
+      # Saved right after a successful build, before the tests, so that a test failure still leaves a warm cache.
+      - name: Save Build Cache
+        if: success() && steps.cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v6
+        with:
+          path: .build
+          key: ${{ steps.cache.outputs.cache-primary-key }}
+
+      - name: Run Tests (Release)
+        run: swift test -c release --skip-build
+
+      # upload-artifact skips hidden directories such as .build, so stage the apps first. Asteroids finds
+      # its sounds through Bundle.module, which looks for the resource bundle next to the executable.
+      - name: Collect executables
+        run: |
+          BIN_PATH="$(swift build -c release --show-bin-path)"
+          mkdir -p artifacts
+          cp "$BIN_PATH/Asteroids" "$BIN_PATH/Particles" artifacts/
+          cp -R "$BIN_PATH"/FirebladeECSDemo_Asteroids.* artifacts/
 
       - name: Upload build artifacts
-        if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: build-artifacts-macos-${{ matrix.swift }}-${{ github.run_id }}
-          path: |
-            .build/**/Asteroids
-            .build/**/Particles
-          if-no-files-found: warn
+          path: artifacts/
+          if-no-files-found: error

@@ -5,13 +5,14 @@
 //  Created by Igor Kravchenko on 18.11.2020.
 //
 
-import FirebladeECS
+import FirebladeECSMacros
 
-final class GameState: Component {
-    var lives = 0
-    var level = 0
-    var hits = 0
-    var playing = false
+@Component
+final class GameState: Component, @unchecked Sendable {
+    var lives: Int = 0
+    var level: Int = 0
+    var hits: Int = 0
+    var playing: Bool = false
 
     func setForStart() {
         lives = 3

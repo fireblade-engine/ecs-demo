@@ -5,21 +5,20 @@
 //  Created by Igor Kravchenko on 18.11.2020.
 //
 
-import FirebladeECS
+import FirebladeECSMacros
 
-final class Audio: Component {
-    var toPlay = [Sound]()
-
-    @inline(__always)
-    func play(sound: Sound) {
-        toPlay.append(sound)
-    }
-}
-
-extension Audio {
-    enum Sound: String, CaseIterable {
+@Component
+final class Audio: Component, @unchecked Sendable {
+    enum Sound: String, CaseIterable, Codable {
         case explodeAsteroid = "asteroid.wav"
         case explodeShip = "ship.wav"
         case shootGun = "shoot.wav"
+    }
+
+    /// Sounds queued for the next audio system update; transient, so not serialized.
+    @ComponentIgnored var toPlay: [Sound] = []
+
+    func play(sound: Sound) {
+        toPlay.append(sound)
     }
 }

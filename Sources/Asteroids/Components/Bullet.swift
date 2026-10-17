@@ -5,16 +5,13 @@
 //  Created by Igor Kravchenko on 18.11.2020.
 //
 
-import FirebladeECS
+import FirebladeECSMacros
 
-final class Bullet: ComponentInitializable {
-    var lifeRemaining: Double
+@Component
+final class Bullet: Component, @unchecked Sendable {
+    var lifeRemaining: Double = 0
 
     init(lifetime: Double) {
         lifeRemaining = lifetime
-    }
-
-    required init() {
-        lifeRemaining = 0
     }
 }

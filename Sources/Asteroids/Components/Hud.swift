@@ -5,9 +5,10 @@
 //  Created by Igor Kravchenko on 18.11.2020.
 //
 
-import FirebladeECS
+import FirebladeECSMacros
 
-final class Hud: Component {
+@Component(excluding: [.serializable, .cloneable])  // holds live views or state machines
+final class Hud: Component, @unchecked Sendable {
     var view: HudView
 
     init(view: HudView) {

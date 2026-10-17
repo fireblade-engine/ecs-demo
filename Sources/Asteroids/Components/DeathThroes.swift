@@ -5,16 +5,13 @@
 //  Created by Igor Kravchenko on 18.11.2020.
 //
 
-import FirebladeECS
+import FirebladeECSMacros
 
-class DeathThroes: ComponentInitializable {
-    var countdown: Double
+@Component
+final class DeathThroes: Component, @unchecked Sendable {
+    var countdown: Double = 0
 
     init(duration: Double) {
         countdown = duration
-    }
-
-    required init() {
-        countdown = .zero
     }
 }

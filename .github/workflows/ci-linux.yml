@@ -7,39 +7,80 @@ on:
     branches: [ master, main ]
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   linux:
+    # Job names are required status checks on master; keep them stable.
     name: Linux (Swift ${{ matrix.swift }})
     runs-on: ubuntu-latest
+    # The image tag pins the exact toolchain; Renovate proposes patch updates.
+    container: swift:${{ matrix.swift-full }}-noble
+    timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
-        swift: ["6.1", "6.2"]
+        include:
+          - swift: "6.1"
+            # renovate: datasource=docker depName=swift
+            swift-full: "6.1.3"
+          - swift: "6.2"
+            # renovate: datasource=docker depName=swift
+            swift-full: "6.2.4"
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Setup Swift
-        uses: swift-actions/setup-swift@v2
-        with:
-          swift-version: ${{ matrix.swift }}
+        uses: actions/checkout@v7
 
       - name: Install dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y libsdl2-dev
+          apt-get update
+          apt-get install -y --no-install-recommends libsdl2-dev
           sdl2-config --version
+          swift --version
 
+      # Caches only depend on the toolchain and the dependency graph, so they hold the expensive
+      # swift-syntax build. After a dependency update the prefix still restores the last build of
+      # this toolchain, so only changed packages rebuild. PRs can read master's caches.
+      - name: Restore Build Cache
+        id: cache
+        uses: actions/cache/restore@v6
+        with:
+          path: .build
+          key: spm-linux-${{ matrix.swift-full }}-release-${{ hashFiles('Package.swift', 'Package.resolved') }}
+          restore-keys: |
+            spm-linux-${{ matrix.swift-full }}-release-
+
+      # One build for the apps and the tests: `swift test` alone would rebuild the whole graph with
+      # testability enabled. `-enable-testing` makes the release build usable for `@testable import`.
       - name: Build Release
-        run: swift build -c release
+        run: swift build -c release --build-tests -Xswiftc -enable-testing -Xswiftc -warnings-as-errors
+
+      # Saved right after a successful build, before the tests, so that a test failure still leaves a warm cache.
+      - name: Save Build Cache
+        if: success() && steps.cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v6
+        with:
+          path: .build
+          key: ${{ steps.cache.outputs.cache-primary-key }}
+
+      - name: Run Tests (Release)
+        run: swift test -c release --skip-build
+
+      # upload-artifact skips hidden directories such as .build, so stage the apps first. Asteroids finds
+      # its sounds through Bundle.module, which looks for the resource bundle next to the executable.
+      - name: Collect executables
+        run: |
+          BIN_PATH="$(swift build -c release --show-bin-path)"
+          mkdir -p artifacts
+          cp "$BIN_PATH/Asteroids" "$BIN_PATH/Particles" artifacts/
+          cp -R "$BIN_PATH"/FirebladeECSDemo_Asteroids.* artifacts/
 
       - name: Upload artifacts
-        if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: build-artifacts-linux-${{ matrix.swift }}-${{ github.run_id }}
-          path: |
-            .build/**/Asteroids
-            .build/**/Particles
-          if-no-files-found: warn
+          path: artifacts/
+          if-no-files-found: error

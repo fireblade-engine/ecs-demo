@@ -6,6 +6,10 @@
   "labels": [
     "dependencies"
   ],
+  "description": "Automerge every update once all CI checks pass. Renovate merges itself (instead of GitHub auto-merge) so that every check counts, not only the required ones.",
+  "automerge": true,
+  "automergeType": "pr",
+  "platformAutomerge": false,
   "packageRules": [
     {
       "description": "Group all Swift package minor and patch updates together",
@@ -19,18 +23,7 @@
       ]
     },
     {
-      "description": "Group all Mint package minor and patch updates together",
-      "groupName": "Mint non-major dependencies",
-      "matchManagers": [
-        "mint"
-      ],
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
-      ]
-    },
-    {
-      "description": "Group and automerge non-major GitHub Actions updates",
+      "description": "Group non-major GitHub Actions updates",
       "groupName": "GitHub Actions non-major dependencies",
       "matchManagers": [
         "github-actions"
@@ -38,13 +31,49 @@
       "matchUpdateTypes": [
         "minor",
         "patch"
+      ]
+    },
+    {
+      "description": "Swift toolchains in CI: only patch updates within each tested Swift minor; adding a minor is a deliberate matrix change",
+      "groupName": "Swift toolchains",
+      "matchDatasources": [
+        "docker"
       ],
-      "automerge": true
+      "matchDepNames": [
+        "swift"
+      ],
+      "matchUpdateTypes": [
+        "major",
+        "minor"
+      ],
+      "enabled": false
+    },
+    {
+      "description": "Group Swift toolchain patch updates; never automerge, a toolchain bump changes what CI tests",
+      "groupName": "Swift toolchains",
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchDepNames": [
+        "swift"
+      ],
+      "automerge": false
     }
   ],
   "suppressNotifications": [
     "prIgnoreNotification",
-    "prEditedNotification",
-    "branchAutomergeFailure"
+    "prEditedNotification"
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Exact Swift toolchain versions pinned in CI matrices (swift-full), annotated with a renovate comment",
+      "managerFilePatterns": [
+        "/^\\.github/workflows/.+\\.ya?ml$/"
+      ],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\s+swift-full: \"(?<currentValue>[^\"]+)\""
+      ]
+    }
   ]
 }

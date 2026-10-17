@@ -7,14 +7,12 @@
 
 import FirebladeMath
 
-// swiftlint:disable prefixed_toplevel_constant
-public let pow: (Double, Double) -> Double = FirebladeMath.pow
-public let sqrt: (Double) -> Double = FirebladeMath.sqrt
-public let cos: (Double) -> Double = FirebladeMath.cos
-public let sin: (Double) -> Double = FirebladeMath.sin
-public let ceil: (Double) -> Double = FirebladeMath.ceil
-public let floor: (Double) -> Double = FirebladeMath.floor
-// swiftlint:enable prefixed_toplevel_constant
+@inlinable public func pow(_ x: Double, _ y: Double) -> Double { FirebladeMath.pow(x, y) }
+@inlinable public func sqrt(_ x: Double) -> Double { FirebladeMath.sqrt(x) }
+@inlinable public func cos(_ x: Double) -> Double { FirebladeMath.cos(x) }
+@inlinable public func sin(_ x: Double) -> Double { FirebladeMath.sin(x) }
+@inlinable public func ceil(_ x: Double) -> Double { FirebladeMath.ceil(x) }
+@inlinable public func floor(_ x: Double) -> Double { FirebladeMath.floor(x) }
 public typealias Vector = Vec2d
 public typealias Rect = FirebladeMath.Rect<Double>
 

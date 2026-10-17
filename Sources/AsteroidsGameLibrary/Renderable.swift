@@ -10,8 +10,8 @@ open class Renderable {
     public var rotation = 0.0
     public var scale = Vector.one
 
-    public private (set) var children = [Renderable]()
-    public private (set) weak var parent: Renderable?
+    public private(set) var children = [Renderable]()
+    public private(set) weak var parent: Renderable?
     public var graphics = Graphics()
     public var handleEvent: ((Event) -> Void)?
 

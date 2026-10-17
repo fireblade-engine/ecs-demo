@@ -5,23 +5,18 @@
 //  Created by Igor Kravchenko on 18.11.2020.
 //
 
-import FirebladeECS
+import FirebladeECSMacros
 import AsteroidsGameLibrary
 
-final class Motion: ComponentInitializable {
-    var velocity: Vector
-    var angularVelocity: Double
-    var damping: Double
+@Component
+final class Motion: Component, @unchecked Sendable {
+    var velocity: Vector = .zero
+    var angularVelocity: Double = 0
+    var damping: Double = 0
 
     init(velocityX: Double, velocityY: Double, angularVelocity: Double, damping: Double) {
         velocity = [velocityX, velocityY]
         self.angularVelocity = angularVelocity
         self.damping = damping
-    }
-
-    required init() {
-        velocity = .zero
-        angularVelocity = .zero
-        damping = .zero
     }
 }
