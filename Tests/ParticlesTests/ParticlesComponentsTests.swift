@@ -30,7 +30,7 @@ import Testing
         // restoring keeps the entity identifiers
         for (entity, name, position, color) in nexus.family(requiresAll: Name.self, Position.self, Color.self)
             .entityAndComponents {
-            let copy = restored.entity(from: entity.identifier)
+            let copy = try #require(restored.entity(entity.identifier))
             #expect(copy.get(Name.self)?.name == name.name)
             let copyPosition = try #require(copy.get(Position.self))
             #expect((copyPosition.x, copyPosition.y) == (position.x, position.y))
@@ -77,8 +77,11 @@ import Testing
         #expect(nexus.numEntities == 2)
         let original = try #require(entity.get(Position.self))
         let copy = try #require(clone.get(Position.self))
-        #expect(original !== copy)
         #expect((copy.x, copy.y) == (4, 2))
+        // components are values: changing the clone leaves the original alone
+        clone.modify(Position.self) { $0.x = 99 }
+        #expect(entity.get(Position.self)?.x == original.x)
+        #expect(clone.get(Position.self)?.x == 99)
         #expect(clone.get(Name.self)?.name == "origin")
     }
 
