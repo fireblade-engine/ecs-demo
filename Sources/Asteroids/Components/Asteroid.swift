@@ -6,6 +6,7 @@
 //
 
 import FirebladeECS
+import FirebladeFSM
 import FirebladeECSMacros
 
 @Component(excluding: [.serializable, .cloneable])  // holds live views or state machines

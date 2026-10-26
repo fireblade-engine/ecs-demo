@@ -6,6 +6,7 @@
 //
 
 import FirebladeECS
+import FirebladeFSM
 import AsteroidsGameLibrary
 import SDL
 
