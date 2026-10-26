@@ -9,7 +9,7 @@ import FirebladeECS
 import FirebladeECSMacros
 
 @Component(excluding: [.serializable, .cloneable])  // holds live views or state machines
-final class Hud: @unchecked Sendable {
+struct Hud: @unchecked Sendable {
     var view: HudView
 
     init(view: HudView) {

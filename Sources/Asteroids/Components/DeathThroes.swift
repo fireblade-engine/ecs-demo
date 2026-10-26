@@ -9,7 +9,7 @@ import FirebladeECS
 import FirebladeECSMacros
 
 @Component
-final class DeathThroes: @unchecked Sendable {
+struct DeathThroes {
     var countdown: Double = 0
 
     init(duration: Double) {

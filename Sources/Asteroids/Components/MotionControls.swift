@@ -10,7 +10,7 @@ import FirebladeECSMacros
 import AsteroidsGameLibrary
 
 @Component
-final class MotionControls: @unchecked Sendable {
+struct MotionControls {
     var left: Set<Int32> = []
     var right: Set<Int32> = []
     var accelerate: Set<Int32> = []

@@ -9,7 +9,7 @@ import FirebladeECS
 import FirebladeECSMacros
 
 @Component
-final class Collision: @unchecked Sendable {
+struct Collision {
     var radius: Double = 0
 
     init(radius: Double) {

@@ -10,7 +10,7 @@ import FirebladeECSMacros
 import AsteroidsGameLibrary
 
 @Component
-final class Position: @unchecked Sendable {
+struct Position {
     var position: Vector = .zero
     var rotation: Double = 0
 

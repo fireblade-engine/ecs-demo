@@ -9,7 +9,7 @@ import FirebladeECS
 import FirebladeECSMacros
 
 @Component
-final class GunControls: @unchecked Sendable {
+struct GunControls {
     var trigger: Int32 = 0
 
     init(trigger: Int32) {

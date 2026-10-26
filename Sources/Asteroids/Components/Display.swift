@@ -10,7 +10,7 @@ import FirebladeECSMacros
 import AsteroidsGameLibrary
 
 @Component(excluding: [.serializable, .cloneable])  // holds live views or state machines
-final class Display: @unchecked Sendable {
+struct Display: @unchecked Sendable {
     var renderable: Renderable
 
     init(renderable: Renderable) {

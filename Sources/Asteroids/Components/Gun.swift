@@ -10,7 +10,7 @@ import FirebladeECSMacros
 import AsteroidsGameLibrary
 
 @Component
-final class Gun: @unchecked Sendable {
+struct Gun {
     var shooting: Bool = false
     var offsetFromParent: Vector = .zero
     var timeSinceLastShot: Double = 0
