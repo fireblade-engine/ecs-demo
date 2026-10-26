@@ -18,7 +18,7 @@ final class MovementSystem {
     }
 
     func update(time: Double) {
-        for (position, motion) in movements {
+        movements.forEach(writing: Position.self, Motion.self) { position, motion in
             position.position += motion.velocity * time
 
             if position.position.x < 0 {

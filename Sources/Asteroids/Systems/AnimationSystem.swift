@@ -15,7 +15,7 @@ final class AnimationSystem {
     }
 
     func update(time: Double) {
-        family.forEach { animation in
+        family.forEach(reading: Animation.self) { animation in
             animation.animation.animate(time: time)
         }
     }

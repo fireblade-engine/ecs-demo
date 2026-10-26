@@ -124,7 +124,7 @@ final class PositionSystem {
     func update() {
 
         family
-            .forEach { (pos: Position) in
+            .forEach(writing: Position.self) { pos in
 
                 let deltaX: Double = velocity*((randNorm() * 2) - 1)
                 let deltaY: Double = velocity*((randNorm() * 2) - 1)
@@ -151,7 +151,7 @@ final class PositionResetSystem {
 
     func update() {
         family
-            .forEach { (pos: Position) in
+            .forEach(writing: Position.self) { pos in
                 pos.x = width/2
                 pos.y = height/2
             }
@@ -164,7 +164,7 @@ final class ColorSystem {
 
     func update() {
         family
-            .forEach { (color: Color) in
+            .forEach(writing: Color.self) { color in
                 color.r = UInt8.random(in: 1...255)
                 color.g = UInt8.random(in: 1...255)
                 color.b = UInt8.random(in: 1...255)

@@ -17,11 +17,12 @@ final class BulletAgeSystem {
     }
 
     func update(time: Double) {
-        for (entity, bullet) in family.entityAndComponents {
+        family.forEach(writing: Bullet.self) { bullet in
             bullet.lifeRemaining -= time
-            if bullet.lifeRemaining <= 0 {
-                creator.destroy(entity: entity)
-            }
+        }
+        // structural changes are not allowed inside forEach, destroy afterwards
+        for (entity, bullet) in family.entityAndComponents where bullet.lifeRemaining <= 0 {
+            creator.destroy(entity: entity)
         }
     }
 }

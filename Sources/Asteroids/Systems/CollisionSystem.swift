@@ -25,7 +25,7 @@ final class CollisionSystem {
 
     func update(time: Double) {
         for (bulletEntity, _, bulletPosition, _) in bullets.entityAndComponents {
-            for (asteroid, asteroidPosition, asteroidCollision, asteroidAudio) in asteroids where Vector
+            for (asteroidEntity, asteroid, asteroidPosition, asteroidCollision, _) in asteroids.entityAndComponents where Vector
                 .distanceSQ(
                     asteroidPosition.position,
                     bulletPosition.position
@@ -40,23 +40,18 @@ final class CollisionSystem {
                                            y: asteroidPosition.position.y + .random(in: 0...10) - 5)
                 }
                 asteroid.fsm.changeState(name: .destroyed)
-                asteroidAudio.play(sound: .explodeAsteroid)
-
-                for game in games {
-                    game.hits += 1
-                }
+                asteroidEntity.modify(Audio.self) { $0.play(sound: .explodeAsteroid) }
+                games.forEach(writing: GameState.self) { $0.hits += 1 }
                 break
             }
         }
 
-        for (spaceship, spaceshipPosition, spaceshipCollision, spaceshipAudio) in spaceships {
+        for (spaceshipEntity, spaceship, spaceshipPosition, spaceshipCollision, _) in spaceships.entityAndComponents {
             for (_, asteroidPosition, asteroidCollision, _) in asteroids where Vector.distanceSQ(asteroidPosition.position, spaceshipPosition.position) <=
                 (asteroidCollision.radius + spaceshipCollision.radius) * (asteroidCollision.radius + spaceshipCollision.radius) {
                 spaceship.fsm.changeState(name: .destoyed)
-                spaceshipAudio.play(sound: .explodeShip)
-                for game in games {
-                    game.lives -= 1
-                }
+                spaceshipEntity.modify(Audio.self) { $0.play(sound: .explodeShip) }
+                games.forEach(writing: GameState.self) { $0.lives -= 1 }
                 break
             }
         }

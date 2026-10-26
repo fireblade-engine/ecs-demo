@@ -26,7 +26,7 @@ final class GameManagementSystem {
     }
 
     func update(time: Double) {
-        for game in games where game.playing {
+        for (gameEntity, game) in games.entityAndComponents where game.playing {
             if spaceships.isEmpty {
                 if game.lives > 0 {
                     let newSpaceshipPosition = Vector(x: config.width * 0.5, y: config.height * 0.5)
@@ -41,16 +41,19 @@ final class GameManagementSystem {
                         creator.createSpaceship()
                     }
                 } else {
-                    game.playing = false
+                    gameEntity.modify(GameState.self) { $0.playing = false }
                     creator.createWaitForClick()
                 }
             }
 
             if asteroids.isEmpty && bullets.isEmpty && !spaceships.isEmpty {
                 // next level
+                // `game` is a copy: track the level locally and write it back
+                var level = game.level
                 for (_, spaceshipPosition) in spaceships {
-                    game.level += 1
-                    let asteroidCount = 2 + game.level
+                    level += 1
+                    gameEntity.modify(GameState.self) { $0.level = level }
+                    let asteroidCount = 2 + level
                     for _ in 0 ..< asteroidCount {
                         var position: Vector
                         repeat {

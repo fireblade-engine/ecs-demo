@@ -18,7 +18,7 @@ final class MotionControlSystem {
     }
 
     func update(time: Double) {
-        for (control, position, motion) in motionControls {
+        motionControls.forEach(reading: MotionControls.self, writing: Position.self, Motion.self) { control, position, motion in
             for key in control.left where isKeyDown(key) {
                 position.rotation -= control.rotationRate * time
             }

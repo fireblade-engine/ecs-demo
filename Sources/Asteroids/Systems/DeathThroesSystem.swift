@@ -17,11 +17,12 @@ final class DeathThroesSystem {
     }
 
     func update(time: Double) {
-        for (entity, death) in family.entityAndComponents {
+        family.forEach(writing: DeathThroes.self) { death in
             death.countdown -= time
-            if death.countdown <= 0 {
-                creator.destroy(entity: entity)
-            }
+        }
+        // structural changes are not allowed inside forEach, destroy afterwards
+        for (entity, death) in family.entityAndComponents where death.countdown <= 0 {
+            creator.destroy(entity: entity)
         }
     }
 }
