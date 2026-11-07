@@ -10,7 +10,7 @@ import FirebladeECSMacros
 // default initializable, and registers it under a stable type name.
 
 @Component
-final class Name: @unchecked Sendable {
+struct Name {
     var name: String = ""
 
     init(_ name: String) {
@@ -19,7 +19,7 @@ final class Name: @unchecked Sendable {
 }
 
 @Component
-final class Position: @unchecked Sendable {
+struct Position {
     var x: Int32 = 0
     var y: Int32 = 0
 
@@ -30,7 +30,7 @@ final class Position: @unchecked Sendable {
 }
 
 @Component
-final class Color: @unchecked Sendable {
+struct Color {
     var r: UInt8 = .random(in: 1...255)
     var g: UInt8 = .random(in: 1...255)
     var b: UInt8 = .random(in: 1...255)

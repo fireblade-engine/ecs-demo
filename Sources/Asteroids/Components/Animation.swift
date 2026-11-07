@@ -10,7 +10,7 @@ import FirebladeECSMacros
 import AsteroidsGameLibrary
 
 @Component(excluding: [.serializable, .cloneable])  // holds live views or state machines
-final class Animation: @unchecked Sendable {
+struct Animation: @unchecked Sendable {
     var animation: Animatable
 
     init(animation: Animatable) {

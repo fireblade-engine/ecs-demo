@@ -10,7 +10,7 @@ import FirebladeECSMacros
 import AsteroidsGameLibrary
 
 @Component
-final class Motion: @unchecked Sendable {
+struct Motion {
     var velocity: Vector = .zero
     var angularVelocity: Double = 0
     var damping: Double = 0

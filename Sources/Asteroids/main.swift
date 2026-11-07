@@ -92,7 +92,7 @@ final class NexusEventDelegateHandler: NexusEventDelegate, @unchecked Sendable {
 
     init(nexus: Nexus, handleComponentAdded: @escaping Callback, handleComponentRemoved: @escaping Callback) {
         componentByComponentIdEntityId = { [weak nexus] componentId, entityId in
-            guard let entity = nexus?.entity(from: entityId) else {
+            guard let entity = nexus?.entity(entityId) else {
                 return nil
             }
             return AnyIterator(entity.makeComponentsIterator()).first { $0.identifier == componentId }

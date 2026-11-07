@@ -193,7 +193,7 @@ final class AudioSystem: @unchecked Sendable {
     }
 
     func update() {
-        family.forEach { audio in
+        family.forEach(writing: Audio.self) { audio in
             audio.toPlay.forEach { sound in
                 queue.async {
                     self.play(sound: sound)

@@ -9,13 +9,13 @@ import FirebladeECS
 import FirebladeECSMacros
 
 @Component
-final class GameState: @unchecked Sendable {
+struct GameState {
     var lives: Int = 0
     var level: Int = 0
     var hits: Int = 0
     var playing: Bool = false
 
-    func setForStart() {
+    mutating func setForStart() {
         lives = 3
         level = 0
         hits = 0

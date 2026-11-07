@@ -19,14 +19,20 @@ final class GunControlSystem {
     }
 
     func update(time: Double) {
-        for (gun, controls, position, audio) in gunControllsFamily {
+        var shots: [(gun: Gun, parentPosition: Position)] = []
+        gunControllsFamily.forEach(reading: GunControls.self, Position.self,
+                                   writing: Gun.self, Audio.self) { controls, position, gun, audio in
             gun.shooting = isKeyDown(controls.trigger)
             gun.timeSinceLastShot += time
             if gun.shooting && gun.timeSinceLastShot >= gun.minimumShotInterval {
-                creator.createBullet(gun: gun, parentPosition: position)
+                shots.append((gun: gun, parentPosition: position))
                 audio.play(sound: .shootGun)
                 gun.timeSinceLastShot = 0
             }
+        }
+        // creating entities is a structural change, which is not allowed inside forEach
+        for shot in shots {
+            creator.createBullet(gun: shot.gun, parentPosition: shot.parentPosition)
         }
     }
 }

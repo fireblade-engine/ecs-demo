@@ -6,10 +6,11 @@
 //
 
 import FirebladeECS
+import FirebladeFSM
 import FirebladeECSMacros
 
 @Component(excluding: [.serializable, .cloneable])  // holds live views or state machines
-final class Asteroid: @unchecked Sendable {
+struct Asteroid: @unchecked Sendable {
     let fsm: EntityStateMachine<State>
 
     init(fsm: EntityStateMachine<State>) {

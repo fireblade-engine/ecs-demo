@@ -1,4 +1,4 @@
-// swift-tools-version:6.1
+// swift-tools-version:6.2
 import PackageDescription
 
 let package = Package(
@@ -10,7 +10,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/ctreffs/SwiftSDL2.git", from: "1.4.1"),
-        .package(url: "https://github.com/fireblade-engine/ecs.git", from: "1.4.3"),
+        .package(url: "https://github.com/fireblade-engine/ecs.git", from: "2.0.0"),
         .package(url: "https://github.com/fireblade-engine/math.git", from: "1.4.0")
     ],
     targets: [
@@ -32,6 +32,7 @@ let package = Package(
             dependencies: [
                 .product(name: "FirebladeECS", package: "ecs"),
                 .product(name: "FirebladeECSMacros", package: "ecs"),
+                .product(name: "FirebladeFSM", package: "ecs"),
                 .product(name: "SDL", package: "SwiftSDL2"),
                 "SDLKit",
                 .product(name: "FirebladeMath", package: "math"),
@@ -44,7 +45,7 @@ let package = Package(
         .testTarget(name: "ParticlesTests",
                     dependencies: ["Particles", .product(name: "FirebladeECS", package: "ecs")]),
         .testTarget(name: "AsteroidsTests",
-                    dependencies: ["Asteroids", .product(name: "FirebladeECS", package: "ecs")])
+                    dependencies: ["Asteroids", .product(name: "FirebladeECS", package: "ecs"), .product(name: "FirebladeFSM", package: "ecs")])
     ],
     swiftLanguageModes: [.v6]
 )

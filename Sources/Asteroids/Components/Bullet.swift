@@ -9,7 +9,7 @@ import FirebladeECS
 import FirebladeECSMacros
 
 @Component
-final class Bullet: @unchecked Sendable {
+struct Bullet {
     var lifeRemaining: Double = 0
 
     init(lifetime: Double) {

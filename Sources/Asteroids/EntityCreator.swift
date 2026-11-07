@@ -6,6 +6,7 @@
 //
 
 import FirebladeECS
+import FirebladeFSM
 import AsteroidsGameLibrary
 import SDL
 
@@ -43,7 +44,11 @@ final class EntityCreator {
             Display(renderable: waitView),
             Position(x: 0, y: 0, rotation: 0)
         )
-        waitEntity.get(WaitForStart.self)?.startGame = false
+        // a component cannot capture itself any more: the view flags the entity through the nexus
+        let waitId = waitEntity.identifier
+        waitView.click = { [weak nexus] in
+            nexus?.entity(waitId)?.modify(WaitForStart.self) { $0.startGame = true }
+        }
         return waitEntity
     }
 

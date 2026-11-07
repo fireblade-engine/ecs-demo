@@ -5,6 +5,7 @@
 
 @testable import Asteroids
 import FirebladeECS
+import FirebladeFSM
 import Foundation
 import Testing
 
@@ -43,7 +44,7 @@ import Testing
 
     @Test func snapshotSkipsRuntimeOnlyComponents() throws {
         let spaceship = creator.createSpaceship()
-        spaceship.get(Audio.self)?.play(sound: .shootGun)
+        spaceship.modify(Audio.self) { $0.play(sound: .shootGun) }
 
         var encoder = JSONEncoder()
         let data = try nexus.encodeSnapshot(using: &encoder, handling: .skip)
@@ -54,7 +55,7 @@ import Testing
         var decoder = JSONDecoder()
         try restored.restoreSnapshot(from: data, using: &decoder)
 
-        let copy = restored.entity(from: spaceship.identifier)
+        let copy = try #require(restored.entity(spaceship.identifier))
         #expect(copy.get(Position.self)?.position == [400, 300])
         #expect(copy.get(Gun.self)?.bulletLifetime == 2)
         #expect(copy.get(MotionControls.self)?.accelerationRate == 100)

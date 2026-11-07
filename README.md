@@ -12,7 +12,8 @@ A minimal demo App for the [Fireblade Entity-Component-System](https://github.co
 This App demonstrates handling of Entities and Components and provides a live Performance Test  for the framework.
 
 Both demos declare their components with the `@Component` macro from the `FirebladeECSMacros` product
-and use the FirebladeECS 1.4 API (`entity.set(_:)`, `entity.get(_:)`, families, entity state machines).
+and use the FirebladeECS 2.0 API: value-type components written through `set`, `modify` and `forEach(reading:writing:)`,
+families, and entity state machines from the `FirebladeFSM` product.
 The particles demo also clones entities and saves and restores the whole world as a JSON snapshot.
 
 
@@ -23,7 +24,7 @@ These instructions will get you a copy of the project up and running on your loc
 ## Prerequisites
 
 - [Swift Package Manager (SPM)](https://github.com/apple/swift-package-manager)
-- [Swift 6.1+](https://www.swift.org/install/), e.g. via [Xcode 16.4+](https://developer.apple.com/xcode/)
+- [Swift 6.2+](https://www.swift.org/install/), e.g. via [Xcode 26+](https://developer.apple.com/xcode/)
 - [Simple DirectMedia Layer 2 (SDL2)](https://github.com/libsdl-org/SDL/tree/SDL2)
 	- Download and install i.e. via [Homebrew](https://brew.sh)   
 		`brew install sdl2` on macOS or `apt-get install libsdl2-dev` on Debian/Ubuntu

@@ -24,12 +24,12 @@ final class WaitForStartSystem {
 
     func update() {
         for (waitEntity, waitForStart) in waits.entityAndComponents where waitForStart.startGame {
-            for game in games {
+            for gameEntity in games.entities {
                 for (asteroidEntity, _) in asteroids.entityAndComponents {
                     creator.destroy(entity: asteroidEntity)
                 }
-                game.setForStart()
-                waitForStart.startGame = false
+                gameEntity.modify(GameState.self) { $0.setForStart() }
+                waitEntity.modify(WaitForStart.self) { $0.startGame = false }
                 creator.destroy(entity: waitEntity)
             }
         }

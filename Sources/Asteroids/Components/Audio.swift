@@ -9,7 +9,7 @@ import FirebladeECS
 import FirebladeECSMacros
 
 @Component
-final class Audio: @unchecked Sendable {
+struct Audio {
     enum Sound: String, CaseIterable, Codable {
         case explodeAsteroid = "asteroid.wav"
         case explodeShip = "ship.wav"
@@ -19,7 +19,7 @@ final class Audio: @unchecked Sendable {
     /// Sounds queued for the next audio system update; transient, so not serialized.
     @ComponentIgnored var toPlay: [Sound] = []
 
-    func play(sound: Sound) {
+    mutating func play(sound: Sound) {
         toPlay.append(sound)
     }
 }
