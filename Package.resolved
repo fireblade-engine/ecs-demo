@@ -1,13 +1,13 @@
 {
-  "originHash" : "629998cc0151b08d40f87a5366087d3a9d6c9b0aac4817fefd0aab3688fb3569",
+  "originHash" : "79fb7e63df853af49c0d4c809a65e9f00e2509aaf96fbf9b6651b3f492a5d10f",
   "pins" : [
     {
       "identity" : "ecs",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/fireblade-engine/ecs.git",
       "state" : {
-        "branch" : "2.0/docs",
-        "revision" : "410580d74ac7d6bd56dabd1cfb6791f6914f7ad3"
+        "revision" : "feeda37023edc10c7accd91997736022ef705e5f",
+        "version" : "2.0.0"
       }
     },
     {
