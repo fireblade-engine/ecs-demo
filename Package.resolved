@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/fireblade-engine/ecs.git",
       "state" : {
-        "revision" : "c85607bfe6893549bc7d058d36a4d662e8834eda",
-        "version" : "1.4.3"
+        "revision" : "0a62efe11f9c55932485b62eccd03ded509580f5",
+        "version" : "2.0.0"
       }
     },
     {
